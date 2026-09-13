@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareTrack - Doctor Consultation</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef7ff;
+    color: #183b56;
+}
+
+.header {
+    background: linear-gradient(135deg, #0757b8, #159bd7);
+    color: white;
+    padding: 23px 45px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header p {
+    margin: 6px 0 0;
+}
+
+.container {
+    max-width: 1050px;
+    margin: 32px auto;
+    padding: 0 22px;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #0757b8;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.main-card {
+    background: white;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0,80,150,0.10);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.title-icon {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8f5ff;
+    border-radius: 15px;
+    font-size: 31px;
+}
+
+.title h2 {
+    margin: 0;
+    color: #123f73;
+}
+
+.title p {
+    margin: 5px 0 0;
+    color: #718096;
+}
+
+.patient-card {
+    background: linear-gradient(135deg, #f8fcff, #edf7ff);
+    border: 1px solid #d8eafb;
+    border-radius: 18px;
+    padding: 23px;
+    margin-bottom: 27px;
+}
+
+.patient-heading {
+    font-size: 18px;
+    font-weight: bold;
+    color: #0757b8;
+    margin-bottom: 18px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 13px;
+}
+
+.info {
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #e1edf7;
+}
+
+.label {
+    font-size: 12px;
+    color: #718096;
+    margin-bottom: 6px;
+}
+
+.value {
+    font-weight: bold;
+    color: #183b61;
+}
+
+.token-value {
+    color: #0757b8;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 21px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #234d72;
+    margin-bottom: 8px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 125px;
+    resize: vertical;
+
+    border: 1px solid #cbdbea;
+    border-radius: 11px;
+
+    padding: 14px;
+
+    font-size: 15px;
+    font-family: inherit;
+
+    outline: none;
+}
+
+textarea:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 3px rgba(13,110,253,0.08);
+}
+
+.save-btn {
+    width: 100%;
+
+    border: none;
+    border-radius: 11px;
+
+    padding: 15px;
+
+    background: linear-gradient(
+        135deg,
+        #149bd7,
+        #0757b8
+    );
+
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.save-btn:hover {
+    transform: translateY(-1px);
+}
+
+.success {
+    background: #e7f8ee;
+    color: #16824b;
+    border: 1px solid #bce8ce;
+
+    padding: 14px 17px;
+
+    border-radius: 11px;
+
+    margin-bottom: 22px;
+
+    font-weight: bold;
+}
+
+.next-card {
+    margin-top: 24px;
+
+    background: #f0f9ff;
+    border: 1px solid #cde9fa;
+
+    border-radius: 15px;
+
+    padding: 20px;
+}
+
+.next-card h3 {
+    margin: 0 0 8px;
+    color: #0757b8;
+}
+
+@media (max-width: 750px) {
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        padding: 20px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="header">
+
+    <h1>CareTrack — Doctor Consultation</h1>
+
+    <p>
+        Dr. {{ doctor_name }}
+    </p>
+
+</div>
+
+
+<div class="container">
+
+<a href="/doctor_appointments" class="back-btn">
+    ← My Appointments
+</a>
+
+
+<div class="main-card">
+
+
+<div class="title">
+
+    <div class="title-icon">
+        🩺
+    </div>
+
+    <div>
+
+        <h2>
+            Patient Consultation
+        </h2>
+
+        <p>
+            Record diagnosis, prescription and treatment details.
+        </p>
+
+    </div>
+
+</div>
+
+
+{% if success %}
+
+<div class="success">
+    ✓ {{ message }}
+</div>
+
+{% endif %}
+
+
+<div class="patient-card">
+
+<div class="patient-heading">
+    👤 Current Patient
+</div>
+
+
+<div class="info-grid">
+
+
+<div class="info">
+
+<div class="label">
+    Patient
+</div>
+
+<div class="value">
+    {{ appointment.patient_name }}
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="label">
+    Token
+</div>
+
+<div class="value token-value">
+    #{{ appointment.token_number }}
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="label">
+    Status
+</div>
+
+<div class="value">
+    {{ appointment.token_status|replace("_", " ")|title }}
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="label">
+    Appointment Date
+</div>
+
+<div class="value">
+    {{ appointment.appointment_date.strftime("%d-%m-%Y") }}
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="label">
+    Day
+</div>
+
+<div class="value">
+    {{ appointment.appointment_day }}
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="label">
+    Time
+</div>
+
+<div class="value">
+    {{ appointment.display_time }}
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+{% if not success %}
+
+<form method="POST">
+
+
+<div class="form-group">
+
+<label>
+    🩻 Diagnosis
+</label>
+
+<textarea
+    name="diagnosis"
+    placeholder="Enter diagnosis..."
+    required
+></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    💊 Prescription
+</label>
+
+<textarea
+    name="prescription"
+    placeholder="Enter prescription..."
+    required
+></textarea>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+    📝 Treatment
+</label>
+
+<textarea
+    name="treatment"
+    placeholder="Enter treatment details..."
+    required
+></textarea>
+
+</div>
+
+
+<button
+    type="submit"
+    class="save-btn"
+>
+    💾 Save Consultation
+</button>
+
+</form>
+
+{% endif %}
+
+
+{% if next_patient %}
+
+<div class="next-card">
+
+<h3>
+    🟢 Next Patient
+</h3>
+
+<p>
+    Token <strong>#{{ next_patient.token_number }}</strong>
+    —
+    {{ next_patient.patient_name }}
+</p>
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+</div>
+
+</body>
+
+</html>

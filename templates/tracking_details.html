@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>CareTrack - Live Token</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #eef6ff;
+
+    color: #12345b;
+}
+
+.container {
+
+    max-width: 950px;
+
+    margin: auto;
+
+    padding: 30px 20px;
+}
+
+.header {
+
+    background: linear-gradient(
+        135deg,
+        #0d6efd,
+        #0b5ed7
+    );
+
+    color: white;
+
+    padding: 28px;
+
+    border-radius: 18px;
+
+    margin-bottom: 22px;
+}
+
+.header h1 {
+
+    margin: 0 0 7px;
+
+    font-size: 28px;
+}
+
+.header p {
+
+    margin: 0;
+
+    opacity: 0.9;
+}
+
+.doctor-card {
+
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 6px 22px rgba(0,80,160,0.10);
+
+    margin-bottom: 20px;
+}
+
+.doctor-name {
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+.doctor-info {
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.main-card {
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 6px 22px rgba(0,80,160,0.10);
+
+    text-align: center;
+}
+
+.token-title {
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+.your-token {
+
+    width: 145px;
+
+    height: 145px;
+
+    border-radius: 50%;
+
+    margin: 18px auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex-direction: column;
+
+    background: #eaf3ff;
+
+    border: 8px solid #0d6efd;
+}
+
+.your-token small {
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+.your-token strong {
+
+    color: #0d6efd;
+
+    font-size: 42px;
+}
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 25px;
+}
+
+.stat {
+
+    background: #f5f9ff;
+
+    padding: 18px;
+
+    border-radius: 14px;
+}
+
+.stat-label {
+
+    font-size: 12px;
+
+    color: #64748b;
+
+    margin-bottom: 6px;
+}
+
+.stat-value {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #12345b;
+}
+
+.status {
+
+    margin-top: 25px;
+
+    padding: 18px;
+
+    border-radius: 14px;
+
+    font-size: 17px;
+
+    font-weight: bold;
+}
+
+.status-waiting {
+
+    background: #fff7ed;
+
+    color: #c2410c;
+}
+
+.status-next {
+
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+.status-consultation {
+
+    background: #e0f2fe;
+
+    color: #0369a1;
+}
+
+.status-completed {
+
+    background: #ecfdf5;
+
+    color: #15803d;
+}
+
+.queue {
+
+    margin-top: 28px;
+
+    text-align: left;
+}
+
+.queue h3 {
+
+    margin-bottom: 18px;
+}
+
+.queue-list {
+
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+
+    align-items: center;
+}
+
+.queue-item {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: bold;
+
+    border: 3px solid #dbeafe;
+
+    background: #f8fbff;
+
+    color: #64748b;
+}
+
+.queue-serving {
+
+    background: #dbeafe;
+
+    border-color: #0d6efd;
+
+    color: #0d6efd;
+}
+
+.queue-you {
+
+    background: #dcfce7;
+
+    border-color: #16a34a;
+
+    color: #166534;
+}
+
+.queue-completed {
+
+    background: #f1f5f9;
+
+    border-color: #94a3b8;
+
+    color: #64748b;
+}
+
+.queue-label {
+
+    margin-top: 12px;
+
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+.details {
+
+    margin-top: 25px;
+
+    padding: 20px;
+
+    background: #f8fbff;
+
+    border-radius: 14px;
+
+    text-align: left;
+}
+
+.details-row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    padding: 9px 0;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.details-row:last-child {
+
+    border-bottom: none;
+}
+
+.details-label {
+
+    color: #64748b;
+}
+
+.details-value {
+
+    font-weight: bold;
+}
+
+.consultation {
+
+    margin-top: 25px;
+
+    padding: 22px;
+
+    background: #ecfdf5;
+
+    border-radius: 14px;
+
+    text-align: left;
+}
+
+.consultation h3 {
+
+    color: #15803d;
+
+    margin-top: 0;
+}
+
+.back {
+
+    display: inline-block;
+
+    margin-top: 22px;
+
+    color: #0d6efd;
+
+    text-decoration: none;
+
+    font-weight: bold;
+}
+
+@media(max-width:650px) {
+
+    .stats {
+
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>Live Token Tracking</h1>
+
+        <p>
+            Follow your queue position and consultation status.
+        </p>
+
+    </div>
+
+
+    <div class="doctor-card">
+
+        <div class="doctor-name">
+
+            {{ appointment.doctor_name }}
+
+        </div>
+
+        <div class="doctor-info">
+
+            {{ appointment.department }}
+
+            {% if appointment.specialization %}
+                • {{ appointment.specialization }}
+            {% endif %}
+
+        </div>
+
+    </div>
+
+
+    <div class="main-card">
+
+        <div class="token-title">
+            YOUR TOKEN
+        </div>
+
+
+        <div class="your-token">
+
+            <small>Token</small>
+
+            <strong>
+                {{ appointment.token_number }}
+            </strong>
+
+        </div>
+
+
+        <div class="stats">
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Now Serving
+                </div>
+
+                <div class="stat-value">
+
+                    {% if now_serving %}
+                        {{ now_serving }}
+                    {% else %}
+                        —
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Patients Ahead
+                </div>
+
+                <div class="stat-value">
+                    {{ patients_ahead }}
+                </div>
+
+            </div>
+
+
+            <div class="stat">
+
+                <div class="stat-label">
+                    Appointment Time
+                </div>
+
+                <div class="stat-value">
+                    {{ appointment.appointment_time }}
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% if status_text == "Queue Not Started" %}
+
+            <div class="status status-waiting">
+
+                ⏳ Queue Not Started
+
+                {% if next_token %}
+                    <br>
+                    <small>
+                        Next Token: {{ next_token }}
+                    </small>
+                {% endif %}
+
+            </div>
+
+
+        {% elif status_text == "Your Turn Is Next" %}
+
+            <div class="status status-next">
+
+                🟢 Your Turn Is Next
+
+            </div>
+
+
+        {% elif status_text == "In Consultation" %}
+
+            <div class="status status-consultation">
+
+                🔵 You Are Currently In Consultation
+
+            </div>
+
+
+        {% elif status_text == "Consultation Completed" %}
+
+            <div class="status status-completed">
+
+                ✓ Consultation Completed
+
+            </div>
+
+
+        {% else %}
+
+            <div class="status status-waiting">
+
+                🟠 Waiting for Consultation
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="queue">
+
+            <h3>
+                Queue Progress
+            </h3>
+
+
+            <div class="queue-list">
+
+                {% for item in queue_data %}
+
+                    {% if item.token_number == appointment.token_number %}
+
+                        <div class="queue-item queue-you">
+
+                            {{ item.token_number }}
+
+                        </div>
+
+                    {% elif item.status == "completed" %}
+
+                        <div class="queue-item queue-completed">
+
+                            ✓
+
+                        </div>
+
+                    {% elif item.status == "in_consultation" %}
+
+                        <div class="queue-item queue-serving">
+
+                            {{ item.token_number }}
+
+                        </div>
+
+                    {% else %}
+
+                        <div class="queue-item">
+
+                            {{ item.token_number }}
+
+                        </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+
+
+            <div class="queue-label">
+
+                Blue = Now Serving &nbsp; | &nbsp;
+                Green = Your Token &nbsp; | &nbsp;
+                Grey = Completed
+
+            </div>
+
+        </div>
+
+
+        <div class="details">
+
+            <div class="details-row">
+
+                <span class="details-label">
+                    Doctor
+                </span>
+
+                <span class="details-value">
+                    {{ appointment.doctor_name }}
+                </span>
+
+            </div>
+
+
+            <div class="details-row">
+
+                <span class="details-label">
+                    Date
+                </span>
+
+                <span class="details-value">
+                    {{ appointment.appointment_date }}
+                </span>
+
+            </div>
+
+
+            <div class="details-row">
+
+                <span class="details-label">
+                    Time
+                </span>
+
+                <span class="details-value">
+                    {{ appointment.appointment_time }}
+                </span>
+
+            </div>
+
+
+            <div class="details-row">
+
+                <span class="details-label">
+                    Token
+                </span>
+
+                <span class="details-value">
+                    {{ appointment.token_number }}
+                </span>
+
+            </div>
+
+        </div>
+
+
+        {% if appointment.record_exists %}
+
+        <div class="consultation">
+
+            <h3>
+                Consultation Details
+            </h3>
+
+            <p>
+                <strong>Diagnosis:</strong><br>
+                {{ appointment.diagnosis }}
+            </p>
+
+            <p>
+                <strong>Prescription:</strong><br>
+                {{ appointment.prescription }}
+            </p>
+
+            <p>
+                <strong>Treatment:</strong><br>
+                {{ appointment.treatment }}
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <a
+        href="/tracking"
+        class="back"
+    >
+        ← Back to Token Tracking
+    </a>
+
+</div>
+
+
+<script>
+
+setTimeout(function() {
+
+    window.location.reload();
+
+}, 3000);
+
+</script>
+
+</body>
+
+</html>

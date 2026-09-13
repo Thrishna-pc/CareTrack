@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Doctor Availability - CareTrack</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef7ff, #f8fbff);
+            color: #253858;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 35px auto 60px;
+        }
+
+        /* BACK BUTTON */
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            background: #2847a6;
+            color: white;
+            text-decoration: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-bottom: 22px;
+            transition: 0.25s;
+        }
+
+        .back-btn:hover {
+            background: #1d3480;
+            transform: translateY(-2px);
+        }
+
+        /* DOCTOR HEADER */
+
+        .doctor-card {
+            background: rgba(255,255,255,0.96);
+            border-radius: 22px;
+            padding: 28px 30px;
+            box-shadow: 0 10px 30px rgba(45, 85, 140, 0.12);
+            border: 1px solid #e4edf8;
+            margin-bottom: 25px;
+        }
+
+        .doctor-title {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .doctor-icon {
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+            background: #e8f1ff;
+            color: #3157b7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .doctor-title h1 {
+            color: #23459c;
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .doctor-title p {
+            color: #697b95;
+            font-size: 14px;
+        }
+
+        .doctor-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #edf1f7;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 14px;
+        }
+
+        .info-item i {
+            color: #3767c8;
+        }
+
+        .info-item strong {
+            color: #334b70;
+        }
+
+        /* ALERT */
+
+        .alert {
+            padding: 15px 18px;
+            border-radius: 12px;
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .success {
+            background: #e8f8ef;
+            color: #187344;
+            border: 1px solid #c8ecd8;
+        }
+
+        .error {
+            background: #fff0f0;
+            color: #b72c2c;
+            border: 1px solid #f2cccc;
+        }
+
+        /* SECTION */
+
+        .section {
+            background: white;
+            border-radius: 22px;
+            padding: 28px;
+            box-shadow: 0 10px 30px rgba(45, 85, 140, 0.10);
+            border: 1px solid #e5edf7;
+            margin-bottom: 25px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .section-heading i {
+            color: #315bb8;
+            font-size: 22px;
+        }
+
+        .section-heading h2 {
+            color: #23459c;
+            font-size: 22px;
+        }
+
+        .section-heading p {
+            color: #8290a5;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        /* AVAILABILITY ROW */
+
+        .availability-row {
+            background: linear-gradient(135deg, #f8fbff, #f1f7ff);
+            border: 1px solid #e2ebf7;
+            border-radius: 15px;
+            padding: 17px;
+            margin-bottom: 13px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+            align-items: center;
+            gap: 15px;
+            transition: 0.25s;
+        }
+
+        .availability-row:hover {
+            box-shadow: 0 7px 20px rgba(50, 90, 150, 0.10);
+            transform: translateY(-2px);
+        }
+
+        .date-box,
+        .day-box,
+        .time-box {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .date-box i {
+            color: #3775ca;
+        }
+
+        .day-box i {
+            color: #5d70a9;
+        }
+
+        .time-box i {
+            color: #ad6289;
+        }
+
+        .time-box {
+            color: #3e506b;
+        }
+
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            border: none;
+            border-radius: 9px;
+            padding: 9px 13px;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            transition: 0.2s;
+        }
+
+        .edit-btn {
+            background: #e9f2ff;
+            color: #2860b6;
+        }
+
+        .edit-btn:hover {
+            background: #d7e8ff;
+        }
+
+        .remove-btn {
+            background: #fff0f0;
+            color: #c53a3a;
+        }
+
+        .remove-btn:hover {
+            background: #ffdcdc;
+        }
+
+        /* EMPTY */
+
+        .empty {
+            text-align: center;
+            padding: 35px;
+            color: #8794a8;
+        }
+
+        .empty i {
+            font-size: 38px;
+            margin-bottom: 12px;
+            color: #b7c7dd;
+        }
+
+        /* ADD FORM */
+
+        .form-row {
+            background: #f8fbff;
+            border: 1px solid #e1eaf5;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+
+            display: grid;
+            grid-template-columns: 1.2fr 1fr 1fr auto;
+            gap: 16px;
+            align-items: end;
+        }
+
+        .field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 700;
+            color: #536681;
+            margin-bottom: 8px;
+        }
+
+        .field label i {
+            margin-right: 5px;
+            color: #3768bd;
+        }
+
+        input,
+        select {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #d5e0ef;
+            border-radius: 9px;
+            padding: 0 12px;
+            background: white;
+            color: #33445d;
+            outline: none;
+            font-size: 14px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #4c78c9;
+            box-shadow: 0 0 0 3px rgba(76,120,201,0.10);
+        }
+
+        .day-display {
+            height: 43px;
+            display: flex;
+            align-items: center;
+            padding: 0 12px;
+            border-radius: 9px;
+            background: #edf4ff;
+            color: #3c61a4;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .remove-new {
+            height: 43px;
+            border: none;
+            border-radius: 9px;
+            background: #fff0f0;
+            color: #c63d3d;
+            padding: 0 15px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .remove-new:hover {
+            background: #ffdede;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 18px;
+        }
+
+        .add-btn {
+            border: none;
+            background: #2995c9;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .add-btn:hover {
+            background: #207eab;
+        }
+
+        .save-btn {
+            border: none;
+            background: #2858b5;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #204798;
+        }
+
+        /* MODAL */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(24, 39, 65, 0.55);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 560px;
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.20);
+        }
+
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #23459c;
+            margin-bottom: 22px;
+        }
+
+        .modal-title i {
+            color: #3d70c7;
+        }
+
+        .modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .modal-grid .full {
+            grid-column: 1 / -1;
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .cancel-btn {
+            border: none;
+            background: #edf1f6;
+            color: #56657b;
+            padding: 11px 18px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .update-btn {
+            border: none;
+            background: #2858b5;
+            color: white;
+            padding: 11px 20px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 900px) {
+
+            .availability-row {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .actions {
+                grid-column: 1 / -1;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 94%;
+            }
+
+            .section,
+            .doctor-card {
+                padding: 20px;
+            }
+
+            .availability-row,
+            .form-row,
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-grid .full {
+                grid-column: auto;
+            }
+
+            .doctor-title h1 {
+                font-size: 22px;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- BACK -->
+
+    <a href="/admin_doctor_manage" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i>
+        Back to Doctor Management
+    </a>
+
+
+    <!-- DOCTOR INFORMATION -->
+
+    <div class="doctor-card">
+
+        <div class="doctor-title">
+
+            <div class="doctor-icon">
+                <i class="fa-solid fa-user-doctor"></i>
+            </div>
+
+            <div>
+                <h1>{{ doctor.name }}</h1>
+                <p>Manage doctor's weekly availability</p>
+            </div>
+
+        </div>
+
+        <div class="doctor-info">
+
+            <div class="info-item">
+                <i class="fa-solid fa-hospital"></i>
+                <strong>Department:</strong>
+                {{ doctor.department }}
+            </div>
+
+            <div class="info-item">
+                <i class="fa-solid fa-stethoscope"></i>
+                <strong>Specialization:</strong>
+                {{ doctor.specialization }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGE -->
+
+    {% if message %}
+
+    <div class="alert {{ message_type }}">
+
+        {% if message_type == "success" %}
+            <i class="fa-solid fa-circle-check"></i>
+        {% else %}
+            <i class="fa-solid fa-circle-exclamation"></i>
+        {% endif %}
+
+        {{ message }}
+
+    </div>
+
+    {% endif %}
+
+
+    <!-- CURRENT AVAILABILITY -->
+
+    <div class="section">
+
+        <div class="section-heading">
+
+            <i class="fa-solid fa-calendar-check"></i>
+
+            <div>
+                <h2>Current Availability</h2>
+                <p>Existing weekly availability for this doctor</p>
+            </div>
+
+        </div>
+
+
+        {% if schedules %}
+
+            {% for schedule in schedules %}
+
+            <div class="availability-row">
+
+                <!-- DATE -->
+
+                <div class="date-box">
+
+                    <i class="fa-solid fa-calendar-day"></i>
+
+                    <span>
+                        {{ schedule.next_date_display }}
+                    </span>
+
+                </div>
+
+
+                <!-- DAY -->
+
+                <div class="day-box">
+
+                    <i class="fa-solid fa-calendar-week"></i>
+
+                    <span>
+                        {{ schedule.day_of_week }}
+                    </span>
+
+                </div>
+
+
+                <!-- START -->
+
+                <div class="time-box">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    <span>
+                        {{ schedule.start_time_display }}
+                    </span>
+
+                </div>
+
+
+                <!-- END -->
+
+                <div class="time-box">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                    <span>
+                        {{ schedule.end_time_display }}
+                    </span>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="actions">
+
+                    <button
+                        type="button"
+                        class="btn edit-btn"
+                        onclick="openEditModal(
+                            '{{ schedule.schedule_id }}',
+                            '{{ schedule.next_date }}',
+                            '{{ schedule.start_time_display }}',
+                            '{{ schedule.end_time_display }}'
+                        )">
+
+                        <i class="fa-solid fa-pen"></i>
+                        Update
+
+                    </button>
+
+
+                    <form method="POST"
+                          onsubmit="return confirm('Remove this availability?');">
+
+                        <input type="hidden"
+                               name="action"
+                               value="remove">
+
+                        <input type="hidden"
+                               name="schedule_id"
+                               value="{{ schedule.schedule_id }}">
+
+                        <button type="submit"
+                                class="btn remove-btn">
+
+                            <i class="fa-solid fa-trash"></i>
+                            Remove
+
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="empty">
+
+                <i class="fa-regular fa-calendar-xmark"></i>
+
+                <p>No availability added yet.</p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- ADD NEW AVAILABILITY -->
+
+    <div class="section">
+
+        <div class="section-heading">
+
+            <i class="fa-solid fa-calendar-plus"></i>
+
+            <div>
+                <h2>Add New Availability</h2>
+                <p>Select a date. The day will be calculated automatically.</p>
+            </div>
+
+        </div>
+
+
+        <form method="POST">
+
+            <input type="hidden"
+                   name="action"
+                   value="add">
+
+
+            <div id="availabilityContainer">
+
+                <div class="form-row availability-input">
+
+                    <!-- DATE -->
+
+                    <div class="field">
+
+                        <label>
+                            <i class="fa-regular fa-calendar"></i>
+                            Select Date
+                        </label>
+
+                        <input type="date"
+                               name="available_date[]"
+                               onchange="showDay(this)"
+                               required>
+
+                    </div>
+
+
+                    <!-- DAY -->
+
+                    <div class="field">
+
+                        <label>
+                            <i class="fa-solid fa-calendar-week"></i>
+                            Day
+                        </label>
+
+                        <div class="day-display">
+                            Day will appear automatically
+                        </div>
+
+                    </div>
+
+
+                    <!-- START TIME -->
+
+                    <div class="field">
+
+                        <label>
+                            <i class="fa-regular fa-clock"></i>
+                            Start Time
+                        </label>
+
+                        <select name="start_time[]" required>
+
+                            <option value="">
+                                Select Start Time
+                            </option>
+
+                            <option value="00:00">12:00 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="10:00">10:00 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="23:00">11:00 PM</option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- END TIME -->
+
+                    <div class="field">
+
+                        <label>
+                            <i class="fa-regular fa-clock"></i>
+                            End Time
+                        </label>
+
+                        <select name="end_time[]" required>
+
+                            <option value="">
+                                Select End Time
+                            </option>
+
+                            <option value="00:00">12:00 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="10:00">10:00 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="23:00">11:00 PM</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="form-buttons">
+
+                <button type="button"
+                        class="add-btn"
+                        onclick="addAvailabilityRow()">
+
+                    <i class="fa-solid fa-plus"></i>
+                    Add New Availability
+
+                </button>
+
+
+                <button type="submit"
+                        class="save-btn">
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save Availability
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- EDIT MODAL -->
+
+<div class="modal" id="editModal">
+
+    <div class="modal-box">
+
+        <div class="modal-title">
+
+            <i class="fa-solid fa-pen-to-square"></i>
+
+            <h2>Update Availability</h2>
+
+        </div>
+
+
+        <form method="POST">
+
+            <input type="hidden"
+                   name="action"
+                   value="update">
+
+            <input type="hidden"
+                   name="schedule_id"
+                   id="editScheduleId">
+
+
+            <div class="modal-grid">
+
+                <div class="field full">
+
+                    <label>
+                        <i class="fa-regular fa-calendar"></i>
+                        Select Date
+                    </label>
+
+                    <input type="date"
+                           name="available_date"
+                           id="editDate"
+                           required>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        <i class="fa-regular fa-clock"></i>
+                        Start Time
+                    </label>
+
+                    <select name="start_time"
+                            id="editStartTime"
+                            required>
+
+<option value="00:00">12:00 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="10:00">10:00 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="23:00">11:00 PM</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="field">
+
+                    <label>
+                        <i class="fa-regular fa-clock"></i>
+                        End Time
+                    </label>
+
+                    <select name="end_time"
+                            id="editEndTime"
+                            required>
+
+                        <option value="00:00">12:00 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="10:00">10:00 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="23:00">11:00 PM</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-buttons">
+
+                <button type="button"
+                        class="cancel-btn"
+                        onclick="closeEditModal()">
+
+                    Cancel
+
+                </button>
+
+                <button type="submit"
+                        class="update-btn">
+
+                    <i class="fa-solid fa-check"></i>
+                    Update Availability
+
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    // -----------------------------------------
+    // SHOW DAY AUTOMATICALLY
+    // -----------------------------------------
+
+    function showDay(dateInput) {
+
+        const row = dateInput.closest(".availability-input");
+
+        const dayBox = row.querySelector(".day-display");
+
+        if (!dateInput.value) {
+
+            dayBox.innerHTML =
+                "Day will appear automatically";
+
+            return;
+        }
+
+        const date = new Date(
+            dateInput.value + "T00:00:00"
+        );
+
+        const days = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ];
+
+        dayBox.innerHTML =
+            '<i class="fa-solid fa-calendar-day"></i> ' +
+            days[date.getDay()];
+    }
+
+
+    // -----------------------------------------
+    // ADD NEW ROW
+    // -----------------------------------------
+
+    function addAvailabilityRow() {
+
+        const container =
+            document.getElementById(
+                "availabilityContainer"
+            );
+
+        const row =
+            document.createElement("div");
+
+        row.className =
+            "form-row availability-input";
+
+        row.innerHTML = `
+
+            <div class="field">
+
+                <label>
+                    <i class="fa-regular fa-calendar"></i>
+                    Select Date
+                </label>
+
+                <input
+                    type="date"
+                    name="available_date[]"
+                    onchange="showDay(this)"
+                    required>
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    <i class="fa-solid fa-calendar-week"></i>
+                    Day
+                </label>
+
+                <div class="day-display">
+                    Day will appear automatically
+                </div>
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    <i class="fa-regular fa-clock"></i>
+                    Start Time
+                </label>
+
+                <select name="start_time[]" required>
+
+                    <option value="">
+                        Select Start Time
+                    </option>
+
+                    <option value="00:00">12:00 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="10:00">10:00 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="23:00">11:00 PM</option>
+
+                </select>
+
+            </div>
+
+            <div class="field">
+
+                <label>
+                    <i class="fa-regular fa-clock"></i>
+                    End Time
+                </label>
+
+                <select name="end_time[]" required>
+
+                    <option value="">
+                        Select End Time
+                    </option>
+
+                    <option value="00:00">12:00 AM</option>
+<option value="01:00">01:00 AM</option>
+<option value="02:00">02:00 AM</option>
+<option value="03:00">03:00 AM</option>
+<option value="04:00">04:00 AM</option>
+<option value="05:00">05:00 AM</option>
+<option value="06:00">06:00 AM</option>
+<option value="07:00">07:00 AM</option>
+<option value="08:00">08:00 AM</option>
+<option value="09:00">09:00 AM</option>
+<option value="10:00">10:00 AM</option>
+<option value="11:00">11:00 AM</option>
+<option value="12:00">12:00 PM</option>
+<option value="13:00">01:00 PM</option>
+<option value="14:00">02:00 PM</option>
+<option value="15:00">03:00 PM</option>
+<option value="16:00">04:00 PM</option>
+<option value="17:00">05:00 PM</option>
+<option value="18:00">06:00 PM</option>
+<option value="19:00">07:00 PM</option>
+<option value="20:00">08:00 PM</option>
+<option value="21:00">09:00 PM</option>
+<option value="22:00">10:00 PM</option>
+<option value="23:00">11:00 PM</option>
+
+                </select>
+
+            </div>
+
+            <button
+                type="button"
+                class="remove-new"
+                onclick="this.closest('.availability-input').remove()">
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+        `;
+
+        container.appendChild(row);
+    }
+
+
+    // -----------------------------------------
+    // EDIT MODAL
+    // -----------------------------------------
+
+    function openEditModal(
+        scheduleId,
+        date,
+        startTime,
+        endTime
+    ) {
+
+        document.getElementById(
+            "editScheduleId"
+        ).value = scheduleId;
+
+        document.getElementById(
+            "editDate"
+        ).value = date;
+
+        document.getElementById(
+            "editStartTime"
+        ).value = convertTo24Hour(startTime);
+
+        document.getElementById(
+            "editEndTime"
+        ).value = convertTo24Hour(endTime);
+
+        document.getElementById(
+            "editModal"
+        ).style.display = "flex";
+    }
+
+
+    function closeEditModal() {
+
+        document.getElementById(
+            "editModal"
+        ).style.display = "none";
+    }
+
+
+    // -----------------------------------------
+    // AM/PM -> 24 HOUR
+    // -----------------------------------------
+
+    function convertTo24Hour(time) {
+
+        const parts = time.split(" ");
+
+        const hm = parts[0].split(":");
+
+        let hour = parseInt(hm[0]);
+        const minute = hm[1];
+
+        const ampm = parts[1];
+
+        if (ampm === "PM" && hour !== 12) {
+            hour += 12;
+        }
+
+        if (ampm === "AM" && hour === 12) {
+            hour = 0;
+        }
+
+        return String(hour).padStart(2, "0")
+            + ":" + minute;
+    }
+
+
+    // -----------------------------------------
+    // CLOSE MODAL WHEN CLICKING OUTSIDE
+    // -----------------------------------------
+
+    window.onclick = function(event) {
+
+        const modal =
+            document.getElementById("editModal");
+
+        if (event.target === modal) {
+
+            closeEditModal();
+        }
+    };
+
+</script>
+
+</body>
+</html>

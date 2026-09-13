@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Medical History - CareTrack</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #f7fbff, #eef7ff);
+            color: #173b78;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            height: 74px;
+            background: linear-gradient(90deg, #1458d9, #3195f5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 42px;
+            color: white;
+            box-shadow: 0 4px 18px rgba(30, 100, 210, 0.18);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: white;
+            color: #1764df;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .user-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        .user-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: white;
+            color: #2372e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 1100px;
+            margin: 45px auto;
+            padding: 0 20px;
+        }
+
+        .page-title {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .main-icon {
+            width: 68px;
+            height: 68px;
+            margin: auto;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e7f1ff, #ffffff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 34px;
+            box-shadow: 0 8px 22px rgba(38, 111, 220, 0.12);
+        }
+
+        .page-title h1 {
+            margin: 12px 0 4px;
+            font-size: 38px;
+            color: #123e82;
+        }
+
+        .page-title h1 span {
+            color: #1674e8;
+        }
+
+        .page-title p {
+            margin: 0;
+            color: #6d83a3;
+            font-size: 15px;
+        }
+
+
+        /* ================= PATIENT CARD ================= */
+
+        .patient-card {
+            background: rgba(255,255,255,0.9);
+            border: 1px solid #dcecff;
+            border-radius: 20px;
+            padding: 18px 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(43, 105, 180, 0.08);
+        }
+
+        .patient-left {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+        }
+
+        .patient-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #dcecff, #f4f9ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #216de0;
+        }
+
+        .patient-name {
+            font-size: 21px;
+            font-weight: 700;
+            color: #17458d;
+        }
+
+        .patient-sub {
+            color: #7890b0;
+            font-size: 13px;
+            margin-top: 3px;
+        }
+
+        .priority {
+            color: #4c8ee8;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: right;
+        }
+
+
+        /* ================= CONSULTATION CARD ================= */
+
+        .history-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            margin-bottom: 18px;
+            padding: 18px;
+            display: grid;
+            grid-template-columns: 210px 1fr 1fr 1fr 160px 42px;
+            gap: 14px;
+            align-items: stretch;
+
+            border: 1px solid #dcecff;
+            box-shadow: 0 7px 22px rgba(39, 101, 175, 0.09);
+
+            position: relative;
+            overflow: hidden;
+
+            transition: 0.25s ease;
+        }
+
+        .history-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(35, 105, 190, 0.14);
+        }
+
+        .history-card::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 6px;
+            background: linear-gradient(#1875ed, #58b9ff);
+        }
+
+
+        /* ================= DOCTOR ================= */
+
+        .doctor-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding-left: 5px;
+        }
+
+        .doctor-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #dff0ff, #f6fbff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+            flex-shrink: 0;
+        }
+
+        .doctor-name {
+            font-weight: 700;
+            color: #16458e;
+            font-size: 16px;
+        }
+
+        .doctor-sub {
+            color: #7890ae;
+            font-size: 12px;
+            margin-top: 4px;
+        }
+
+
+        /* ================= INFO BOXES ================= */
+
+        .info-box {
+            border-radius: 14px;
+            padding: 12px 13px;
+            min-height: 86px;
+        }
+
+        .diagnosis-box {
+            background: linear-gradient(135deg, #fff0f5, #fff8fb);
+        }
+
+        .prescription-box {
+            background: linear-gradient(135deg, #ecfff7, #f7fffb);
+        }
+
+        .treatment-box {
+            background: linear-gradient(135deg, #f4efff, #faf8ff);
+        }
+
+        .info-title {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 9px;
+        }
+
+        .diagnosis-box .info-title {
+            color: #ed477a;
+        }
+
+        .prescription-box .info-title {
+            color: #13a978;
+        }
+
+        .treatment-box .info-title {
+            color: #7d52dd;
+        }
+
+        .info-icon {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+
+        .diagnosis-icon {
+            background: #f04b80;
+        }
+
+        .prescription-icon {
+            background: #19b985;
+        }
+
+        .treatment-icon {
+            background: #8358e5;
+        }
+
+        .info-text {
+            color: #38557e;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+
+        /* ================= DATE ================= */
+
+        .date-box {
+            background: linear-gradient(135deg, #eaf5ff, #f6fbff);
+            border-radius: 14px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .date-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #2384ed;
+        }
+
+        .date-label {
+            font-size: 10px;
+            color: #6583a7;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .date-value {
+            margin-top: 4px;
+            color: #176ad6;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+
+        /* ================= ARROW ================= */
+
+        .arrow {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            align-self: center;
+
+            background: linear-gradient(135deg, #1683ef, #4caeff);
+            color: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+            font-weight: bold;
+
+            box-shadow: 0 5px 12px rgba(34, 126, 230, 0.25);
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-area {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            background: linear-gradient(135deg, #1474e8, #258ff5);
+            color: white;
+
+            padding: 13px 28px;
+            border-radius: 10px;
+
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 700;
+
+            box-shadow: 0 7px 18px rgba(27, 112, 224, 0.25);
+
+            transition: 0.25s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px rgba(27, 112, 224, 0.35);
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+            color: #91a5c0;
+            font-size: 12px;
+            margin: 22px 0 35px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 950px) {
+
+            .history-card {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .doctor-box {
+                grid-column: span 2;
+            }
+
+            .date-box {
+                grid-column: span 1;
+            }
+
+            .arrow {
+                justify-self: end;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 0 18px;
+            }
+
+            .container {
+                margin-top: 25px;
+            }
+
+            .page-title h1 {
+                font-size: 30px;
+            }
+
+            .history-card {
+                grid-template-columns: 1fr;
+            }
+
+            .doctor-box {
+                grid-column: span 1;
+            }
+
+            .date-box {
+                grid-column: span 1;
+            }
+
+            .arrow {
+                justify-self: center;
+            }
+
+            .patient-card {
+                padding: 15px;
+            }
+
+            .priority {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <div class="header">
+
+        <div class="logo">
+            <div class="logo-icon">💓</div>
+            CareTrack
+        </div>
+
+        <div class="user-area">
+            <div class="user-icon">👤</div>
+
+            <span>
+                {{ session.get('name', 'Patient') }}
+            </span>
+
+            <span>⌄</span>
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-title">
+
+            <div class="main-icon">
+                🩺
+            </div>
+
+            <h1>
+                Medical <span>History</span>
+            </h1>
+
+            <p>
+                View your complete consultation history
+            </p>
+
+        </div>
+
+
+        <!-- ================= PATIENT ================= -->
+
+        <div class="patient-card">
+
+            <div class="patient-left">
+
+                <div class="patient-icon">
+                    👤
+                </div>
+
+                <div>
+
+                    <div class="patient-name">
+                        {{ session.get('name', 'Patient') }}
+                    </div>
+
+                    <div class="patient-sub">
+                        Your personal medical history
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="priority">
+                Your Health<br>
+                Our Priority ♥
+            </div>
+
+        </div>
+
+
+        <!-- ================= MEDICAL HISTORY ================= -->
+
+        {% if records %}
+
+            {% for record in records %}
+
+            <div class="history-card">
+
+                <!-- DOCTOR -->
+
+                <div class="doctor-box">
+
+                    <div class="doctor-icon">
+                        👨‍⚕️
+                    </div>
+
+                    <div>
+
+                        <div class="doctor-name">
+                            {{ record.doctor_name }}
+                        </div>
+
+                        <div class="doctor-sub">
+                            Consultation Record
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DIAGNOSIS -->
+
+                <div class="info-box diagnosis-box">
+
+                    <div class="info-title">
+
+                        <div class="info-icon diagnosis-icon">
+                            ✚
+                        </div>
+
+                        Diagnosis
+
+                    </div>
+
+                    <div class="info-text">
+                        {{ record.diagnosis or 'Not available' }}
+                    </div>
+
+                </div>
+
+
+                <!-- PRESCRIPTION -->
+
+                <div class="info-box prescription-box">
+
+                    <div class="info-title">
+
+                        <div class="info-icon prescription-icon">
+                            💊
+                        </div>
+
+                        Prescription
+
+                    </div>
+
+                    <div class="info-text">
+                        {{ record.prescription or 'Not available' }}
+                    </div>
+
+                </div>
+
+
+                <!-- TREATMENT -->
+
+                <div class="info-box treatment-box">
+
+                    <div class="info-title">
+
+                        <div class="info-icon treatment-icon">
+                            ✚
+                        </div>
+
+                        Treatment
+
+                    </div>
+
+                    <div class="info-text">
+                        {{ record.treatment or 'Not available' }}
+                    </div>
+
+                </div>
+
+
+                <!-- CONSULTATION DATE -->
+
+                <div class="date-box">
+
+                    <div class="date-icon">
+                        📅
+                    </div>
+
+                    <div class="date-label">
+                        Consultation Date
+                    </div>
+
+                    <div class="date-value">
+
+                        {{ record.record_date or 'N/A' }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- ARROW -->
+
+                <div class="arrow">
+                    →
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div style="
+                text-align:center;
+                background:white;
+                padding:35px;
+                border-radius:18px;
+                color:#7186a4;
+                box-shadow:0 7px 20px rgba(40,100,170,0.08);
+            ">
+
+                <div style="font-size:35px;">📋</div>
+
+                <h3 style="color:#315887;">
+                    No Medical History Found
+                </h3>
+
+                <p>
+                    Your consultation history will appear here.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+        <!-- ================= BACK BUTTON ================= -->
+
+        <div class="back-area">
+
+            <a href="{{ url_for('patient_dashboard') }}"
+               class="back-btn">
+
+                ← &nbsp; Back to Dashboard
+
+            </a>
+
+        </div>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <div class="footer">
+            CareTrack © 2026 | Healthcare Management System
+        </div>
+
+    </div>
+
+</body>
+</html>

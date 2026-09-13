@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Doctor Management - CareTrack</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f8ff;
+    color: #1f2937;
+}
+
+.header {
+    background: #1261d6;
+    color: white;
+    padding: 22px 40px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 35px auto;
+}
+
+.card {
+    background: white;
+    border-radius: 14px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+}
+
+h1,
+h2 {
+    color: #1261d6;
+}
+
+.subtitle {
+    color: #667085;
+    margin-bottom: 25px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;
+    font-size: 15px;
+    background: white;
+}
+
+.availability-title {
+    color: #1261d6;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.availability-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr auto;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.day-display {
+    background: #eef5ff;
+    color: #1261d6;
+    font-weight: bold;
+}
+
+.add-availability {
+    background: #159a8c;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.add-availability:hover {
+    background: #117c71;
+}
+
+.remove-availability {
+    background: #d6455d;
+    color: white;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.add-doctor {
+    background: #1261d6;
+    color: white;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+.add-doctor:hover {
+    background: #0d4fae;
+}
+
+.message {
+    padding: 13px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.success {
+    background: #e8f8ef;
+    color: #157347;
+}
+
+.error {
+    background: #fdecec;
+    color: #b42318;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th {
+    background: #1261d6;
+    color: white;
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.delete-btn {
+    background: #d6455d;
+    color: white;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.back-btn {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 12px 20px;
+    background: #2583d9;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .availability-row {
+        grid-template-columns: 1fr;
+    }
+    .message {
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin: 20px 0;
+    font-weight: bold;
+}
+
+.message.error {
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fca5a5;
+}
+
+.message.success {
+    background: #dcfce7;
+    color: #15803d;
+    border: 1px solid #86efac;
+}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+    CareTrack — Admin Panel
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Add New Doctor</h1>
+
+<p class="subtitle">
+Enter doctor information and availability.
+</p>
+
+{% if message %}
+<div class="message {{ message_type }}">
+    {{ message }}
+</div>
+{% endif %}
+
+<form method="POST" action="/admin_doctor_manage">
+
+<div class="form-grid">
+
+<input
+    type="text"
+    name="name"
+    placeholder="Doctor Name"
+    required
+>
+
+<input
+    type="email"
+    name="email"
+    placeholder="Email"
+    required
+>
+
+<input
+    type="text"
+    name="password"
+    placeholder="Password"
+    required
+>
+
+<input
+    type="text"
+    name="specialization"
+    placeholder="Specialization"
+    required
+>
+
+<input
+    type="text"
+    name="department"
+    placeholder="Department"
+    required
+>
+
+<input
+    type="text"
+    name="phone"
+    placeholder="Phone"
+>
+
+</div>
+
+
+<h2 class="availability-title">
+    Availability
+</h2>
+
+
+<div id="availability-container">
+
+<div class="availability-row">
+
+<!-- DATE -->
+
+<input
+    type="date"
+    name="availability_date[]"
+    required
+    onchange="updateDay(this)"
+>
+
+
+<!-- AUTOMATIC DAY -->
+
+<input
+    type="text"
+    name="available_day[]"
+    class="day-display"
+    placeholder="Day"
+    readonly
+    required
+>
+
+
+<!-- START TIME -->
+
+<select name="start_time[]" required>
+
+<option value="">
+Start Time
+</option>
+
+<option value="09:00:00">09:00 AM</option>
+<option value="09:30:00">09:30 AM</option>
+<option value="10:00:00">10:00 AM</option>
+<option value="10:30:00">10:30 AM</option>
+<option value="11:00:00">11:00 AM</option>
+<option value="11:30:00">11:30 AM</option>
+<option value="12:00:00">12:00 PM</option>
+<option value="12:30:00">12:30 PM</option>
+<option value="13:00:00">01:00 PM</option>
+<option value="13:30:00">01:30 PM</option>
+<option value="14:00:00">02:00 PM</option>
+<option value="14:30:00">02:30 PM</option>
+<option value="15:00:00">03:00 PM</option>
+<option value="15:30:00">03:30 PM</option>
+<option value="16:00:00">04:00 PM</option>
+<option value="16:30:00">04:30 PM</option>
+<option value="17:00:00">05:00 PM</option>
+<option value="17:30:00">05:30 PM</option>
+<option value="18:00:00">06:00 PM</option>
+
+</select>
+
+
+<!-- END TIME -->
+
+<select name="end_time[]" required>
+
+<option value="">
+End Time
+</option>
+
+<option value="09:30:00">09:30 AM</option>
+<option value="10:00:00">10:00 AM</option>
+<option value="10:30:00">10:30 AM</option>
+<option value="11:00:00">11:00 AM</option>
+<option value="11:30:00">11:30 AM</option>
+<option value="12:00:00">12:00 PM</option>
+<option value="12:30:00">12:30 PM</option>
+<option value="13:00:00">01:00 PM</option>
+<option value="13:30:00">01:30 PM</option>
+<option value="14:00:00">02:00 PM</option>
+<option value="14:30:00">02:30 PM</option>
+<option value="15:00:00">03:00 PM</option>
+<option value="15:30:00">03:30 PM</option>
+<option value="16:00:00">04:00 PM</option>
+<option value="16:30:00">04:30 PM</option>
+<option value="17:00:00">05:00 PM</option>
+<option value="17:30:00">05:30 PM</option>
+<option value="18:00:00">06:00 PM</option>
+
+</select>
+
+
+<button
+    type="button"
+    class="remove-availability"
+    onclick="removeAvailability(this)"
+>
+Remove
+</button>
+
+</div>
+
+</div>
+
+
+<button
+    type="button"
+    class="add-availability"
+    onclick="addAvailability()"
+>
++ Add Availability
+</button>
+
+
+<br>
+
+
+<button
+    type="submit"
+    class="add-doctor"
+>
+Add Doctor
+</button>
+
+</form>
+
+</div>
+
+
+<div class="card">
+
+<h2>Doctor Information</h2>
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Email</th>
+<th>Department</th>
+<th>Specialization</th>
+<th>Phone</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for doctor in doctors %}
+
+<tr>
+
+<td>{{ doctor.name }}</td>
+
+<td>{{ doctor.email }}</td>
+
+<td>{{ doctor.department }}</td>
+
+<td>{{ doctor.specialization }}</td>
+
+<td>{{ doctor.phone }}</td>
+
+<td>
+
+<a
+    href="/doctor_availability/{{ doctor.doctor_id }}"
+    style="
+        display: inline-block;
+        background: #159a8c;
+        color: white;
+        padding: 9px 15px;
+        border-radius: 7px;
+        text-decoration: none;
+        margin-right: 6px;
+    "
+>
+    Manage Availability
+</a>
+
+<form
+    method="POST"
+    action="/admin_doctor_delete/{{ doctor.doctor_id }}"
+    style="display: inline-block;"
+    onsubmit="return confirm('Are you sure you want to delete this doctor?');"
+>
+
+<button
+    type="submit"
+    class="delete-btn"
+>
+Delete
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% else %}
+
+<tr>
+
+<td colspan="6">
+No doctors found.
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<a href="/admin_dashboard" class="back-btn">
+← Back to Dashboard
+</a>
+
+</div>
+
+
+<script>
+
+/* Automatically find the day from selected date */
+
+function updateDay(dateInput) {
+
+    const row = dateInput.closest(".availability-row");
+
+    const dayInput =
+        row.querySelector('input[name="available_day[]"]');
+
+    if (!dateInput.value) {
+
+        dayInput.value = "";
+
+        return;
+    }
+
+    const selectedDate =
+        new Date(dateInput.value + "T00:00:00");
+
+    const days = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+    ];
+
+    dayInput.value =
+        days[selectedDate.getDay()];
+}
+
+
+/* Add another availability */
+
+function addAvailability() {
+
+    const container =
+        document.getElementById("availability-container");
+
+    const row =
+        document.createElement("div");
+
+    row.className = "availability-row";
+
+    row.innerHTML = `
+
+        <input
+            type="date"
+            name="availability_date[]"
+            required
+            onchange="updateDay(this)"
+        >
+
+        <input
+            type="text"
+            name="available_day[]"
+            class="day-display"
+            placeholder="Day"
+            readonly
+            required
+        >
+
+        <select name="start_time[]" required>
+
+            <option value="">
+                Start Time
+            </option>
+
+            <option value="09:00:00">09:00 AM</option>
+            <option value="09:30:00">09:30 AM</option>
+            <option value="10:00:00">10:00 AM</option>
+            <option value="10:30:00">10:30 AM</option>
+            <option value="11:00:00">11:00 AM</option>
+            <option value="11:30:00">11:30 AM</option>
+            <option value="12:00:00">12:00 PM</option>
+            <option value="12:30:00">12:30 PM</option>
+            <option value="13:00:00">01:00 PM</option>
+            <option value="13:30:00">01:30 PM</option>
+            <option value="14:00:00">02:00 PM</option>
+            <option value="14:30:00">02:30 PM</option>
+            <option value="15:00:00">03:00 PM</option>
+            <option value="15:30:00">03:30 PM</option>
+            <option value="16:00:00">04:00 PM</option>
+            <option value="16:30:00">04:30 PM</option>
+            <option value="17:00:00">05:00 PM</option>
+            <option value="17:30:00">05:30 PM</option>
+            <option value="18:00:00">06:00 PM</option>
+
+        </select>
+
+        <select name="end_time[]" required>
+
+            <option value="">
+                End Time
+            </option>
+
+            <option value="09:30:00">09:30 AM</option>
+            <option value="10:00:00">10:00 AM</option>
+            <option value="10:30:00">10:30 AM</option>
+            <option value="11:00:00">11:00 AM</option>
+            <option value="11:30:00">11:30 AM</option>
+            <option value="12:00:00">12:00 PM</option>
+            <option value="12:30:00">12:30 PM</option>
+            <option value="13:00:00">01:00 PM</option>
+            <option value="13:30:00">01:30 PM</option>
+            <option value="14:00:00">02:00 PM</option>
+            <option value="14:30:00">02:30 PM</option>
+            <option value="15:00:00">03:00 PM</option>
+            <option value="15:30:00">03:30 PM</option>
+            <option value="16:00:00">04:00 PM</option>
+            <option value="16:30:00">04:30 PM</option>
+            <option value="17:00:00">05:00 PM</option>
+            <option value="17:30:00">05:30 PM</option>
+            <option value="18:00:00">06:00 PM</option>
+
+        </select>
+
+        <button
+            type="button"
+            class="remove-availability"
+            onclick="removeAvailability(this)"
+        >
+            Remove
+        </button>
+
+    `;
+
+    container.appendChild(row);
+}
+
+
+/* Remove availability */
+
+function removeAvailability(button) {
+
+    const container =
+        document.getElementById("availability-container");
+
+    const rows =
+        container.querySelectorAll(".availability-row");
+
+    if (rows.length > 1) {
+
+        button.parentElement.remove();
+
+    } else {
+
+        alert("At least one availability is required.");
+
+    }
+}
+
+</script>
+
+</body>
+</html>

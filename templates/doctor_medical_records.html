@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareTrack - Medical Records</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef7ff;
+    color: #183b56;
+}
+
+.header {
+    background: linear-gradient(135deg, #0757b8, #159bd7);
+    color: white;
+    padding: 23px 45px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header p {
+    margin: 6px 0 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 0 22px;
+}
+
+.back-btn {
+    display: inline-block;
+    background: #0757b8;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.hero {
+    background: white;
+    border-radius: 21px;
+    padding: 28px;
+    box-shadow: 0 9px 28px rgba(0,80,150,0.09);
+    margin-bottom: 22px;
+}
+
+.hero-icon {
+    font-size: 40px;
+}
+
+.hero h2 {
+    margin: 8px 0 5px;
+    color: #123f73;
+}
+
+.hero p {
+    margin: 0;
+    color: #718096;
+}
+
+.filter-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    margin-bottom: 24px;
+    box-shadow: 0 8px 25px rgba(0,80,150,0.08);
+}
+
+.filter-card label {
+    display: block;
+    font-weight: bold;
+    color: #234d72;
+    margin-bottom: 8px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 12px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+select {
+    min-width: 280px;
+    height: 45px;
+
+    border: 1px solid #cbdbea;
+    border-radius: 9px;
+
+    padding: 0 12px;
+    font-size: 15px;
+}
+
+.search-btn {
+    height: 45px;
+
+    border: none;
+    border-radius: 9px;
+
+    padding: 0 22px;
+
+    background: #0757b8;
+    color: white;
+
+    font-weight: bold;
+}
+
+.records-card {
+    background: white;
+    border-radius: 18px;
+    overflow-x: auto;
+    box-shadow: 0 8px 25px rgba(0,80,150,0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+th {
+    background: #edf7ff;
+    color: #214d78;
+    padding: 16px;
+    text-align: left;
+}
+
+td {
+    padding: 16px;
+    border-top: 1px solid #edf2f7;
+    vertical-align: top;
+}
+
+.patient {
+    font-weight: bold;
+    color: #183b61;
+}
+
+.date {
+    color: #0757b8;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.empty {
+    background: white;
+    border-radius: 18px;
+    padding: 45px;
+    text-align: center;
+    color: #718096;
+    box-shadow: 0 8px 25px rgba(0,80,150,0.08);
+}
+
+.empty-icon {
+    font-size: 45px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="header">
+
+    <h1>CareTrack — Medical Records</h1>
+
+    <p>
+        Doctor Medical Records
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+<a href="/doctor_dashboard" class="back-btn">
+    ← Back to Dashboard
+</a>
+
+
+<div class="hero">
+
+    <div class="hero-icon">
+        📋
+    </div>
+
+    <h2>
+        Medical Records
+    </h2>
+
+    <p>
+        View consultation records of your patients.
+    </p>
+
+</div>
+
+
+<div class="filter-card">
+
+<form
+    method="GET"
+    action="/doctor_medical_records"
+>
+
+<div class="filter-row">
+
+<div>
+
+<label>
+    👤 Select Patient
+</label>
+
+<select name="patient_id">
+
+<option value="">
+    All Patients
+</option>
+
+{% for patient in patients %}
+
+<option
+    value="{{ patient.patient_id }}"
+    {% if selected_patient|string == patient.patient_id|string %}
+        selected
+    {% endif %}
+>
+    {{ patient.patient_name }}
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<button
+    type="submit"
+    class="search-btn"
+>
+    🔎 Search Records
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+{% if records %}
+
+<div class="records-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>Patient</th>
+    <th>Record Date</th>
+    <th>Diagnosis</th>
+    <th>Prescription</th>
+    <th>Treatment</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+{% for record in records %}
+
+<tr>
+
+<td class="patient">
+    👤 {{ record.patient_name }}
+</td>
+
+<td class="date">
+    {{ record.record_date.strftime("%d-%m-%Y") }}
+</td>
+
+<td>
+    {{ record.diagnosis }}
+</td>
+
+<td>
+    {{ record.prescription }}
+</td>
+
+<td>
+    {{ record.treatment }}
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+
+{% else %}
+
+<div class="empty">
+
+<div class="empty-icon">
+    📂
+</div>
+
+<h3>
+    No Medical Records Found
+</h3>
+
+<p>
+    Saved consultation records will appear here.
+</p>
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+</body>
+
+</html>

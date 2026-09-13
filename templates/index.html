@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareTrack Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: linear-gradient(135deg, #eef6ff, #f8fbff);
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            background: linear-gradient(135deg, #123f91, #1976d2);
+            color: white;
+            padding: 18px 45px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow: 0 5px 20px rgba(13, 110, 253, 0.25);
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 45px;
+            height: 45px;
+
+            background: rgba(255, 255, 255, 0.18);
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 24px;
+
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.25);
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: 750;
+        }
+
+        .navbar-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            max-width: 1150px;
+            margin: 45px auto;
+            padding: 0 25px;
+        }
+
+
+        /* ================= WELCOME ================= */
+
+        .welcome {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .welcome-icon {
+            width: 78px;
+            height: 78px;
+
+            margin: 0 auto 18px;
+
+            background: linear-gradient(145deg, #dceeff, #ffffff);
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 40px;
+
+            box-shadow:
+                0 8px 25px rgba(13, 110, 253, 0.15),
+                inset 0 0 0 1px #d6e9ff;
+        }
+
+        .welcome h1 {
+            margin: 0;
+
+            color: #123f91;
+
+            font-size: 37px;
+            font-weight: 750;
+
+            letter-spacing: -0.5px;
+        }
+
+        .welcome p {
+            color: #64748b;
+
+            font-size: 17px;
+
+            margin-top: 10px;
+        }
+
+
+        /* ================= SUCCESS MESSAGE ================= */
+
+        .success {
+            max-width: 650px;
+
+            margin: 0 auto 35px;
+
+            background: linear-gradient(135deg, #ecfdf5, #f4fffa);
+
+            color: #047857;
+
+            padding: 14px 20px;
+
+            border-radius: 12px;
+
+            text-align: center;
+
+            font-weight: 700;
+
+            border: 1px solid #bbf7d0;
+
+            box-shadow: 0 5px 15px rgba(4, 120, 87, 0.08);
+        }
+
+
+        /* ================= DASHBOARD GRID ================= */
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns: repeat(2, 1fr);
+
+            gap: 25px;
+        }
+
+
+        /* ================= CARD ================= */
+
+        .card {
+            position: relative;
+
+            background: rgba(255,255,255,0.95);
+
+            padding: 30px;
+
+            min-height: 235px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 8px 25px rgba(32, 91, 150, 0.10);
+
+            text-decoration: none;
+
+            color: #1e293b;
+
+            border: 1px solid #dce9f7;
+
+            overflow: hidden;
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+            height: 150px;
+
+            right: -60px;
+            bottom: -65px;
+
+            border-radius: 50%;
+
+            background: rgba(13, 110, 253, 0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            box-shadow:
+                0 16px 35px rgba(32, 91, 150, 0.18);
+
+            border-color: #70adf5;
+        }
+
+
+        /* ================= CARD ICON ================= */
+
+        .card-icon {
+            width: 62px;
+            height: 62px;
+
+            border-radius: 17px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 32px;
+
+            margin-bottom: 20px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        /* Individual icon backgrounds */
+
+        .patients .card-icon {
+            background: #dceeff;
+        }
+
+        .doctors .card-icon {
+            background: #dff8ef;
+        }
+
+        .appointments .card-icon {
+            background: #eee5ff;
+        }
+
+        .tracking .card-icon {
+            background: #fff0d2;
+        }
+
+        .records .card-icon {
+            background: #def5ff;
+        }
+
+        .reports .card-icon {
+            background: #eee7ff;
+        }
+
+
+        /* ================= CARD TEXT ================= */
+
+        .card h2 {
+            margin: 0 0 9px;
+
+            color: #123f91;
+
+            font-size: 23px;
+
+            font-weight: 750;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .card p {
+            margin: 0;
+
+            color: #64748b;
+
+            line-height: 1.6;
+
+            font-size: 15.5px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        /* ================= CARD ARROW ================= */
+
+        .card-arrow {
+            position: absolute;
+
+            right: 25px;
+            top: 27px;
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+
+            background: #edf5ff;
+
+            color: #1976d2;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+
+            opacity: 0;
+
+            transform: translateX(-5px);
+
+            transition: 0.25s;
+
+            z-index: 3;
+        }
+
+        .card:hover .card-arrow {
+            opacity: 1;
+
+            transform: translateX(0);
+        }
+
+
+        
+        
+
+        /* ================= LOGOUT ================= */
+
+        .logout-container {
+            text-align: center;
+
+            margin-top: 42px;
+
+            margin-bottom: 25px;
+        }
+
+        .logout-btn {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 10px;
+
+            padding: 13px 32px;
+
+            background: linear-gradient(135deg, #174ea6, #1976d2);
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 10px;
+
+            font-weight: 700;
+
+            font-size: 16px;
+
+            box-shadow:
+                0 8px 20px rgba(25, 118, 210, 0.25);
+
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-3px);
+
+            background: linear-gradient(135deg, #103b82, #125ca8);
+
+            box-shadow:
+                0 12px 25px rgba(25, 118, 210, 0.35);
+        }
+
+        .logout-icon {
+            font-size: 20px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 25px;
+
+            padding-bottom: 30px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        /* ================= DECORATIONS ================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            width: 250px;
+            height: 250px;
+
+            left: -120px;
+            bottom: -100px;
+
+            border-radius: 50%;
+
+            background: rgba(25,118,210,0.07);
+
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            width: 220px;
+            height: 220px;
+
+            right: -100px;
+            top: 180px;
+
+            border-radius: 50%;
+
+            background: rgba(25,118,210,0.06);
+
+            z-index: -1;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 750px) {
+
+            .navbar {
+                padding: 16px 22px;
+            }
+
+            .navbar-text {
+                display: none;
+            }
+
+            .container {
+                margin: 30px auto;
+                padding: 0 18px;
+            }
+
+            .welcome h1 {
+                font-size: 30px;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <div class="logo-area">
+
+            <div class="logo-icon">
+                ❤️‍⚕️
+            </div>
+
+            <div class="logo">
+                CareTrack
+            </div>
+
+        </div>
+
+        <div class="navbar-text">
+            Healthcare Management System
+        </div>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <div class="welcome-icon">
+                🏥
+            </div>
+
+            <h1>
+                Welcome to CareTrack
+            </h1>
+
+            <p>
+                Hospital Management Dashboard
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN MESSAGE -->
+
+        <div class="success">
+            ✓ Login successful!
+        </div>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <div class="dashboard-grid">
+
+
+            <!-- PATIENTS -->
+
+            <a href="/admin_patients" class="card patients">
+
+                <div class="card-icon">
+                    👤
+                </div>
+
+                <div class="card-arrow">
+                    →
+                </div>
+
+                <h2>
+                    Patients
+                </h2>
+
+                <p>
+                    View patient details and patient information.
+                </p>
+
+            </a>
+
+
+            <!-- DOCTORS -->
+
+            <a href="/admin_doctor_manage" class="card doctors">
+
+                <div class="card-icon">
+                    👨‍⚕️
+                </div>
+
+                <div class="card-arrow">
+                    →
+                </div>
+
+                <h2>
+                    Doctors
+                </h2>
+
+                <p>
+                    View and manage doctor information.
+                </p>
+
+            </a>
+
+
+            <!-- APPOINTMENTS -->
+
+            <a href="/admin_appointments" class="card appointments">
+
+                <div class="card-icon">
+                    📅
+                </div>
+
+                <div class="card-arrow">
+                    →
+                </div>
+
+                <h2>
+                    Appointments
+                </h2>
+
+                <p>
+                    View patient appointments and appointment details.
+                </p>
+
+            </a>
+
+
+            <!-- TOKEN TRACKING -->
+
+            <a href="/admin_tracking" class="card tracking">
+
+                <div class="card-icon">
+                    🎫
+                </div>
+
+                <div class="card-arrow">
+                    →
+                </div>
+
+                <h2>
+                    Token Tracking
+                </h2>
+
+                <p>
+                    Track token status and appointment details for each doctors.
+                </p>
+
+            </a>
+
+
+            <!-- MEDICAL RECORDS -->
+
+            <a href="/admin_medical_records" class="card records">
+
+                <div class="card-icon">
+                    📋
+                </div>
+
+                <div class="card-arrow">
+                    →
+                </div>
+
+                <h2>
+                    Medical Records
+                </h2>
+
+                <p>
+                    Search and view patient medical records.
+                </p>
+
+            </a>
+
+
+            <!-- REPORT GENERATION -->
+
+            <a href="/report" class="card reports">
+
+                <div class="card-icon">
+                    📄
+                </div>
+
+                <div class="card-arrow">
+                    →
+                </div>
+
+                <h2>
+                    Report Generation
+                </h2>
+
+                <p>
+                    Generate and print patient medical reports.
+                </p>
+
+            </a>
+
+
+        </div>
+
+
+        <!-- ================= LOGOUT ================= -->
+
+        <div class="logout-container">
+
+            <a href="/logout" class="logout-btn">
+
+                <span class="logout-icon">
+                    🚪
+                </span>
+
+                Logout
+
+            </a>
+
+        </div>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <div class="footer">
+            CareTrack © 2026 | Healthcare Management System
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

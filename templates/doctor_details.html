@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Doctor Details - CareTrack</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8fc;
+            color: #1e293b;
+        }
+
+        .navbar {
+            background: #0d6efd;
+            color: white;
+            padding: 18px 45px;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .back-button {
+            display: inline-block;
+            background: #0d6efd;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .back-button:hover {
+            background: #0b5ed7;
+        }
+
+        .title {
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            color: #0d6efd;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #64748b;
+        }
+
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(300px, 1fr)
+            );
+            gap: 22px;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        .doctor-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #e7f1ff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .doctor-card h2 {
+            margin: 0 0 15px;
+            color: #0d6efd;
+            font-size: 21px;
+        }
+
+        .doctor-info {
+            margin: 10px 0;
+            color: #475569;
+        }
+
+        .doctor-info strong {
+            color: #1e293b;
+        }
+
+        .availability {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .availability h3 {
+            color: #0d6efd;
+            margin-bottom: 12px;
+            font-size: 17px;
+        }
+
+        .availability-item {
+            background: #f8fbff;
+            border: 1px solid #dbeafe;
+            padding: 11px 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .no-availability {
+            color: #64748b;
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .no-doctors {
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            color: #64748b;
+            box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (max-width: 650px) {
+
+            .navbar {
+                padding: 18px 20px;
+            }
+
+            .container {
+                margin: 25px auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">CareTrack</div>
+    </div>
+
+    <div class="container">
+
+        <a href="/patient_dashboard" class="back-button">
+            ← Back to Dashboard
+        </a>
+
+        <div class="title">
+            <h1>Doctor Details</h1>
+            <p>View doctor information and availability</p>
+        </div>
+
+        {% if doctors %}
+
+        <div class="doctor-grid">
+
+            {% for doctor in doctors %}
+
+            <div class="doctor-card">
+
+                <div class="doctor-icon">
+                    👨‍⚕️
+                </div>
+
+                <h2> {{ doctor.name }}</h2>
+
+                <div class="doctor-info">
+                    <strong>Department:</strong>
+                    {{ doctor.department }}
+                </div>
+
+                <div class="doctor-info">
+                    <strong>Specialization:</strong>
+                    {{ doctor.specialization }}
+                </div>
+
+                
+
+                <div class="availability">
+
+                    <h3>Availability</h3>
+
+                    {% if doctor.availability %}
+
+                        {% for schedule in doctor.availability %}
+
+                        <div class="availability-item">
+                            📅 {{ schedule.day }}
+                            — {{ schedule.date }}
+                            <br>
+                            ⏰ {{ schedule.time }}
+                        </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="no-availability">
+                            Availability not updated
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-doctors">
+            No doctors available at the moment.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>

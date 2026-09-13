@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CareTrack - Patients</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f8fc;
+        }
+
+        .header {
+            background: #0d6efd;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 30px auto;
+        }
+
+        .filter-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .filter-box label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        select {
+            width: 70%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .search-button {
+            padding: 12px 22px;
+            background: #0d6efd;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 8px;
+            font-size: 15px;
+        }
+
+        .search-button:hover {
+            background: #0b5ed7;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        .patient-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .patient-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .patient-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .patient-card h3 {
+            color: #0d6efd;
+            margin: 8px 0 15px;
+        }
+
+        .patient-card p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .details-button {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 16px;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .details-button:hover {
+            background: #0b5ed7;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 20px;
+            background: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        .no-patients {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: #666;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>CareTrack</h1>
+        <p>Patient Information</p>
+    </div>
+
+    <div class="container">
+
+        <div class="filter-box">
+
+            <form method="GET" action="/admin_patients">
+
+                <label>Select Patient</label>
+
+                <select name="patient_id">
+
+                    <option value="">Select Patient</option>
+
+                    {% for patient in patient_list %}
+
+                    <option value="{{ patient.patient_id }}"
+                        {% if selected_patient_id|string == patient.patient_id|string %}
+                        selected
+                        {% endif %}>
+                        {{ patient.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+                <button type="submit" class="search-button">
+                    Search
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <h2>Patient Cards</h2>
+
+        {% if patients %}
+
+        <div class="patient-grid">
+
+            {% for patient in patients %}
+
+            <div class="patient-card">
+
+                <div class="patient-icon">
+                    👤
+                </div>
+
+                <h3>{{ patient.name }}</h3>
+
+                <p>
+                    <strong>Email:</strong>
+                    {{ patient.email }}
+                </p>
+
+                <p>
+                    <strong>Phone:</strong>
+                    {{ patient.phone }}
+                </p>
+
+                <p>
+                    <strong>Age:</strong>
+                    {{ patient.age }}
+                </p>
+
+                <p>
+                    <strong>Gender:</strong>
+                    {{ patient.gender }}
+                </p>
+
+                <a
+                    href="/admin_patient_details/{{ patient.patient_id }}"
+                    class="details-button">
+                    View Details
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-patients">
+            No patients found.
+        </div>
+
+        {% endif %}
+
+
+        <a href="/admin_dashboard" class="back-button">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+
+</html>
