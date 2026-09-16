@@ -21,11 +21,17 @@
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
-    color: #263b67;
+
+    color: #244B5A;
+
     background:
-        radial-gradient(circle at 8% 25%, rgba(255, 187, 219, 0.25), transparent 18%),
-        radial-gradient(circle at 95% 35%, rgba(190, 175, 255, 0.25), transparent 20%),
-        linear-gradient(135deg, #fff8fc, #f7f3ff, #f4fbff);
+        linear-gradient(
+            135deg,
+            #F4FBFD,
+            #EAF7FA,
+            #F7FCFD
+        );
+
     min-height: 100vh;
 }
 
@@ -38,26 +44,29 @@ body {
     background:
         linear-gradient(
             120deg,
-            #4924b8,
-            #8b35cf,
-            #d43ca8,
-            #f05a9d
+            #087E9B,
+            #159BB8,
+            #55BDD0
         );
 
     color: white;
+
     padding: 20px 45px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    box-shadow: 0 8px 25px rgba(110, 50, 170, 0.25);
+    box-shadow:
+        0 8px 25px rgba(8,126,155,0.18);
+
     position: relative;
     overflow: hidden;
 }
 
 .header::after {
     content: "";
+
     position: absolute;
 
     width: 500px;
@@ -66,14 +75,17 @@ body {
     right: 18%;
     top: -90px;
 
-    background: rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.12);
+
     border-radius: 50%;
 }
 
 .brand {
     display: flex;
     align-items: center;
+
     gap: 14px;
+
     position: relative;
     z-index: 2;
 }
@@ -93,44 +105,62 @@ body {
     font-size: 34px;
 
     box-shadow:
-        0 5px 15px rgba(0,0,0,0.12),
+        0 5px 15px rgba(0,0,0,0.10),
         inset 0 0 0 1px rgba(255,255,255,0.25);
+}
+.heart-logo {
+    color: #087E9B;
+    font-size: 38px;
+    line-height: 1;
 }
 
 .brand-text h1 {
     margin: 0;
+
     font-size: 27px;
+
     letter-spacing: 0.3px;
 }
 
 .brand-text p {
     margin: 3px 0 0;
+
     font-size: 14px;
+
     opacity: 0.92;
 }
 
 .nav {
     display: flex;
     align-items: center;
+
     gap: 30px;
+
     position: relative;
     z-index: 2;
 }
 
 .nav-item {
     color: white;
+
     text-decoration: none;
+
     font-weight: 600;
+
     display: flex;
     align-items: center;
+
     gap: 8px;
+
     font-size: 15px;
 }
 
 .profile {
     display: flex;
     align-items: center;
+
     gap: 10px;
+
     font-weight: 600;
 }
 
@@ -170,12 +200,14 @@ body {
 
 .back-btn {
     display: inline-flex;
+
     align-items: center;
+
     gap: 8px;
 
     background: white;
 
-    color: #6127b7;
+    color: #087E9B;
 
     text-decoration: none;
 
@@ -185,9 +217,10 @@ body {
 
     font-weight: 700;
 
-    border: 1px solid #d9c5ff;
+    border: 1px solid #B9E3EE;
 
-    box-shadow: 0 5px 15px rgba(110,50,180,0.10);
+    box-shadow:
+        0 5px 15px rgba(8,126,155,0.10);
 
     margin-bottom: 14px;
 
@@ -196,7 +229,9 @@ body {
 
 .back-btn:hover {
     transform: translateX(-3px);
-    box-shadow: 0 8px 20px rgba(110,50,180,0.18);
+
+    box-shadow:
+        0 8px 20px rgba(8,126,155,0.16);
 }
 
 
@@ -205,19 +240,20 @@ body {
 ========================================================= */
 
 .main-card {
-    background: rgba(255,255,255,0.94);
+    background: rgba(255,255,255,0.97);
 
     border-radius: 25px;
 
     padding: 30px 32px;
 
-    border: 1px solid rgba(210,190,240,0.55);
+    border: 1px solid #CBE8EF;
 
     box-shadow:
-        0 18px 45px rgba(100,60,150,0.12),
-        0 3px 10px rgba(100,60,150,0.06);
+        0 18px 45px rgba(8,126,155,0.09),
+        0 3px 10px rgba(8,126,155,0.05);
 
     position: relative;
+
     overflow: hidden;
 }
 
@@ -234,7 +270,7 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(255,105,180,0.08);
+    background: rgba(85,189,208,0.08);
 }
 
 .main-card::after {
@@ -250,7 +286,7 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(125,80,220,0.08);
+    background: rgba(21,155,184,0.06);
 }
 
 
@@ -261,6 +297,7 @@ body {
 .title {
     display: flex;
     align-items: center;
+
     gap: 18px;
 
     margin-bottom: 25px;
@@ -278,8 +315,8 @@ body {
     background:
         linear-gradient(
             135deg,
-            #ffe1f1,
-            #eadcff
+            #DDF4F9,
+            #BFE8F1
         );
 
     display: flex;
@@ -288,8 +325,10 @@ body {
 
     font-size: 36px;
 
+    color: #087E9B;
+
     box-shadow:
-        0 8px 20px rgba(180,70,170,0.14);
+        0 8px 20px rgba(8,126,155,0.12);
 }
 
 .title h2 {
@@ -297,21 +336,15 @@ body {
 
     font-size: 31px;
 
-    background:
-        linear-gradient(
-            90deg,
-            #c21888,
-            #7025ba
-        );
+    color: #075E75;
 
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: 800;
 }
 
 .title p {
     margin: 6px 0 0;
 
-    color: #7181a3;
+    color: #678591;
 
     font-size: 15px;
 }
@@ -326,16 +359,12 @@ body {
 
     overflow: hidden;
 
-    border: 1px solid #f3b9dc;
+    border: 1px solid #B9E3EE;
 
-    background:
-        linear-gradient(
-            135deg,
-            #fff9fd,
-            #faf5ff
-        );
+    background: #FFFFFF;
 
-    box-shadow: 0 8px 22px rgba(130,50,150,0.07);
+    box-shadow:
+        0 8px 22px rgba(8,126,155,0.07);
 
     position: relative;
     z-index: 2;
@@ -347,17 +376,17 @@ body {
     background:
         linear-gradient(
             90deg,
-            #ffe8f5,
-            #f0e7ff
+            #DDF3F8,
+            #EAF8FB
         );
 
-    color: #6d1eaf;
+    color: #075E75;
 
     font-size: 18px;
 
     font-weight: 800;
 
-    border-bottom: 1px solid #eed5eb;
+    border-bottom: 1px solid #C5E7EE;
 }
 
 .info-grid {
@@ -373,11 +402,14 @@ body {
 
     min-height: 78px;
 
-    border-right: 1px solid #eadff0;
-    border-bottom: 1px solid #eadff0;
+    border-right: 1px solid #DCECEF;
+
+    border-bottom: 1px solid #DCECEF;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
 }
 
@@ -395,7 +427,7 @@ body {
 .label {
     font-size: 11px;
 
-    color: #8a7ca6;
+    color: #72909B;
 
     font-weight: 700;
 
@@ -409,13 +441,13 @@ body {
 .value {
     font-weight: 800;
 
-    color: #283c73;
+    color: #244B5A;
 
     font-size: 16px;
 }
 
 .token-value {
-    color: #8c28c4;
+    color: #087E9B;
 
     font-size: 19px;
 }
@@ -427,12 +459,14 @@ body {
 
 .details-title {
     display: flex;
+
     align-items: center;
+
     gap: 11px;
 
     margin: 28px 0 14px;
 
-    color: #42209a;
+    color: #075E75;
 
     font-size: 21px;
 
@@ -448,11 +482,14 @@ body {
     background:
         linear-gradient(
             135deg,
-            #d9c5ff,
-            #f4c5ec
+            #DDF4F9,
+            #BFE8F1
         );
 
+    color: #087E9B;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -472,6 +509,7 @@ body {
     gap: 20px;
 
     position: relative;
+
     z-index: 2;
 }
 
@@ -489,24 +527,34 @@ body {
     transform: translateY(-3px);
 }
 
-.diagnosis-card {
-    background: linear-gradient(145deg, #fff0f5, #ffe5f0);
-    border: 1px solid #f5b7d0;
-}
 
-.prescription-card {
-    background: linear-gradient(145deg, #f3ecff, #eee4ff);
-    border: 1px solid #d3baf4;
-}
+/* =========================================================
+   ALL CONSULTATION CARDS
+========================================================= */
 
+.diagnosis-card,
+.prescription-card,
 .treatment-card {
-    background: linear-gradient(145deg, #e9fff8, #ddf8f0);
-    border: 1px solid #aee5d5;
+    background:
+        linear-gradient(
+            145deg,
+            #F2FBFD,
+            #E2F5F9
+        );
+
+    border: 1px solid #B9E3EE;
 }
+
+
+/* =========================================================
+   FORM HEADING
+========================================================= */
 
 .form-heading {
     display: flex;
+
     align-items: center;
+
     gap: 10px;
 
     font-weight: 800;
@@ -514,6 +562,8 @@ body {
     font-size: 17px;
 
     margin-bottom: 9px;
+
+    color: #075E75;
 }
 
 .form-heading-icon {
@@ -522,35 +572,30 @@ body {
 
     border-radius: 50%;
 
+    background: #D5F0F7;
+
+    color: #087E9B;
+
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     font-size: 19px;
 }
 
-.diagnosis-card .form-heading {
-    color: #c52b72;
-}
-
-.diagnosis-card .form-heading-icon {
-    background: #ffd0e2;
-}
-
-.prescription-card .form-heading {
-    color: #6630b5;
-}
-
-.prescription-card .form-heading-icon {
-    background: #d9c7ff;
-}
-
+.diagnosis-card .form-heading,
+.prescription-card .form-heading,
 .treatment-card .form-heading {
-    color: #168878;
+    color: #075E75;
 }
 
+.diagnosis-card .form-heading-icon,
+.prescription-card .form-heading-icon,
 .treatment-card .form-heading-icon {
-    background: #c4f1e3;
+    background: #D5F0F7;
+
+    color: #087E9B;
 }
 
 
@@ -569,11 +614,11 @@ textarea {
 
     padding: 15px;
 
-    border: 1px solid rgba(180,180,200,0.55);
+    border: 1px solid #BFDDE5;
 
-    background: rgba(255,255,255,0.88);
+    background: #FFFFFF;
 
-    color: #33456f;
+    color: #315766;
 
     font-family: inherit;
 
@@ -585,28 +630,16 @@ textarea {
 }
 
 textarea::placeholder {
-    color: #8290ac;
+    color: #91ADB6;
 }
 
-.diagnosis-card textarea:focus {
-    border-color: #ed6ca8;
-
-    box-shadow:
-        0 0 0 3px rgba(237,108,168,0.12);
-}
-
-.prescription-card textarea:focus {
-    border-color: #9b6be0;
-
-    box-shadow:
-        0 0 0 3px rgba(155,107,224,0.12);
-}
-
+.diagnosis-card textarea:focus,
+.prescription-card textarea:focus,
 .treatment-card textarea:focus {
-    border-color: #4fc3aa;
+    border-color: #159BB8;
 
     box-shadow:
-        0 0 0 3px rgba(79,195,170,0.12);
+        0 0 0 3px rgba(21,155,184,0.12);
 }
 
 
@@ -628,9 +661,9 @@ textarea::placeholder {
     background:
         linear-gradient(
             100deg,
-            #ef3f9b,
-            #a83bd0,
-            #6537d4
+            #087E9B,
+            #159BB8,
+            #55BDD0
         );
 
     color: white;
@@ -644,11 +677,12 @@ textarea::placeholder {
     letter-spacing: 0.2px;
 
     box-shadow:
-        0 9px 22px rgba(150,50,180,0.25);
+        0 9px 22px rgba(8,126,155,0.20);
 
     transition: 0.2s;
 
     position: relative;
+
     z-index: 2;
 }
 
@@ -656,7 +690,7 @@ textarea::placeholder {
     transform: translateY(-2px);
 
     box-shadow:
-        0 13px 28px rgba(150,50,180,0.32);
+        0 13px 28px rgba(8,126,155,0.26);
 }
 
 .save-btn:active {
@@ -672,13 +706,13 @@ textarea::placeholder {
     background:
         linear-gradient(
             135deg,
-            #e9fff6,
-            #dcf8ee
+            #E8F8FB,
+            #DDF4F8
         );
 
-    color: #16866d;
+    color: #087E9B;
 
-    border: 1px solid #a9e5d2;
+    border: 1px solid #B9E3EE;
 
     padding: 16px 19px;
 
@@ -704,23 +738,23 @@ textarea::placeholder {
     background:
         linear-gradient(
             135deg,
-            #effff8,
-            #e9f8ff
+            #EFFBFD,
+            #E4F6F9
         );
 
-    border: 1px solid #b8e8dc;
+    border: 1px solid #B9E3EE;
 }
 
 .next-card h3 {
     margin: 0 0 7px;
 
-    color: #138b73;
+    color: #087E9B;
 }
 
 .next-card p {
     margin: 0;
 
-    color: #4d6580;
+    color: #4D6D78;
 }
 
 
@@ -733,7 +767,7 @@ textarea::placeholder {
 
     margin-top: 22px;
 
-    color: #7d87a3;
+    color: #78929C;
 
     font-size: 13px;
 }
@@ -741,7 +775,7 @@ textarea::placeholder {
 .footer span {
     margin: 0 7px;
 
-    color: #c04aa8;
+    color: #159BB8;
 }
 
 
@@ -768,11 +802,11 @@ textarea::placeholder {
     }
 
     .info:nth-child(3) {
-        border-right: 1px solid #eadff0;
+        border-right: 1px solid #DCECEF;
     }
 
     .info:nth-child(4) {
-        border-bottom: 1px solid #eadff0;
+        border-bottom: 1px solid #DCECEF;
     }
 
     .info:nth-child(5) {
@@ -781,6 +815,7 @@ textarea::placeholder {
 
     .info:nth-child(6) {
         border-bottom: none;
+
         border-right: none;
     }
 }
@@ -803,6 +838,7 @@ textarea::placeholder {
     .logo {
         width: 50px;
         height: 50px;
+
         font-size: 27px;
     }
 
@@ -825,6 +861,7 @@ textarea::placeholder {
     .title-icon {
         width: 57px;
         height: 57px;
+
         font-size: 29px;
     }
 
@@ -834,7 +871,8 @@ textarea::placeholder {
 
     .info {
         border-right: none !important;
-        border-bottom: 1px solid #eadff0 !important;
+
+        border-bottom: 1px solid #DCECEF !important;
     }
 
     .info:last-child {
@@ -844,7 +882,6 @@ textarea::placeholder {
 }
 
 </style>
-
 </head>
 
 
@@ -860,7 +897,7 @@ textarea::placeholder {
     <div class="brand">
 
         <div class="logo">
-            💗
+            <span class="heart-logo">♥</span>
         </div>
 
         <div class="brand-text">

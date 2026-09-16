@@ -367,7 +367,27 @@ def consultation():
         return redirect("/doctor_dashboard")
 
     doctor_id = doctor["doctor_id"]
+    # Automatically cancel missed waiting appointments
+    cursor.execute("""
+            UPDATE tokens t
+            JOIN appointments a
+                ON t.appointment_id = a.appointment_id
+            SET
+                t.status = 'cancelled',
+                a.status = 'cancelled'
+            WHERE a.doctor_id = %s
+            AND a.status = 'booked'
+            AND t.status = 'waiting'
+            AND (
+                    a.appointment_date < CURDATE()
+                    OR (
+                        a.appointment_date = CURDATE()
+                        AND ADDTIME(a.appointment_time, '00:10:00') <= CURTIME()
+                    )
+                )
+        """, (doctor_id,))
 
+    db.commit()
     # Get all appointments for this doctor
     cursor.execute("""
         SELECT
@@ -2156,12 +2176,14 @@ def tracking():
                         ON t.appointment_id = a.appointment_id
 
                     WHERE a.doctor_id = %s
-                      AND a.appointment_date = %s
+                    AND a.appointment_date = %s
+                    AND t.token_number <= %s
 
                     ORDER BY t.token_number
                 """, (
                     doctor_id,
-                    appointment_date
+                    appointment_date,
+                    token_number
                 ))
 
                 queue_cache[cache_key] = cursor.fetchall()
@@ -2321,9 +2343,9 @@ def tracking_details(appointment_id):
         SELECT
             a.appointment_id,
             a.doctor_id,
-
+            a.appointment_date AS actual_date,
             du.name AS doctor_name,
-
+            
             d.department,
             d.specialization,
 
@@ -2402,23 +2424,24 @@ def tracking_details(appointment_id):
 
     # Get today's queue status for this doctor/date
     cursor.execute("""
-        SELECT
-            t.token_number,
-            t.status
-        FROM tokens t
+    SELECT
+        t.token_number,
+        t.status
+    FROM tokens t
 
-        JOIN appointments a
-            ON t.appointment_id = a.appointment_id
+    JOIN appointments a
+        ON t.appointment_id = a.appointment_id
 
-        WHERE a.doctor_id = %s
-          AND a.appointment_date = %s
+    WHERE a.doctor_id = %s
+      AND a.appointment_date = %s
+      AND t.token_number <= %s
 
-        ORDER BY t.token_number
-    """, (
-        doctor_id,
-        appointment["appointment_date"]
-    ))
-
+    ORDER BY t.token_number
+""", (
+    doctor_id,
+    appointment["actual_date"],
+    token_number
+))
     queue_data = cursor.fetchall()
 
     # Find token currently in consultation
@@ -3638,7 +3661,7 @@ def available_times():
                     "label": time_label
                 })
 
-            current_time += timedelta(minutes=30)
+            current_time += timedelta(minutes=10)
 
         return {"times": times}
 
