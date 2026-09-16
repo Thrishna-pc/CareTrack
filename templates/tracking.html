@@ -1,0 +1,1967 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>CareTrack - Token Tracking</title>
+
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
+
+body {
+
+    margin: 0;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef6ff,
+            #f8f4ff
+        );
+
+    color: #12345b;
+
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.container {
+
+    max-width: 1150px;
+
+    margin: auto;
+
+    padding: 30px 20px;
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+
+    background:
+        linear-gradient(
+            135deg,
+            #a955c5,
+            #6f42c1
+        );
+
+    color: white;
+
+    padding: 30px;
+
+    border-radius: 22px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(13,110,253,0.20);
+
+}
+
+.header h1 {
+
+    margin: 0 0 8px;
+
+    font-size: 30px;
+
+}
+
+.header p {
+
+    margin: 0;
+
+    opacity: 0.92;
+
+}
+
+
+/* =========================================================
+   SELECT APPOINTMENT
+========================================================= */
+
+.selector-card {
+
+    background: white;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 7px 25px
+        rgba(0,80,160,0.10);
+
+}
+
+.selector-card label {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    margin-bottom: 10px;
+
+    color: #475569;
+
+}
+
+#appointmentSelector {
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border: 2px solid #dbeafe;
+
+    border-radius: 12px;
+
+    background: #f8fbff;
+
+    color: #12345b;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    outline: none;
+
+    cursor: pointer;
+
+}
+
+#appointmentSelector:focus {
+
+    border-color: #0d6efd;
+
+}
+
+
+/* =========================================================
+   APPOINTMENT PANEL
+========================================================= */
+
+.appointment-panel {
+
+    display: none;
+
+}
+
+.appointment-panel.active {
+
+    display: block;
+
+}
+
+
+/* =========================================================
+   DOCTOR CARD
+========================================================= */
+
+.doctor-card {
+
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    margin-bottom: 20px;
+
+    box-shadow:
+        0 7px 25px
+        rgba(0,80,160,0.10);
+
+}
+
+.doctor-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+}
+
+.doctor-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #dbeafe,
+            #ede9fe
+        );
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 29px;
+
+}
+
+.doctor-name {
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+    color: #12345b;
+
+}
+
+.doctor-info {
+
+    margin-top: 18px;
+
+    color: #64748b;
+
+    font-size: 15px;
+
+}
+
+.live-badge {
+
+    display: inline-block;
+
+    margin-top: 15px;
+
+    padding: 8px 14px;
+
+    border-radius: 20px;
+
+    background: #ecfdf5;
+
+    color: #15803d;
+
+    border: 1px solid #bbf7d0;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================================
+   APPOINTMENT DETAILS
+========================================================= */
+
+.appointment-details {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+
+}
+
+.detail {
+
+    background: white;
+
+    border-radius: 16px;
+
+    padding: 20px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(0,80,160,0.08);
+
+}
+
+.detail-label {
+
+    font-size: 12px;
+
+    color: #64748b;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+.detail-value {
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    color: #12345b;
+
+}
+
+
+/* =========================================================
+   TRACK CARD
+========================================================= */
+
+.track-card {
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    box-shadow:
+        0 8px 28px
+        rgba(0,80,160,0.10);
+
+}
+
+.track-title h2 {
+
+    margin: 0 0 6px;
+
+    color: #12345b;
+
+}
+
+.track-title p {
+
+    margin: 0 0 25px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+/* =========================================================
+   TOKEN TRACK
+========================================================= */
+
+.token-track-wrapper {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding: 15px 5px 25px;
+
+}
+
+.token-track {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    min-width: max-content;
+
+}
+
+.token-node-wrapper {
+
+    display: flex;
+
+    align-items: center;
+
+}
+
+.token-node-area {
+
+    text-align: center;
+
+    min-width: 105px;
+
+}
+
+
+/* =========================================================
+   TOKEN CIRCLES
+========================================================= */
+
+.token-circle {
+
+    width: 62px;
+
+    height: 62px;
+
+    border-radius: 50%;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 19px;
+
+    font-weight: bold;
+
+    border: 4px solid white;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.12);
+
+}
+
+.token-you {
+
+    background: #8b5cf6;
+
+    color: white;
+
+}
+
+.token-you-serving {
+
+    background: #2563eb;
+
+    color: white;
+
+    animation: pulse 1.5s infinite;
+
+}
+
+.token-you-completed {
+
+    background: #16a34a;
+
+    color: white;
+
+}
+
+.token-serving {
+
+    background: #0d6efd;
+
+    color: white;
+
+    animation: pulse 1.5s infinite;
+
+}
+
+.token-completed {
+
+    background: #22c55e;
+
+    color: white;
+
+}
+
+.token-waiting {
+
+    background: #f59e0b;
+
+    color: white;
+
+}
+
+
+/* =========================================================
+   PULSE
+========================================================= */
+
+@keyframes pulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   TOKEN LABEL
+========================================================= */
+
+.token-label {
+
+    margin-top: 8px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #475569;
+
+}
+
+.token-status {
+
+    margin-top: 5px;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    color: #94a3b8;
+
+}
+
+.token-status-serving {
+
+    color: #0369a1;
+
+}
+
+.token-status-completed {
+
+    color: #15803d;
+
+}
+
+.token-status-you {
+
+    color: #7c3aed;
+
+}
+
+
+/* =========================================================
+   CONNECTING LINE
+========================================================= */
+
+.track-line {
+
+    width: 65px;
+
+    height: 5px;
+
+    margin-top: 29px;
+
+    background: #cbd5e1;
+
+    border-radius: 10px;
+
+}
+
+.line-completed {
+
+    background: #22c55e;
+
+}
+
+.line-active {
+
+    background: #0d6efd;
+
+}
+
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.legend {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 18px;
+
+    margin-top: 15px;
+
+    padding-top: 18px;
+
+    border-top: 1px solid #e2e8f0;
+
+}
+
+.legend-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 13px;
+
+    color: #64748b;
+
+    font-weight: 600;
+
+}
+
+.legend-dot {
+
+    width: 12px;
+
+    height: 12px;
+
+    border-radius: 50%;
+
+}
+
+.dot-completed {
+
+    background: #22c55e;
+
+}
+
+.dot-serving {
+
+    background: #0d6efd;
+
+}
+
+.dot-you {
+
+    background: #8b5cf6;
+
+}
+
+.dot-waiting {
+
+    background: #f59e0b;
+
+}
+
+
+/* =========================================================
+   QUEUE SUMMARY
+========================================================= */
+
+.queue-summary {
+
+    margin-top: 25px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #faf7ff
+        );
+
+    border: 1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+}
+
+.summary-top {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+}
+
+.summary-title {
+
+    font-size: 13px;
+
+    color: #64748b;
+
+    font-weight: bold;
+
+}
+
+.summary-message {
+
+    margin-top: 6px;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    color: #12345b;
+
+}
+
+.summary-token {
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 50%;
+
+    background: #8b5cf6;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 23px;
+
+    font-weight: bold;
+
+}
+
+.summary-sub {
+
+    margin-top: 15px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #e2e8f0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================================================
+   STATUS BOXES
+========================================================= */
+
+.status-box {
+
+    margin-top: 18px;
+
+    padding: 17px;
+
+    border-radius: 14px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.status-completed {
+
+    background: #ecfdf5;
+
+    color: #15803d;
+
+    border: 1px solid #bbf7d0;
+
+}
+
+.status-serving {
+
+    background: #eff6ff;
+
+    color: #0369a1;
+
+    border: 1px solid #bfdbfe;
+
+}
+
+.status-next {
+
+    background: #f0fdf4;
+
+    color: #166534;
+
+    border: 1px solid #bbf7d0;
+
+}
+
+.status-waiting {
+
+    background: #fff7ed;
+
+    color: #c2410c;
+
+    border: 1px solid #fed7aa;
+
+}
+
+.status-upcoming {
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    border: 1px solid #c7d2fe;
+
+}
+
+.status-previous {
+
+    background: #f8fafc;
+
+    color: #64748b;
+
+    border: 1px solid #e2e8f0;
+
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty {
+
+    background: white;
+
+    padding: 55px 25px;
+
+    text-align: center;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 7px 25px
+        rgba(0,80,160,0.10);
+
+}
+
+.empty-icon {
+
+    font-size: 50px;
+
+}
+
+.empty h2 {
+
+    color: #12345b;
+
+}
+
+.empty p {
+
+    color: #64748b;
+
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back {
+
+    display: inline-block;
+
+    margin-top: 25px;
+
+    padding: 12px 20px;
+
+    background: #0d6efd;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+}
+
+.back:hover {
+
+    background: #0b5ed7;
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 700px) {
+
+    .appointment-details {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .doctor-name {
+
+        font-size: 20px;
+
+    }
+
+    .header h1 {
+
+        font-size: 25px;
+
+    }
+
+    .track-card {
+
+        padding: 18px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<div class="header">
+
+    <h1>
+        🎫 Token Journey
+    </h1>
+
+    <p>
+        Track your appointment and queue status.
+    </p>
+
+</div>
+
+
+
+{% if appointments %}
+
+
+<!-- =========================================================
+     SELECT APPOINTMENT
+========================================================= -->
+
+<div class="selector-card">
+
+    <label for="appointmentSelector">
+        📋 Select Appointment
+    </label>
+
+
+    <select
+        id="appointmentSelector"
+        onchange="showAppointment(this.value)"
+    >
+
+        {% for appointment in appointments %}
+
+        <option
+            value="appointment-{{ appointment.appointment_id }}"
+        >
+
+            {% if appointment.is_today %}
+
+                🟢 Today -
+
+            {% elif appointment.is_upcoming %}
+
+                📅 Upcoming -
+
+            {% else %}
+
+                📋 Previous -
+
+            {% endif %}
+
+            {{ appointment.doctor_name }}
+            -
+            {{ appointment.appointment_date }}
+            -
+            Token
+            {{ appointment.token_number or '—' }}
+
+        </option>
+
+        {% endfor %}
+
+    </select>
+
+</div>
+
+
+
+<!-- =========================================================
+     APPOINTMENT PANELS
+========================================================= -->
+
+{% for appointment in appointments %}
+
+<div
+    id="appointment-{{ appointment.appointment_id }}"
+    class="appointment-panel {% if loop.first %}active{% endif %}"
+>
+
+
+<!-- =====================================================
+     DOCTOR
+===================================================== -->
+
+<div class="doctor-card">
+
+    <div class="doctor-row">
+
+        <div class="doctor-icon">
+            👨‍⚕️
+        </div>
+
+        <div>
+
+            <div class="doctor-name">
+                {{ appointment.doctor_name }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="doctor-info">
+
+        🏥 {{ appointment.department }}
+
+        {% if appointment.specialization %}
+
+            • {{ appointment.specialization }}
+
+        {% endif %}
+
+    </div>
+
+
+    {% if appointment.is_today %}
+
+        <div class="live-badge">
+            ● LIVE QUEUE
+        </div>
+
+    {% elif appointment.is_upcoming %}
+
+        <div
+            class="live-badge"
+            style="
+                background:#eef2ff;
+                color:#4f46e5;
+                border-color:#c7d2fe;
+            "
+        >
+
+            📅 UPCOMING
+
+        </div>
+
+    {% else %}
+
+        <div
+            class="live-badge"
+            style="
+                background:#f8fafc;
+                color:#64748b;
+                border-color:#e2e8f0;
+            "
+        >
+
+            📋 PREVIOUS
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+
+<!-- =====================================================
+     DETAILS
+===================================================== -->
+
+<div class="appointment-details">
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        📅 APPOINTMENT DATE
+    </div>
+
+    <div class="detail-value">
+        {{ appointment.appointment_date }}
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        ⏰ APPOINTMENT TIME
+    </div>
+
+    <div class="detail-value">
+        {{ appointment.appointment_time }}
+    </div>
+
+</div>
+
+
+<div class="detail">
+
+    <div class="detail-label">
+        🎫 YOUR TOKEN
+    </div>
+
+    <div class="detail-value">
+        {{ appointment.token_number or '—' }}
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     TRACK
+===================================================== -->
+
+<div class="track-card">
+
+
+<div class="track-title">
+
+    <h2>
+        Live Token Track
+    </h2>
+
+    <p>
+        Follow the queue from the current token to yours
+    </p>
+
+</div>
+
+
+{% if appointment.queue_data %}
+
+
+<div class="token-track-wrapper">
+
+<div class="token-track">
+
+
+{% for item in appointment.queue_data %}
+
+{% set is_you =
+    item.token_number ==
+    appointment.token_number
+%}
+
+
+<div class="token-node-wrapper">
+
+
+<div class="token-node-area">
+
+
+{% if is_you and item.status == "serving" %}
+
+<div class="
+    token-circle
+    token-you-serving
+">
+
+    {{ item.token_number }}
+
+</div>
+
+
+{% elif is_you
+      and item.status == "completed" %}
+
+<div class="
+    token-circle
+    token-you-completed
+">
+
+    {{ item.token_number }}
+
+</div>
+
+
+{% elif is_you %}
+
+<div class="
+    token-circle
+    token-you
+">
+
+    {{ item.token_number }}
+
+</div>
+
+
+{% elif item.status == "serving" %}
+
+<div class="
+    token-circle
+    token-serving
+">
+
+    {{ item.token_number }}
+
+</div>
+
+
+{% elif item.status == "completed" %}
+
+<div class="
+    token-circle
+    token-completed
+">
+
+    ✓
+
+</div>
+
+
+{% else %}
+
+<div class="
+    token-circle
+    token-waiting
+">
+
+    {{ item.token_number }}
+
+</div>
+
+{% endif %}
+
+
+
+<div class="token-label">
+
+    Token
+    {{ item.token_number }}
+
+</div>
+
+
+
+{% if is_you and item.status == "completed" %}
+
+<div class="
+    token-status
+    token-status-completed
+">
+
+    YOUR TOKEN • COMPLETED
+
+</div>
+
+
+{% elif is_you and item.status == "serving" %}
+
+<div class="
+    token-status
+    token-status-serving
+">
+
+    YOUR TOKEN • IN CONSULTATION
+
+</div>
+
+
+{% elif is_you %}
+
+<div class="
+    token-status
+    token-status-you
+">
+
+    YOUR TOKEN
+
+</div>
+
+
+{% elif item.status == "serving" %}
+
+<div class="
+    token-status
+    token-status-serving
+">
+
+    IN CONSULTATION
+
+</div>
+
+
+{% elif item.status == "completed" %}
+
+<div class="
+    token-status
+    token-status-completed
+">
+
+    COMPLETED
+
+</div>
+
+
+{% else %}
+
+<div class="token-status">
+
+    WAITING
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+
+
+{% if not loop.last %}
+
+{% if item.status == "completed" %}
+
+<div class="
+    track-line
+    line-completed
+">
+</div>
+
+{% elif item.status == "serving" %}
+
+<div class="
+    track-line
+    line-active
+">
+</div>
+
+{% else %}
+
+<div class="track-line">
+</div>
+
+{% endif %}
+
+{% endif %}
+
+
+</div>
+
+{% endfor %}
+
+
+</div>
+
+</div>
+
+
+
+<!-- =================================================
+     LEGEND
+================================================= -->
+
+<div class="legend">
+
+
+<div class="legend-item">
+
+    <span class="
+        legend-dot
+        dot-completed
+    "></span>
+
+    Completed
+
+</div>
+
+
+<div class="legend-item">
+
+    <span class="
+        legend-dot
+        dot-serving
+    "></span>
+
+    In Consultation
+
+</div>
+
+
+<div class="legend-item">
+
+    <span class="
+        legend-dot
+        dot-you
+    "></span>
+
+    Your Token
+
+</div>
+
+
+<div class="legend-item">
+
+    <span class="
+        legend-dot
+        dot-waiting
+    "></span>
+
+    Waiting
+
+</div>
+
+
+</div>
+
+
+{% endif %}
+
+
+
+<!-- =================================================
+     YOUR QUEUE SUMMARY
+================================================= -->
+
+<div class="queue-summary">
+
+
+<div class="summary-top">
+
+
+<div>
+
+<div class="summary-title">
+    🎫 YOUR TOKEN
+</div>
+
+
+<div class="summary-message">
+
+
+{% if appointment.token_status == "completed" %}
+
+    Consultation Completed
+
+{% elif appointment.token_status == "serving" %}
+
+    You are currently in consultation
+
+{% elif appointment.is_upcoming %}
+
+    Upcoming Appointment
+
+{% elif appointment.patients_ahead == 0
+      and appointment.now_serving %}
+
+    Your Turn Is Next
+
+{% elif appointment.patients_ahead == 0
+      and appointment.is_today %}
+
+    Queue Not Started
+
+{% elif appointment.patients_ahead == 1 %}
+
+    1 Patient Ahead
+
+{% elif appointment.patients_ahead > 1 %}
+
+    {{ appointment.patients_ahead }}
+    Patients Ahead
+
+{% else %}
+
+    Previous Appointment
+
+{% endif %}
+
+
+</div>
+
+</div>
+
+
+<div class="summary-token">
+
+    {{ appointment.token_number or '—' }}
+
+</div>
+
+
+</div>
+
+
+
+<!-- =================================================
+     TODAY STATUS
+================================================= -->
+
+{% if appointment.is_today %}
+
+
+{% if appointment.token_status == "completed" %}
+
+<div class="
+    status-box
+    status-completed
+">
+
+    ✓ Your consultation has been completed.
+
+</div>
+
+
+{% elif appointment.token_status == "serving" %}
+
+<div class="
+    status-box
+    status-serving
+">
+
+    🔵 Token
+    {{ appointment.token_number }}
+    is currently in consultation.
+
+</div>
+
+
+{% elif appointment.patients_ahead == 0
+      and appointment.now_serving %}
+
+<div class="
+    status-box
+    status-next
+">
+
+    🟢 Your turn is next!
+
+</div>
+
+
+{% elif appointment.now_serving %}
+
+<div class="
+    status-box
+    status-waiting
+">
+
+    ⏳
+
+    {{ appointment.patients_ahead }}
+    patient{% if appointment.patients_ahead != 1 %}s{% endif %}
+    ahead of you.
+
+    <br><br>
+
+    🔵 Currently in consultation:
+    Token {{ appointment.now_serving }}
+
+</div>
+
+
+{% else %}
+
+<div class="
+    status-box
+    status-waiting
+">
+
+    ⏳ Queue has not started yet.
+
+</div>
+
+{% endif %}
+
+
+
+{% elif appointment.is_upcoming %}
+
+
+<div class="
+    status-box
+    status-upcoming
+">
+
+    📅 This is an upcoming appointment.
+
+    <br><br>
+
+    Live queue tracking will start
+    on the appointment date.
+
+</div>
+
+
+
+{% else %}
+
+
+<div class="
+    status-box
+    status-previous
+">
+
+    📋 This is a previous appointment.
+
+    {% if appointment.token_status == "completed" %}
+
+        <br><br>
+
+        ✓ Consultation was completed.
+
+    {% endif %}
+
+</div>
+
+{% endif %}
+
+
+
+{% if appointment.is_today
+      and appointment.patients_ahead > 0
+      and appointment.token_status == "waiting" %}
+
+
+<div class="summary-sub">
+
+    Your token is
+
+    <strong>
+        {{ appointment.token_number }}
+    </strong>.
+
+    There are
+
+    <strong>
+        {{ appointment.patients_ahead }}
+    </strong>
+
+    patient{% if appointment.patients_ahead != 1 %}s{% endif %}
+    ahead of you.
+
+    {% if appointment.now_serving %}
+
+        Token
+
+        <strong>
+            {{ appointment.now_serving }}
+        </strong>
+
+        is currently being consulted.
+
+    {% endif %}
+
+</div>
+
+
+{% endif %}
+
+
+</div>
+
+</div>
+
+
+</div>
+
+{% endfor %}
+
+
+
+{% else %}
+
+
+<!-- =========================================================
+     NO APPOINTMENTS
+========================================================= -->
+
+<div class="empty">
+
+    <div class="empty-icon">
+        🎫
+    </div>
+
+    <h2>
+        No Appointments Found
+    </h2>
+
+    <p>
+        You currently have no appointments to track.
+    </p>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- =========================================================
+     BACK
+========================================================= -->
+
+<a
+    href="/patient_dashboard"
+    class="back"
+>
+    ← Back to Dashboard
+</a>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   KEEP SELECTED APPOINTMENT AFTER AUTO REFRESH
+========================================================= */
+
+const selector =
+    document.getElementById("appointmentSelector");
+
+
+/* =========================================================
+   SELECT APPOINTMENT
+========================================================= */
+
+function showAppointment(id) {
+
+    const panels =
+        document.querySelectorAll(
+            ".appointment-panel"
+        );
+
+
+    panels.forEach(function(panel) {
+
+        panel.classList.remove("active");
+
+    });
+
+
+    const selected =
+        document.getElementById(id);
+
+
+    if (selected) {
+
+        selected.classList.add("active");
+
+    }
+
+
+    /*
+       IMPORTANT:
+       Save the actual appointment ID.
+       This prevents the selected appointment
+       from changing after refresh.
+    */
+
+    if (selector) {
+
+        localStorage.setItem(
+            "caretrack_selected_appointment",
+            id
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   RESTORE SAME APPOINTMENT AFTER REFRESH
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        if (!selector) {
+            return;
+        }
+
+
+        const savedAppointment =
+            localStorage.getItem(
+                "caretrack_selected_appointment"
+            );
+
+
+        /*
+           Find the saved appointment in the
+           newly loaded appointment list.
+        */
+
+        const savedOption =
+            Array.from(
+                selector.options
+            ).find(function(option) {
+
+                return option.value ===
+                       savedAppointment;
+
+            });
+
+
+        if (savedOption) {
+
+            /*
+               RESTORE SAME APPOINTMENT
+            */
+
+            selector.value =
+                savedAppointment;
+
+            showAppointment(
+                savedAppointment
+            );
+
+        }
+
+        else if (selector.options.length > 0) {
+
+            /*
+               Only if the saved appointment
+               no longer exists.
+            */
+
+            selector.value =
+                selector.options[0].value;
+
+            showAppointment(
+                selector.value
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   SAVE WHEN USER CHANGES APPOINTMENT
+========================================================= */
+
+if (selector) {
+
+    selector.addEventListener(
+        "change",
+        function() {
+
+            localStorage.setItem(
+                "caretrack_selected_appointment",
+                this.value
+            );
+
+            showAppointment(
+                this.value
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   AUTO REFRESH
+========================================================= */
+
+setTimeout(
+    function() {
+
+        /*
+           Save current appointment
+           BEFORE page refresh.
+        */
+
+        if (selector) {
+
+            localStorage.setItem(
+                "caretrack_selected_appointment",
+                selector.value
+            );
+
+        }
+
+
+        /*
+           Refresh page so live queue/status
+           can update.
+        */
+
+        location.reload();
+
+    },
+    5000
+);
+
+</script>
+
+
+</body>
+
+</html>

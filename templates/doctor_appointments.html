@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareTrack - Doctor Appointments</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef7ff;
+    color: #183b56;
+}
+
+/* HEADER */
+
+.top-header {
+    background: linear-gradient(135deg, #0757b8, #159bd7);
+    color: white;
+    padding: 24px 45px;
+    box-shadow: 0 5px 18px rgba(0, 80, 150, 0.18);
+}
+
+.top-header h1 {
+    margin: 0;
+    font-size: 27px;
+}
+
+.top-header p {
+    margin: 7px 0 0;
+    opacity: 0.92;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 1200px;
+    margin: 32px auto;
+    padding: 0 22px;
+}
+
+/* BACK BUTTON */
+
+.back-btn {
+    display: inline-block;
+    text-decoration: none;
+    background: #0757b8;
+    color: white;
+    padding: 11px 19px;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.back-btn:hover {
+    background: #064796;
+}
+
+/* HERO */
+
+.hero-card {
+    position: relative;
+    overflow: hidden;
+
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+
+    box-shadow: 0 9px 28px rgba(0, 80, 150, 0.09);
+
+    margin-bottom: 22px;
+}
+
+.hero-card::after {
+    content: "🩺";
+
+    position: absolute;
+    right: 30px;
+    top: 18px;
+
+    font-size: 65px;
+    opacity: 0.10;
+}
+
+.hero-icon {
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.hero-card h2 {
+    margin: 0;
+    color: #123f73;
+    font-size: 27px;
+}
+
+.hero-card p {
+    margin: 8px 0 0;
+    color: #718096;
+}
+
+/* SEARCH */
+
+.search-card {
+    background: white;
+    border-radius: 18px;
+    padding: 23px;
+
+    box-shadow: 0 8px 25px rgba(0, 80, 150, 0.08);
+
+    margin-bottom: 25px;
+}
+
+.search-title {
+    font-size: 17px;
+    font-weight: bold;
+    color: #164b80;
+    margin-bottom: 14px;
+}
+
+.search-row {
+    display: flex;
+    gap: 12px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+.search-field {
+    flex: 1;
+    min-width: 230px;
+}
+
+.search-field label {
+    display: block;
+    font-size: 13px;
+    font-weight: bold;
+    color: #64748b;
+    margin-bottom: 7px;
+}
+
+.search-field input {
+    width: 100%;
+    height: 45px;
+
+    border: 1px solid #cbdbea;
+    border-radius: 9px;
+
+    padding: 0 13px;
+    font-size: 15px;
+}
+
+.search-btn {
+    height: 45px;
+
+    border: none;
+    border-radius: 9px;
+
+    background: #0757b8;
+    color: white;
+
+    padding: 0 22px;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.search-btn:hover {
+    background: #064796;
+}
+
+/* SECTION */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    margin: 28px 0 14px;
+}
+
+.section-heading .icon {
+    font-size: 27px;
+}
+
+.section-heading h3 {
+    margin: 0;
+    color: #164b80;
+    font-size: 21px;
+}
+
+/* DATE INFO */
+
+.date-card {
+    background: linear-gradient(135deg, #ffffff, #f0f8ff);
+
+    border-left: 5px solid #159bd7;
+
+    border-radius: 15px;
+
+    padding: 17px 20px;
+
+    margin-bottom: 16px;
+
+    box-shadow: 0 5px 17px rgba(0, 80, 150, 0.06);
+}
+
+.date-card strong {
+    color: #0757b8;
+}
+
+/* TABLE */
+
+.table-card {
+    background: white;
+    border-radius: 18px;
+
+    overflow-x: auto;
+
+    box-shadow: 0 8px 25px rgba(0, 80, 150, 0.08);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+th {
+    background: #edf7ff;
+    color: #214d78;
+
+    padding: 16px;
+
+    text-align: left;
+    font-size: 14px;
+}
+
+td {
+    padding: 16px;
+
+    border-top: 1px solid #edf2f7;
+
+    font-size: 14px;
+}
+
+.patient {
+    font-weight: bold;
+    color: #183b61;
+}
+
+/* TOKEN */
+
+.token {
+    display: inline-block;
+
+    background: #e5f3ff;
+    color: #0757b8;
+
+    padding: 7px 13px;
+
+    border-radius: 20px;
+
+    font-weight: bold;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-block;
+
+    padding: 7px 12px;
+
+    border-radius: 20px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+.waiting {
+    background: #fff6d8;
+    color: #946b00;
+}
+
+.consultation {
+    background: #e5f7ff;
+    color: #087ea4;
+}
+
+.completed {
+    background: #e7f8ee;
+    color: #16824b;
+}
+
+.cancelled {
+    background: #ffe9e9;
+    color: #c53030;
+}
+
+/* CONSULTATION BUTTON */
+
+.consult-btn {
+    display: inline-block;
+
+    background: linear-gradient(
+        135deg,
+        #149bd7,
+        #0757b8
+    );
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 9px 15px;
+
+    border-radius: 9px;
+
+    font-weight: bold;
+
+    font-size: 13px;
+}
+
+.consult-btn:hover {
+    transform: translateY(-1px);
+}
+
+/* EMPTY */
+
+.empty-card {
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 45px 25px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(0, 80, 150, 0.08);
+
+    color: #718096;
+}
+
+.empty-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+/* HISTORY */
+
+.history-box {
+    margin-top: 35px;
+}
+
+.small-note {
+    color: #718096;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+/* MOBILE */
+
+@media (max-width: 700px) {
+
+    .top-header {
+        padding: 20px;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    .hero-card h2 {
+        font-size: 22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="top-header">
+
+    <h1>CareTrack — Doctor Portal</h1>
+
+    <p>
+        Welcome, {{ doctor.doctor_name }}
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+<a href="/doctor_dashboard" class="back-btn">
+    ← Back to Dashboard
+</a>
+
+
+<!-- HERO -->
+
+<div class="hero-card">
+
+    <div class="hero-icon">
+        👨‍⚕️
+    </div>
+
+    <h2>
+        My Appointments
+    </h2>
+
+    <p>
+        View today's patients and search previous appointment dates.
+    </p>
+
+</div>
+
+
+<!-- HISTORY SEARCH -->
+
+<div class="search-card">
+
+    <div class="search-title">
+        🔎 Search Appointment History
+    </div>
+
+    <form method="GET" action="/doctor_appointments">
+
+        <div class="search-row">
+
+            <div class="search-field">
+
+                <label>
+                    Select Appointment Date
+                </label>
+
+                <input
+                    type="date"
+                    name="history_date"
+                    value="{{ history_date or '' }}"
+                    required
+                >
+
+            </div>
+
+            <button
+                type="submit"
+                class="search-btn"
+            >
+                Search
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+
+<!-- TODAY -->
+
+<div class="section-heading">
+
+    <div class="icon">
+        📅
+    </div>
+
+    <h3>
+        Today's Appointments
+    </h3>
+
+</div>
+
+
+<div class="date-card">
+
+    <strong>
+        {{ today.strftime("%d-%m-%Y") }}
+    </strong>
+
+    &nbsp; • &nbsp;
+
+    {{ today.strftime("%A") }}
+
+    {% if today_schedule %}
+
+        &nbsp; • &nbsp;
+
+        🟢 Doctor Available Today
+
+    {% else %}
+
+        &nbsp; • &nbsp;
+
+        ⚪ No scheduled availability today
+
+    {% endif %}
+
+</div>
+
+
+{% if today_appointments %}
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>No.</th>
+    <th>Patient</th>
+    <th>Time</th>
+    <th>Token</th>
+    <th>Status</th>
+    <th>Action</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+{% for appointment in today_appointments %}
+
+<tr>
+
+<td>
+    {{ loop.index }}
+</td>
+
+
+<td class="patient">
+    👤 {{ appointment.patient_name }}
+</td>
+
+
+<td>
+    🕐 {{ appointment.time_display }}
+</td>
+
+
+<td>
+
+{% if appointment.token_number %}
+
+<span class="token">
+    #{{ appointment.token_number }}
+</span>
+
+{% else %}
+
+    —
+
+{% endif %}
+
+</td>
+
+
+<td>
+
+{% if appointment.token_status == "waiting" %}
+
+<span class="status waiting">
+    🟡 Waiting
+</span>
+
+{% elif appointment.token_status == "in_consultation" %}
+
+<span class="status consultation">
+    🔵 In Consultation
+</span>
+
+{% elif appointment.token_status == "completed" %}
+
+<span class="status completed">
+    🟢 Completed
+</span>
+
+{% elif appointment.token_status == "cancelled" %}
+
+<span class="status cancelled">
+    🔴 Cancelled
+</span>
+
+{% else %}
+
+<span class="status waiting">
+    {{ appointment.appointment_status }}
+</span>
+
+{% endif %}
+
+</td>
+
+
+<td>
+
+{% if appointment.token_status in ["waiting", "in_consultation"] %}
+
+<a
+    href="/consultation/{{ appointment.appointment_id }}"
+    class="consult-btn"
+>
+    🩺 Consultation
+</a>
+
+{% elif appointment.token_status == "completed" %}
+
+<span style="color:#16824b;font-weight:bold;">
+    ✓ Completed
+</span>
+
+{% else %}
+
+    —
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+
+{% else %}
+
+<div class="empty-card">
+
+    <div class="empty-icon">
+        📭
+    </div>
+
+    <h3>
+        No appointments for today
+    </h3>
+
+    <p>
+        No patients have booked an appointment for today's date.
+    </p>
+
+</div>
+
+{% endif %}
+
+
+
+<!-- HISTORY RESULT -->
+
+{% if history_date %}
+
+<div class="section-heading history-box">
+
+    <div class="icon">
+        🕘
+    </div>
+
+    <h3>
+        Appointment History
+    </h3>
+
+</div>
+
+<div class="small-note">
+
+    Showing appointments for: {{ history_date_display }}
+
+</div>
+
+
+{% if history_appointments %}
+
+<div class="table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th>No.</th>
+    <th>Patient</th>
+    <th>Time</th>
+    <th>Token</th>
+    <th>Status</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+{% for appointment in history_appointments %}
+
+<tr>
+
+<td>
+    {{ loop.index }}
+</td>
+
+<td class="patient">
+    👤 {{ appointment.patient_name }}
+</td>
+
+<td>
+    🕐 {{ appointment.time_display }}
+</td>
+
+<td>
+
+{% if appointment.token_number %}
+
+<span class="token">
+    #{{ appointment.token_number }}
+</span>
+
+{% else %}
+
+    —
+
+{% endif %}
+
+</td>
+
+<td>
+
+{% if appointment.token_status == "completed" %}
+
+<span class="status completed">
+    🟢 Completed
+</span>
+
+{% elif appointment.token_status == "cancelled" %}
+
+<span class="status cancelled">
+    🔴 Cancelled
+</span>
+
+{% elif appointment.token_status == "in_consultation" %}
+
+<span class="status consultation">
+    🔵 In Consultation
+</span>
+
+{% else %}
+
+<span class="status waiting">
+    {{ appointment.token_status or appointment.appointment_status }}
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
+
+
+{% else %}
+
+<div class="empty-card">
+
+    <div class="empty-icon">
+        🔍
+    </div>
+
+    <h3>
+        No appointments found
+    </h3>
+
+    <p>
+        No appointments are available for the selected date.
+    </p>
+
+</div>
+
+{% endif %}
+
+{% endif %}
+
+
+</div>
+
+</body>
+
+</html>

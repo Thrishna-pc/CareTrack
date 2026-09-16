@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CareTrack - Doctor Consultation</title>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    color: #263b67;
+    background:
+        radial-gradient(circle at 8% 25%, rgba(255, 187, 219, 0.25), transparent 18%),
+        radial-gradient(circle at 95% 35%, rgba(190, 175, 255, 0.25), transparent 20%),
+        linear-gradient(135deg, #fff8fc, #f7f3ff, #f4fbff);
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    background:
+        linear-gradient(
+            120deg,
+            #4924b8,
+            #8b35cf,
+            #d43ca8,
+            #f05a9d
+        );
+
+    color: white;
+    padding: 20px 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 8px 25px rgba(110, 50, 170, 0.25);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+
+    width: 500px;
+    height: 180px;
+
+    right: 18%;
+    top: -90px;
+
+    background: rgba(255,255,255,0.10);
+    border-radius: 50%;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    width: 62px;
+    height: 62px;
+
+    border-radius: 20px;
+
+    background: rgba(255,255,255,0.18);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 34px;
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.12),
+        inset 0 0 0 1px rgba(255,255,255,0.25);
+}
+
+.brand-text h1 {
+    margin: 0;
+    font-size: 27px;
+    letter-spacing: 0.3px;
+}
+
+.brand-text p {
+    margin: 3px 0 0;
+    font-size: 14px;
+    opacity: 0.92;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.nav-item {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.profile-icon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.20);
+
+    border: 2px solid rgba(255,255,255,0.55);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.container {
+    width: 92%;
+    max-width: 1270px;
+
+    margin: 20px auto 35px;
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: white;
+
+    color: #6127b7;
+
+    text-decoration: none;
+
+    padding: 11px 20px;
+
+    border-radius: 25px;
+
+    font-weight: 700;
+
+    border: 1px solid #d9c5ff;
+
+    box-shadow: 0 5px 15px rgba(110,50,180,0.10);
+
+    margin-bottom: 14px;
+
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    transform: translateX(-3px);
+    box-shadow: 0 8px 20px rgba(110,50,180,0.18);
+}
+
+
+/* =========================================================
+   MAIN CARD
+========================================================= */
+
+.main-card {
+    background: rgba(255,255,255,0.94);
+
+    border-radius: 25px;
+
+    padding: 30px 32px;
+
+    border: 1px solid rgba(210,190,240,0.55);
+
+    box-shadow:
+        0 18px 45px rgba(100,60,150,0.12),
+        0 3px 10px rgba(100,60,150,0.06);
+
+    position: relative;
+    overflow: hidden;
+}
+
+.main-card::before {
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    right: -160px;
+    top: -150px;
+
+    border-radius: 50%;
+
+    background: rgba(255,105,180,0.08);
+}
+
+.main-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    left: -100px;
+    bottom: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(125,80,220,0.08);
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+
+    margin-bottom: 25px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.title-icon {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe1f1,
+            #eadcff
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 36px;
+
+    box-shadow:
+        0 8px 20px rgba(180,70,170,0.14);
+}
+
+.title h2 {
+    margin: 0;
+
+    font-size: 31px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #c21888,
+            #7025ba
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title p {
+    margin: 6px 0 0;
+
+    color: #7181a3;
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   CURRENT PATIENT
+========================================================= */
+
+.patient-card {
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    border: 1px solid #f3b9dc;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff9fd,
+            #faf5ff
+        );
+
+    box-shadow: 0 8px 22px rgba(130,50,150,0.07);
+
+    position: relative;
+    z-index: 2;
+}
+
+.patient-heading {
+    padding: 14px 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffe8f5,
+            #f0e7ff
+        );
+
+    color: #6d1eaf;
+
+    font-size: 18px;
+
+    font-weight: 800;
+
+    border-bottom: 1px solid #eed5eb;
+}
+
+.info-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    padding: 12px 15px 16px;
+}
+
+.info {
+    padding: 15px 18px;
+
+    min-height: 78px;
+
+    border-right: 1px solid #eadff0;
+    border-bottom: 1px solid #eadff0;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info:nth-child(3),
+.info:nth-child(6) {
+    border-right: none;
+}
+
+.info:nth-child(4),
+.info:nth-child(5),
+.info:nth-child(6) {
+    border-bottom: none;
+}
+
+.label {
+    font-size: 11px;
+
+    color: #8a7ca6;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+    margin-bottom: 5px;
+}
+
+.value {
+    font-weight: 800;
+
+    color: #283c73;
+
+    font-size: 16px;
+}
+
+.token-value {
+    color: #8c28c4;
+
+    font-size: 19px;
+}
+
+
+/* =========================================================
+   CONSULTATION DETAILS TITLE
+========================================================= */
+
+.details-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    margin: 28px 0 14px;
+
+    color: #42209a;
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+.details-icon {
+    width: 37px;
+    height: 37px;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #d9c5ff,
+            #f4c5ec
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   FORM GRID
+========================================================= */
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+
+    position: relative;
+    z-index: 2;
+}
+
+.form-card {
+    border-radius: 17px;
+
+    padding: 13px;
+
+    min-height: 176px;
+
+    transition: 0.2s;
+}
+
+.form-card:hover {
+    transform: translateY(-3px);
+}
+
+.diagnosis-card {
+    background: linear-gradient(145deg, #fff0f5, #ffe5f0);
+    border: 1px solid #f5b7d0;
+}
+
+.prescription-card {
+    background: linear-gradient(145deg, #f3ecff, #eee4ff);
+    border: 1px solid #d3baf4;
+}
+
+.treatment-card {
+    background: linear-gradient(145deg, #e9fff8, #ddf8f0);
+    border: 1px solid #aee5d5;
+}
+
+.form-heading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    font-weight: 800;
+
+    font-size: 17px;
+
+    margin-bottom: 9px;
+}
+
+.form-heading-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+.diagnosis-card .form-heading {
+    color: #c52b72;
+}
+
+.diagnosis-card .form-heading-icon {
+    background: #ffd0e2;
+}
+
+.prescription-card .form-heading {
+    color: #6630b5;
+}
+
+.prescription-card .form-heading-icon {
+    background: #d9c7ff;
+}
+
+.treatment-card .form-heading {
+    color: #168878;
+}
+
+.treatment-card .form-heading-icon {
+    background: #c4f1e3;
+}
+
+
+/* =========================================================
+   TEXTAREA
+========================================================= */
+
+textarea {
+    width: 100%;
+
+    min-height: 110px;
+
+    resize: vertical;
+
+    border-radius: 12px;
+
+    padding: 15px;
+
+    border: 1px solid rgba(180,180,200,0.55);
+
+    background: rgba(255,255,255,0.88);
+
+    color: #33456f;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s;
+}
+
+textarea::placeholder {
+    color: #8290ac;
+}
+
+.diagnosis-card textarea:focus {
+    border-color: #ed6ca8;
+
+    box-shadow:
+        0 0 0 3px rgba(237,108,168,0.12);
+}
+
+.prescription-card textarea:focus {
+    border-color: #9b6be0;
+
+    box-shadow:
+        0 0 0 3px rgba(155,107,224,0.12);
+}
+
+.treatment-card textarea:focus {
+    border-color: #4fc3aa;
+
+    box-shadow:
+        0 0 0 3px rgba(79,195,170,0.12);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+.save-btn {
+    width: 100%;
+
+    border: none;
+
+    border-radius: 14px;
+
+    padding: 16px;
+
+    margin-top: 18px;
+
+    background:
+        linear-gradient(
+            100deg,
+            #ef3f9b,
+            #a83bd0,
+            #6537d4
+        );
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    letter-spacing: 0.2px;
+
+    box-shadow:
+        0 9px 22px rgba(150,50,180,0.25);
+
+    transition: 0.2s;
+
+    position: relative;
+    z-index: 2;
+}
+
+.save-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 13px 28px rgba(150,50,180,0.32);
+}
+
+.save-btn:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.success {
+    background:
+        linear-gradient(
+            135deg,
+            #e9fff6,
+            #dcf8ee
+        );
+
+    color: #16866d;
+
+    border: 1px solid #a9e5d2;
+
+    padding: 16px 19px;
+
+    border-radius: 13px;
+
+    margin-bottom: 20px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   NEXT PATIENT
+========================================================= */
+
+.next-card {
+    margin-top: 22px;
+
+    padding: 18px 20px;
+
+    border-radius: 15px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #effff8,
+            #e9f8ff
+        );
+
+    border: 1px solid #b8e8dc;
+}
+
+.next-card h3 {
+    margin: 0 0 7px;
+
+    color: #138b73;
+}
+
+.next-card p {
+    margin: 0;
+
+    color: #4d6580;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer {
+    text-align: center;
+
+    margin-top: 22px;
+
+    color: #7d87a3;
+
+    font-size: 13px;
+}
+
+.footer span {
+    margin: 0 7px;
+
+    color: #c04aa8;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .header {
+        padding: 18px 25px;
+    }
+
+    .nav {
+        gap: 15px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .info:nth-child(3) {
+        border-right: 1px solid #eadff0;
+    }
+
+    .info:nth-child(4) {
+        border-bottom: 1px solid #eadff0;
+    }
+
+    .info:nth-child(5) {
+        border-bottom: none;
+    }
+
+    .info:nth-child(6) {
+        border-bottom: none;
+        border-right: none;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .header {
+        padding: 15px 18px;
+    }
+
+    .brand-text h1 {
+        font-size: 21px;
+    }
+
+    .brand-text p {
+        font-size: 12px;
+    }
+
+    .logo {
+        width: 50px;
+        height: 50px;
+        font-size: 27px;
+    }
+
+    .nav-item {
+        display: none;
+    }
+
+    .container {
+        width: 94%;
+    }
+
+    .main-card {
+        padding: 22px 16px;
+    }
+
+    .title h2 {
+        font-size: 25px;
+    }
+
+    .title-icon {
+        width: 57px;
+        height: 57px;
+        font-size: 29px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info {
+        border-right: none !important;
+        border-bottom: 1px solid #eadff0 !important;
+    }
+
+    .info:last-child {
+        border-bottom: none !important;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="header">
+
+    <div class="brand">
+
+        <div class="logo">
+            💗
+        </div>
+
+        <div class="brand-text">
+
+            <h1>CareTrack</h1>
+
+            <p>
+                Doctor Consultation Portal
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="nav">
+
+        <a href="/doctor_dashboard" class="nav-item">
+            🏠 Home
+        </a>
+
+        <a href="/doctor_appointments" class="nav-item">
+            📅 Appointments
+        </a>
+
+        <div class="profile">
+
+            <div class="profile-icon">
+                👤
+            </div>
+
+            <span>
+                {{ session.get("name", "Doctor") }}
+            </span>
+
+            <span>⌄</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<div class="container">
+
+
+    <a href="/doctor_appointments" class="back-btn">
+        ← &nbsp; My Appointments
+    </a>
+
+
+    <div class="main-card">
+
+
+        <!-- =================================================
+             TITLE
+        ================================================== -->
+
+        <div class="title">
+
+            <div class="title-icon">
+                🩺
+            </div>
+
+            <div>
+
+                <h2>
+                    Patient Consultation
+                </h2>
+
+                <p>
+                    Complete the patient's consultation details below.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SUCCESS MESSAGE
+        ================================================== -->
+
+        {% if success %}
+
+        <div class="success">
+            ✓ &nbsp; {{ message }}
+        </div>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             CURRENT PATIENT
+        ================================================== -->
+
+        <div class="patient-card">
+
+            <div class="patient-heading">
+                👤 &nbsp; Current Patient
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <!-- PATIENT -->
+
+                <div class="info">
+
+                    <div class="label">
+                        Patient
+                    </div>
+
+                    <div class="value">
+                        {{ appointment.patient_name }}
+                    </div>
+
+                </div>
+
+
+                <!-- TOKEN -->
+
+                <div class="info">
+
+                    <div class="label">
+                        Token Number
+                    </div>
+
+                    <div class="value token-value">
+                        #{{ appointment.token_number }}
+                    </div>
+
+                </div>
+
+
+                <!-- DOCTOR -->
+
+                <div class="info">
+
+                    <div class="label">
+                        Doctor
+                    </div>
+
+                    <div class="value">
+                         {{ doctor_name }}
+                    </div>
+
+                </div>
+
+
+                <!-- DATE -->
+
+                <div class="info">
+
+                    <div class="label">
+                        Appointment Date
+                    </div>
+
+                    <div class="value">
+                        {{ appointment.appointment_date.strftime("%d-%m-%Y") }}
+                    </div>
+
+                </div>
+
+
+                <!-- DAY -->
+
+                <div class="info">
+
+                    <div class="label">
+                        Day
+                    </div>
+
+                    <div class="value">
+                        {{ appointment.appointment_day }}
+                    </div>
+
+                </div>
+
+
+                <!-- TIME -->
+
+                <div class="info">
+
+                    <div class="label">
+                        Appointment Time
+                    </div>
+
+                    <div class="value">
+                        {{ appointment.display_time }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CONSULTATION DETAILS
+        ================================================== -->
+
+        <div class="details-title">
+
+            <div class="details-icon">
+                📄
+            </div>
+
+            <span>
+                Consultation Details
+            </span>
+
+        </div>
+
+
+        {% if not success %}
+
+        <form method="POST">
+
+
+            <div class="form-grid">
+
+
+                <!-- =================================================
+                     DIAGNOSIS
+                ================================================== -->
+
+                <div class="form-card diagnosis-card">
+
+                    <div class="form-heading">
+
+                        <div class="form-heading-icon">
+                            🩺
+                        </div>
+
+                        <span>
+                            Diagnosis
+                        </span>
+
+                    </div>
+
+
+                    <textarea
+                        name="diagnosis"
+                        placeholder="Enter diagnosis details..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- =================================================
+                     PRESCRIPTION
+                ================================================== -->
+
+                <div class="form-card prescription-card">
+
+                    <div class="form-heading">
+
+                        <div class="form-heading-icon">
+                            💊
+                        </div>
+
+                        <span>
+                            Prescription
+                        </span>
+
+                    </div>
+
+
+                    <textarea
+                        name="prescription"
+                        placeholder="Enter prescribed medicines and instructions..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+                <!-- =================================================
+                     TREATMENT
+                ================================================== -->
+
+                <div class="form-card treatment-card">
+
+                    <div class="form-heading">
+
+                        <div class="form-heading-icon">
+                            🌿
+                        </div>
+
+                        <span>
+                            Treatment
+                        </span>
+
+                    </div>
+
+
+                    <textarea
+                        name="treatment"
+                        placeholder="Enter treatment and follow-up details..."
+                        required
+                    ></textarea>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =================================================
+                 SUBMIT
+            ================================================== -->
+
+            <button
+                type="submit"
+                class="save-btn"
+            >
+                ➤ &nbsp; Submit Consultation
+            </button>
+
+
+        </form>
+
+        {% endif %}
+
+
+        <!-- =================================================
+             NEXT PATIENT
+        ================================================== -->
+
+        {% if next_patient %}
+
+        <div class="next-card">
+
+            <h3>
+                🟢 Next Patient
+            </h3>
+
+            <p>
+
+                Token
+                <strong>
+                    #{{ next_patient.token_number }}
+                </strong>
+
+                &nbsp;—&nbsp;
+
+                {{ next_patient.patient_name }}
+
+            </p>
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <div class="footer">
+
+        <span>━━</span>
+
+        CareTrack
+
+        <span>•</span>
+
+        Doctor Consultation Management
+
+        <span>━━</span>
+
+    </div>
+
+
+</div>
+
+
+</body>
+
+</html>

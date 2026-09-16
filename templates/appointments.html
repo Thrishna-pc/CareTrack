@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareTrack - Appointments</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f7fb;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #1f3c88;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .form-box {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 7px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            max-width: 500px;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 15px;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #2878d0;
+        }
+
+        button {
+            background-color: #1f3c88;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background-color: #162d68;
+        }
+
+        .table-box {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: #2878d0;
+            color: white;
+            padding: 14px;
+            text-align: left;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f6fc;
+        }
+
+        .empty {
+            text-align: center;
+            color: #777;
+            padding: 20px;
+        }
+      .message {
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.message.error {
+    background: #ffe5e5;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+}
+
+.message.success {
+    background: #e6f4ea;
+    color: #2e7d32;
+    border: 1px solid #81c784;
+}  
+    </style>
+</head>
+
+<body>
+    {% if message %}
+
+<div class="message {{ message_type }}">
+    {{ message }}
+</div>
+
+{% endif %}
+
+<div class="container">
+
+    <h1>CareTrack</h1>
+
+    <!-- Appointment Booking -->
+
+    <h2>Book Appointment</h2>
+
+    <div class="form-box">
+
+        <form method="POST" action="/appointments">
+
+            <!-- Patient -->
+
+            <div class="form-group">
+
+                <label for="patient_id">Patient</label>
+
+                <select id="patient_id" name="patient_id" required>
+
+                    <option value="">Select Patient</option>
+
+                    {% for patient in patients %}
+
+                    <option value="{{ patient[0] }}">
+                        {{ patient[1] }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Doctor -->
+
+            <div class="form-group">
+
+                <label for="doctor_id">Doctor</label>
+
+                <select id="doctor_id" name="doctor_id" required>
+
+                    <option value="">Select Doctor</option>
+
+                    {% for doctor in doctors %}
+
+                    <option value="{{ doctor[0] }}">
+                        {{ doctor[1] }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Appointment Date -->
+
+            <div class="form-group">
+
+                <label for="appointment_date">
+                    Appointment Date
+                </label>
+
+              <input type="date" name="appointment_date" required>
+
+            </div>
+
+
+            
+
+            <!-- Appointment Time -->
+<div class="form-group">
+
+    <label for="appointment_time">
+        Appointment Time
+    </label>
+
+    <select name="appointment_time" id="appointment_time" required>
+
+    <option value="">Select Time</option>
+
+    <option value="09:00:00">09:00 AM</option>
+    <option value="09:30:00">09:30 AM</option>
+    <option value="10:00:00">10:00 AM</option>
+    <option value="10:30:00">10:30 AM</option>
+    <option value="11:00:00">11:00 AM</option>
+    <option value="11:30:00">11:30 AM</option>
+    <option value="12:00:00">12:00 PM</option>
+    <option value="12:30:00">12:30 PM</option>
+    <option value="02:00:00">02:00 PM</option>
+    <option value="02:30:00">02:30 PM</option>
+    <option value="03:00:00">03:00 PM</option>
+    <option value="03:30:00">03:30 PM</option>
+    <option value="04:00:00">04:00 PM</option>
+    <option value="04:30:00">04:30 PM</option>
+
+</select>
+
+</div>
+
+
+            <!-- Submit -->
+
+            <button type="submit">
+                Book Appointment
+            </button>
+
+        </form>
+
+    </div>
+
+
+    <!-- Existing Appointments -->
+
+<h2>Appointment Information</h2>
+
+<div class="table-box">
+
+    {% if appointments %}
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Patient</th>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Token</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            {% for appointment in appointments %}
+
+            <tr>
+                <td>{{ appointment[1] }}</td>
+                <td>{{ appointment[2] }}</td>
+                <td>{{ appointment[3] }}</td>
+                <td>{{ appointment[4] }}</td>
+                <td>{{ appointment[5] }}</td>
+                <td>{{ appointment[6] }}</td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% else %}
+
+    <p class="empty">No appointments found.</p>
+
+    {% endif %}
+
+</div>
+
+</div>
+
+</body>
+
+</html>

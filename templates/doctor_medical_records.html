@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareTrack - Medical Records</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at top left, #f2eaff 0%, transparent 35%),
+        radial-gradient(circle at bottom right, #e7f0ff 0%, transparent 35%),
+        linear-gradient(135deg, #f7f5ff, #f4f8ff);
+    color: #20264a;
+}
+
+
+/* ================= HEADER ================= */
+
+.header {
+    background: linear-gradient(135deg, #17105c, #35208f, #536dfe);
+    color: white;
+    padding: 28px 48px;
+    box-shadow: 0 8px 30px rgba(55, 35, 145, 0.28);
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: "";
+    position: absolute;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    right: -90px;
+    top: -150px;
+}
+
+.header::after {
+    content: "";
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    background: rgba(184, 148, 255, 0.14);
+    left: 35%;
+    top: -110px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo-mark {
+    width: 72px;
+    height: 72px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #ffffff, #eee7ff);
+    border: 3px solid rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.22),
+        0 0 0 6px rgba(255,255,255,0.08);
+}
+
+.logo-text h1 {
+    margin: 0;
+    font-size: 32px;
+    letter-spacing: 0.5px;
+    font-weight: 800;
+}
+
+.logo-text p {
+    margin: 6px 0 0;
+    font-size: 14px;
+    opacity: 0.90;
+    letter-spacing: 0.3px;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.container {
+    max-width: 1200px;
+    margin: 35px auto;
+    padding: 0 22px;
+}
+
+
+/* ================= BACK BUTTON ================= */
+
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #4c2bbf, #315bea);
+    color: white;
+    text-decoration: none;
+    padding: 12px 21px;
+    border-radius: 13px;
+    font-weight: bold;
+    margin-bottom: 25px;
+    box-shadow: 0 7px 20px rgba(72, 43, 191, 0.25);
+    transition: 0.25s ease;
+}
+
+.back-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 11px 25px rgba(72, 43, 191, 0.34);
+}
+
+
+/* ================= HERO ================= */
+
+.hero {
+    background: linear-gradient(135deg, #a98bef 0%, #e8edff 50%, #876be2 100%);
+    border-radius: 25px;
+    padding: 31px;
+    box-shadow: 0 12px 35px rgba(62, 45, 140, 0.15);
+    margin-bottom: 25px;
+    border: 1px solid #dcd2fa;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(126,87,255,0.10),
+        rgba(83,109,254,0.04)
+    );
+    right: -70px;
+    top: -90px;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: rgba(214, 195, 255, 0.18);
+    right: 110px;
+    bottom: -55px;
+}
+
+.hero-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #6a35d4, #536dfe);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 33px;
+    box-shadow: 0 9px 22px rgba(84, 61, 190, 0.28);
+    position: relative;
+    z-index: 2;
+}
+
+.hero h2 {
+    margin: 14px 0 6px;
+    color: #28206c;
+    font-size: 27px;
+    font-weight: 800;
+}
+
+.hero p {
+    margin: 0;
+    color: #74708c;
+    font-size: 15px;
+}
+
+
+/* ================= FILTER ================= */
+
+.filter-card {
+    background: rgba(255,255,255,0.96);
+    border-radius: 21px;
+    padding: 24px;
+    margin-bottom: 28px;
+    box-shadow: 0 9px 30px rgba(64, 45, 145, 0.10);
+    border: 1px solid #e8e2f7;
+}
+
+.filter-card label {
+    display: block;
+    font-weight: bold;
+    color: #392b79;
+    margin-bottom: 9px;
+}
+
+.filter-row {
+    display: flex;
+    gap: 14px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+select {
+    min-width: 280px;
+    height: 47px;
+    border: 1px solid #d7cff0;
+    border-radius: 12px;
+    padding: 0 14px;
+    font-size: 15px;
+    color: #302a50;
+    background: #fcfbff;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+select:focus {
+    border-color: #7254db;
+    box-shadow: 0 0 0 4px rgba(114,84,219,0.12);
+}
+
+.search-btn {
+    height: 47px;
+    border: none;
+    border-radius: 12px;
+    padding: 0 24px;
+    background: linear-gradient(135deg, #5429b8, #4668ee);
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 7px 18px rgba(75, 45, 180, 0.23);
+    transition: 0.25s ease;
+}
+
+.search-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 11px 24px rgba(75, 45, 180, 0.31);
+}
+
+
+/* ================= RECORDS ================= */
+
+.records-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    gap: 23px;
+}
+
+
+/* ================= MEDICAL RECORD CARD ================= */
+
+.record-card {
+    background: rgba(255,255,255,0.98);
+    border-radius: 23px;
+    padding: 23px;
+    box-shadow: 0 10px 30px rgba(55, 40, 130, 0.11);
+    border: 1px solid #e8e1f7;
+    transition: 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.record-card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 6px;
+    height: 100%;
+    background: linear-gradient(
+        180deg,
+        #712bd4,
+        #536dfe,
+        #a34de8
+    );
+}
+
+.record-card::after {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(112, 76, 210, 0.045);
+    right: -35px;
+    top: -35px;
+    pointer-events: none;
+}
+
+.record-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 18px 42px rgba(55, 40, 130, 0.18);
+    border-color: #d8c9f5;
+}
+
+
+/* ================= PATIENT HEADER ================= */
+
+.patient-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #eeeaf7;
+    margin-bottom: 18px;
+}
+
+.patient-info {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.patient-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 17px;
+
+    /* Different color for patient icon */
+    background: linear-gradient(
+        135deg,
+        #7b2fd0,
+        #d04bcf
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;
+
+    box-shadow:
+        0 7px 18px rgba(173, 62, 196, 0.25),
+        inset 0 1px 0 rgba(255,255,255,0.35);
+}
+
+.patient-name {
+    font-size: 19px;
+    font-weight: 800;
+
+    /* Different color for patient name */
+    color: #54249c;
+}
+
+.date-badge {
+    background: linear-gradient(
+        135deg,
+        #eef0ff,
+        #f2eaff
+    );
+
+    color: #4c3bb0;
+
+    padding: 8px 11px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    border: 1px solid #ddd5fa;
+}
+
+
+/* ================= RECORD DETAILS ================= */
+
+.record-detail {
+    display: flex;
+    gap: 13px;
+    margin-bottom: 15px;
+    padding: 14px;
+    border-radius: 15px;
+    background: linear-gradient(
+        135deg,
+        #fbfaff,
+        #f8f9ff
+    );
+    border: 1px solid #eeeaf8;
+    transition: 0.22s ease;
+}
+
+.record-detail:hover {
+    transform: translateX(3px);
+    background: #f8f5ff;
+}
+
+.detail-icon {
+    min-width: 42px;
+    width: 42px;
+    height: 42px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+
+/* ================= DIFFERENT ICON COLORS ================= */
+
+.diagnosis-icon {
+    background: linear-gradient(
+        135deg,
+        #eee5ff,
+        #e1e8ff
+    );
+
+    box-shadow: 0 5px 13px rgba(105, 65, 205, 0.13);
+}
+
+.prescription-icon {
+    background: linear-gradient(
+        135deg,
+        #fff0f8,
+        #ffe8f1
+    );
+
+    box-shadow: 0 5px 13px rgba(218, 74, 137, 0.12);
+}
+
+.treatment-icon {
+    background: linear-gradient(
+        135deg,
+        #eaf0ff,
+        #e5eaff
+    );
+
+    box-shadow: 0 5px 13px rgba(73, 94, 218, 0.13);
+}
+
+
+.detail-content {
+    flex: 1;
+}
+
+.detail-title {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #746d8f;
+    margin-bottom: 5px;
+}
+
+.detail-text {
+    color: #333052;
+    line-height: 1.55;
+    font-size: 14px;
+}
+
+
+/* ================= EMPTY ================= */
+
+.empty {
+    background: rgba(255,255,255,0.97);
+    border-radius: 23px;
+    padding: 58px 30px;
+    text-align: center;
+    color: #77718d;
+    box-shadow: 0 10px 30px rgba(55, 40, 130, 0.10);
+    border: 1px solid #e7e1f5;
+}
+
+.empty-icon {
+    width: 78px;
+    height: 78px;
+    margin: 0 auto 16px;
+    border-radius: 23px;
+
+    background: linear-gradient(
+        135deg,
+        #eee5ff,
+        #e7edff
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px;
+
+    box-shadow: 0 8px 20px rgba(91, 67, 185, 0.12);
+}
+
+.empty h3 {
+    color: #392b79;
+    margin: 8px 0;
+}
+
+.empty p {
+    margin: 0;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 700px) {
+
+    .header {
+        padding: 21px 22px;
+    }
+
+    .logo-text h1 {
+        font-size: 24px;
+    }
+
+    .logo-mark {
+        width: 58px;
+        height: 58px;
+        font-size: 30px;
+        border-radius: 18px;
+    }
+
+    .container {
+        margin: 22px auto;
+        padding: 0 15px;
+    }
+
+    .hero {
+        padding: 24px;
+    }
+
+    .filter-card {
+        padding: 18px;
+    }
+
+    select {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .search-btn {
+        width: 100%;
+    }
+
+    .records-card {
+        grid-template-columns: 1fr;
+    }
+
+    .patient-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .date-badge {
+        margin-left: 65px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <div class="logo-area">
+
+        <div class="logo-mark">
+            🏥
+        </div>
+
+        <div class="logo-text">
+            <h1>CareTrack</h1>
+            <p>Doctor Medical Records</p>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+<a href="/doctor_dashboard" class="back-btn">
+    ← Back to Dashboard
+</a>
+
+
+<div class="hero">
+
+    <div class="hero-icon">
+        📋
+    </div>
+
+    <h2>
+        Medical Records
+    </h2>
+
+    <p>
+        View consultation records of your patients.
+    </p>
+
+</div>
+
+
+<div class="filter-card">
+
+<form
+    method="GET"
+    action="/doctor_medical_records"
+>
+
+<div class="filter-row">
+
+<div>
+
+<label>
+    👤 Select Patient
+</label>
+
+<select name="patient_id">
+
+<option value="">
+    All Patients
+</option>
+
+{% for patient in patients %}
+
+<option
+    value="{{ patient.patient_id }}"
+    {% if selected_patient|string == patient.patient_id|string %}
+        selected
+    {% endif %}
+>
+
+    {{ patient.patient_name }}
+
+</option>
+
+{% endfor %}
+
+</select>
+
+</div>
+
+
+<button
+    type="submit"
+    class="search-btn"
+>
+
+    🔎 Search Records
+
+</button>
+
+</div>
+
+</form>
+
+</div>
+
+
+{% if records %}
+
+<div class="records-card">
+
+{% for record in records %}
+
+<div class="record-card">
+
+    <!-- PATIENT -->
+
+    <div class="patient-header">
+
+        <div class="patient-info">
+
+            <div class="patient-icon">
+                👤
+            </div>
+
+            <div class="patient-name">
+                {{ record.patient_name }}
+            </div>
+
+        </div>
+
+
+        <div class="date-badge">
+            📅 {{ record.record_date.strftime("%d-%m-%Y") }}
+        </div>
+
+    </div>
+
+
+    <!-- DIAGNOSIS -->
+
+    <div class="record-detail">
+
+        <div class="detail-icon diagnosis-icon">
+            🩺
+        </div>
+
+        <div class="detail-content">
+
+            <div class="detail-title">
+                Diagnosis
+            </div>
+
+            <div class="detail-text">
+                {{ record.diagnosis }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- PRESCRIPTION -->
+
+    <div class="record-detail">
+
+        <div class="detail-icon prescription-icon">
+            💊
+        </div>
+
+        <div class="detail-content">
+
+            <div class="detail-title">
+                Prescription
+            </div>
+
+            <div class="detail-text">
+                {{ record.prescription }}
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- TREATMENT -->
+
+    <div class="record-detail">
+
+        <div class="detail-icon treatment-icon">
+            🏥
+        </div>
+
+        <div class="detail-content">
+
+            <div class="detail-title">
+                Treatment
+            </div>
+
+            <div class="detail-text">
+                {{ record.treatment }}
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+
+{% else %}
+
+<div class="empty">
+
+    <div class="empty-icon">
+        📂
+    </div>
+
+    <h3>
+        No Medical Records Found
+    </h3>
+
+    <p>
+        Saved consultation records will appear here.
+    </p>
+
+</div>
+
+{% endif %}
+
+
+</div>
+
+</body>
+</html>

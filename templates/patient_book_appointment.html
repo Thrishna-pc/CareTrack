@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment - CareTrack</title>
+
+   <style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f6fb;
+    color: #252a3a;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar {
+    background: linear-gradient(135deg, #172554, #312e81);
+    color: white;
+    padding: 25px 48px;
+    box-shadow: 0 8px 25px rgba(23, 37, 84, 0.20);
+}
+
+.logo {
+    font-size: 31px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+
+.logo::before {
+    content: "✚";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 43px;
+    height: 43px;
+    margin-right: 12px;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #4f46e5;
+    font-size: 25px;
+    vertical-align: middle;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+/* ================= MAIN ================= */
+
+.container {
+    max-width: 1080px;
+    margin: 45px auto;
+    padding: 0 25px;
+}
+
+/* ================= BACK BUTTON ================= */
+
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 12px 21px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #3730a3;
+    border: 1px solid #d9ddf2;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: 0 5px 15px rgba(37, 45, 90, 0.08);
+    transition: all 0.25s ease;
+}
+
+.back-button:hover {
+    background: #3730a3;
+    color: white;
+    transform: translateX(-3px);
+}
+
+/* ================= TITLE ================= */
+
+.title {
+    margin-bottom: 25px;
+}
+
+.title h1 {
+    margin: 0;
+    font-size: 39px;
+    font-weight: 800;
+    color: #2448be;
+    letter-spacing: -0.7px;
+}
+
+.title h1::before {
+    content: "📅";
+    margin-right: 13px;
+    font-size: 32px;
+}
+
+.title p {
+    margin: 8px 0 0 49px;
+    color: #72798c;
+    font-size: 15px;
+}
+
+/* ================= FORM CARD ================= */
+
+.card {
+    position: relative;
+    background: #ffffff;
+    padding: 35px 38px;
+    border-radius: 24px;
+    margin-bottom: 42px;
+    border: 1px solid #e3e7f2;
+    box-shadow: 0 15px 40px rgba(31, 41, 75, 0.10);
+    overflow: hidden;
+}
+
+/* Top decorative line */
+
+.card::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(
+        90deg,
+        #ec4899,
+        #8b5cf6,
+        #3b82f6,
+        #14b8a6
+    );
+}
+
+/* ================= FORM GROUP ================= */
+
+.form-group {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+/* ================= LABELS ================= */
+
+label {
+    display: block;
+    margin-bottom: 9px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+/* Patient */
+
+.form-group:nth-child(1) label {
+    color: #db2777;
+}
+
+.form-group:nth-child(1) label::before {
+    content: "👤";
+    margin-right: 9px;
+}
+
+/* Department */
+
+.form-group:nth-child(2) label {
+    color: #7c3aed;
+}
+
+.form-group:nth-child(2) label::before {
+    content: "🏥";
+    margin-right: 9px;
+}
+
+/* Doctor */
+
+.form-group:nth-child(3) label {
+    color: #2563eb;
+}
+
+.form-group:nth-child(3) label::before {
+    content: "🩺";
+    margin-right: 9px;
+}
+
+/* Date */
+
+.form-group:nth-child(4) label {
+    color: #ea580c;
+}
+
+.form-group:nth-child(4) label::before {
+    content: "📅";
+    margin-right: 9px;
+}
+
+/* Time */
+
+.form-group:nth-child(5) label {
+    color: #0f766e;
+}
+
+.form-group:nth-child(5) label::before {
+    content: "🕐";
+    margin-right: 9px;
+}
+
+/* ================= PATIENT DISPLAY ================= */
+
+.form-group div[style] {
+    width: 100% !important;
+    padding: 15px 17px !important;
+    border-radius: 12px !important;
+    background: #fff1f7 !important;
+    border: 1px solid #f6c9df !important;
+    color: #be185d !important;
+    font-size: 15px !important;
+    font-weight: 750 !important;
+}
+
+/* ================= SELECT + DATE ================= */
+
+select,
+input[type="date"] {
+    width: 100%;
+    height: 51px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid #dfe3ed;
+    background: #fbfcff;
+    color: #30364a;
+    font-size: 15px;
+    font-family: inherit;
+    transition: all 0.25s ease;
+}
+
+/* Department field */
+
+.form-group:nth-child(2) select {
+    border-left: 4px solid #8b5cf6;
+}
+
+/* Doctor field */
+
+.form-group:nth-child(3) select {
+    border-left: 4px solid #3b82f6;
+}
+
+/* Date field */
+
+.form-group:nth-child(4) input {
+    border-left: 4px solid #f97316;
+}
+
+/* Time field */
+
+.form-group:nth-child(5) select {
+    border-left: 4px solid #14b8a6;
+}
+
+select:hover,
+input[type="date"]:hover {
+    background: #ffffff;
+    border-color: #b8bfd3;
+}
+
+select:focus,
+input[type="date"]:focus {
+    outline: none;
+    background: #ffffff;
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.09);
+}
+
+/* ================= BOOK BUTTON ================= */
+
+.button {
+    width: 100%;
+    margin-top: 7px;
+    padding: 17px 20px;
+    border: none;
+    border-radius: 13px;
+    background: linear-gradient(135deg, #4338ca, #7c3aed);
+    color: white;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+    cursor: pointer;
+    box-shadow: 0 10px 22px rgba(79, 70, 229, 0.25);
+    transition: all 0.25s ease;
+}
+
+.button::before {
+    content: "✓";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 23px;
+    height: 23px;
+    margin-right: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.20);
+}
+
+.button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px rgba(79, 70, 229, 0.32);
+}
+
+/* ================= MESSAGE ================= */
+
+.message {
+    padding: 15px 18px;
+    margin-bottom: 23px;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+.success {
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #b7ead6;
+}
+
+.error {
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+}
+
+/* ================= SECOND TITLE ================= */
+
+.title:nth-of-type(2) {
+    margin-top: 48px;
+    margin-bottom: 25px;
+}
+
+.title:nth-of-type(2) h1 {
+    margin: 0 0 8px;
+    color: #26346f;
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.title:nth-of-type(2) h1::before {
+    content: "📋";
+    margin-right: 12px;
+    font-size: 31px;
+}
+
+.title:nth-of-type(2) p {
+    margin: 0 0 0 47px;
+    color: #7a8195;
+    font-size: 15px;
+}
+
+
+/* ================= COLORFUL APPOINTMENT TABLE ================= */
+
+.table-card {
+    background: #ffffff;
+    border-radius: 22px;
+    overflow: hidden;
+    border: 1px solid #e1e5ef;
+    box-shadow: 0 15px 35px rgba(44, 53, 105, 0.12);
+}
+
+
+/* ================= TABLE ================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+/* ================= COLORFUL HEADINGS ================= */
+
+th {
+    padding: 18px 17px;
+    color: white;
+    text-align: left;
+    font-size: 14px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+
+/* Doctor - Pink */
+
+th:nth-child(1) {
+    background: linear-gradient(135deg, #d9467a, #ec4899);
+}
+
+th:nth-child(1)::before {
+    content: "🩺";
+    margin-right: 8px;
+}
+
+
+/* Date - Purple */
+
+th:nth-child(2) {
+    background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+}
+
+th:nth-child(2)::before {
+    content: "📅";
+    margin-right: 8px;
+}
+
+
+/* Time - Blue */
+
+th:nth-child(3) {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+}
+
+th:nth-child(3)::before {
+    content: "🕐";
+    margin-right: 8px;
+}
+
+
+/* Token - Teal */
+
+th:nth-child(4) {
+    background: linear-gradient(135deg, #0891b2, #14b8a6);
+}
+
+th:nth-child(4)::before {
+    content: "🎟";
+    margin-right: 8px;
+}
+
+
+/* Status - Orange */
+
+th:nth-child(5) {
+    background: linear-gradient(135deg, #ea580c, #f59e0b);
+}
+
+th:nth-child(5)::before {
+    content: "●";
+    margin-right: 8px;
+}
+
+
+/* ================= TABLE ROWS ================= */
+
+td {
+    padding: 18px 17px;
+    font-size: 14px;
+    border-bottom: 1px solid #edf0f6;
+    background: #ffffff;
+}
+
+
+/* Doctor */
+
+td:nth-child(1) {
+    color: #c02670;
+    font-weight: 700;
+}
+
+
+/* Date */
+
+td:nth-child(2) {
+    color: #6542b8;
+    font-weight: 700;
+}
+
+
+/* Time */
+
+td:nth-child(3) {
+    color: #087f9b;
+    font-weight: 700;
+}
+
+
+/* Token */
+
+td:nth-child(4) {
+    color: #0f766e;
+    font-weight: 800;
+}
+
+
+/* Status */
+
+td:nth-child(5) {
+    color: #d97706;
+    font-weight: 800;
+}
+
+
+/* ================= ROW COLORS ================= */
+
+tbody tr:nth-child(even) td {
+    background: #faf8ff;
+}
+
+tbody tr:nth-child(odd) td {
+    background: #ffffff;
+}
+
+tbody tr:hover td {
+    background: #f1f4ff;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* ================= EMPTY APPOINTMENTS ================= */
+
+.no-appointments {
+    padding: 48px 25px;
+    text-align: center;
+    background: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e1e5ef;
+    color: #737b8e;
+    box-shadow: 0 14px 35px rgba(31, 41, 75, 0.08);
+}
+
+.no-appointments::before {
+    content: "📅";
+    display: block;
+    margin-bottom: 13px;
+    font-size: 43px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .title:nth-of-type(2) h1 {
+        font-size: 29px;
+    }
+
+    .title:nth-of-type(2) p {
+        margin-left: 0;
+    }
+
+    th,
+    td {
+        padding: 14px 11px;
+        font-size: 12px;
+    }
+
+}
+</style>
+</head>
+
+
+<body>
+
+
+<div class="navbar">
+
+    <div class="logo">
+        CareTrack
+    </div>
+
+</div>
+
+
+<div class="container">
+
+
+    <a href="/patient_dashboard" class="back-button">
+        ← Back to Dashboard
+    </a>
+
+
+    <div class="title">
+
+        <h1>
+            Book Appointment
+        </h1>
+
+        <p>
+            Select department, doctor, date and available time
+        </p>
+
+    </div>
+
+
+    {% if message %}
+
+    <div class="message {{ message_type }}">
+        {{ message }}
+    </div>
+
+    {% endif %}
+
+
+    <div class="card">
+
+
+        <form method="POST" action="/patient_book_appointment">
+
+            <div class="form-group">
+
+    <label>Patient</label>
+
+    <div style="
+        width: 100%;
+        padding: 13px;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        background: #f8fbff;
+        font-size: 15px;
+        font-weight: bold;
+    ">
+        {{ patient_name }}
+    </div>
+
+</div>
+            <!-- Department -->
+
+            <div class="form-group">
+
+                <label>
+                    Department
+                </label>
+
+                <select
+                    name="department"
+                    id="department"
+                    required
+                >
+
+                    <option value="">
+                        Select Department
+                    </option>
+
+                    {% for department in departments %}
+
+                    <option value="{{ department }}">
+                        {{ department }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Doctor -->
+
+            <div class="form-group">
+
+                <label>
+                    Doctor
+                </label>
+
+                <select
+                    name="doctor_id"
+                    id="doctor"
+                    required
+                >
+
+                    <option value="">
+                        Select Doctor
+                    </option>
+
+                    {% for doctor in doctors %}
+
+                    <option
+                        value="{{ doctor.doctor_id }}"
+                        data-department="{{ doctor.department }}"
+                    >
+                        {{ doctor.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Date -->
+
+            <div class="form-group">
+
+                <label>
+                    Appointment Date
+                </label>
+
+                <input
+                    type="date"
+                    name="appointment_date"
+                    id="appointment_date"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Time -->
+
+            <div class="form-group">
+
+                <label>
+                    Appointment Time
+                </label>
+
+                <select
+                    name="appointment_time"
+                    id="appointment_time"
+                    required
+                >
+
+                    <option value="">
+                        Select Time
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="button"
+            >
+                Book Appointment
+            </button>
+
+
+        </form>
+
+    </div>
+
+
+    <!-- Appointment Information -->
+
+    <div class="title">
+
+        <h1>
+            Appointment Information
+        </h1>
+
+        <p>
+            Your booked appointments
+        </p>
+
+    </div>
+
+
+    {% if appointments %}
+
+
+    <div class="table-card">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>
+                        Doctor
+                    </th>
+
+                    <th>
+                        Date
+                    </th>
+
+                    <th>
+                        Time
+                    </th>
+
+                    <th>
+                        Token
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+                {% for appointment in appointments %}
+
+                <tr>
+
+                    <td>
+                        {{ appointment.doctor_name }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_date }}
+                    </td>
+
+                    <td>
+                        {{ appointment.appointment_time }}
+                    </td>
+
+                    <td>
+                        {{ appointment.token_number }}
+                    </td>
+
+                    <td>
+                        {{ appointment.status }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    {% else %}
+
+
+    <div class="no-appointments">
+
+        No appointments found.
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+
+<script>
+
+
+/* Department → Doctor */
+
+const departmentSelect =
+    document.getElementById("department");
+
+const doctorSelect =
+    document.getElementById("doctor");
+
+const dateInput =
+    document.getElementById("appointment_date");
+
+const timeSelect =
+    document.getElementById("appointment_time");
+
+
+departmentSelect.addEventListener(
+    "change",
+    function () {
+
+        const selectedDepartment =
+            this.value;
+
+        doctorSelect.value = "";
+
+        dateInput.value = "";
+
+        timeSelect.innerHTML =
+            '<option value="">Select Time</option>';
+
+
+        Array.from(
+            doctorSelect.options
+        ).forEach(function (option) {
+
+            if (option.value === "") {
+
+                option.style.display = "block";
+
+                return;
+            }
+
+
+            if (
+                option.dataset.department ===
+                selectedDepartment
+            ) {
+
+                option.style.display = "block";
+
+            } else {
+
+                option.style.display = "none";
+
+            }
+
+        });
+
+    }
+);
+
+
+/* Doctor change */
+
+doctorSelect.addEventListener(
+    "change",
+    function () {
+
+        dateInput.value = "";
+
+        timeSelect.innerHTML =
+            '<option value="">Select Time</option>';
+
+    }
+);
+
+
+/* Date → Available Time */
+
+dateInput.addEventListener(
+    "change",
+    async function () {
+
+        const doctorId =
+            doctorSelect.value;
+
+        const selectedDate =
+            this.value;
+
+
+        timeSelect.innerHTML =
+            '<option value="">Loading available times...</option>';
+
+
+        if (
+            !doctorId ||
+            !selectedDate
+        ) {
+
+            timeSelect.innerHTML =
+                '<option value="">Select Time</option>';
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `/available_times?doctor_id=${doctorId}&appointment_date=${selectedDate}`
+                );
+
+
+            const data =
+                await response.json();
+
+
+            timeSelect.innerHTML =
+                '<option value="">Select Time</option>';
+
+
+            if (
+                data.times.length === 0
+            ) {
+
+                timeSelect.innerHTML =
+                    '<option value="">No available time slots</option>';
+
+                return;
+
+            }
+
+
+            data.times.forEach(
+                function (time) {
+
+                    const option =
+                        document.createElement("option");
+
+                    option.value =
+                        time.value;
+
+                    option.textContent =
+                        time.label;
+
+                    timeSelect.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+
+        } catch (error) {
+
+            timeSelect.innerHTML =
+                '<option value="">Unable to load time slots</option>';
+
+        }
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>

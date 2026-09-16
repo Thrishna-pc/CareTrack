@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Doctor Details - CareTrack</title>
+
+   <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background:
+            radial-gradient(circle at 5% 15%, rgba(99, 102, 241, 0.10), transparent 25%),
+            radial-gradient(circle at 95% 20%, rgba(20, 184, 166, 0.10), transparent 25%),
+            #f5f8ff;
+        color: #1e293b;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+        background: linear-gradient(135deg, #9554eb, #5a56ad, #ac83f4);
+        color: white;
+        padding: 21px 45px;
+        box-shadow: 0 6px 22px rgba(37, 99, 235, 0.20);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .navbar::after {
+        content: "";
+        position: absolute;
+        width: 260px;
+        height: 260px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        right: -100px;
+        top: -150px;
+    }
+
+    .logo {
+        font-size: 29px;
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* ================= CONTAINER ================= */
+
+    .container {
+        max-width: 1160px;
+        margin: 38px auto;
+        padding: 0 24px;
+    }
+
+    /* ================= BACK BUTTON ================= */
+
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #2563eb, #4f46e5);
+        color: white;
+        padding: 12px 21px;
+        border-radius: 11px;
+        text-decoration: none;
+        font-weight: 700;
+        margin-bottom: 32px;
+        box-shadow: 0 7px 18px rgba(37, 99, 235, 0.20);
+        transition: 0.25s ease;
+    }
+
+    .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 23px rgba(37, 99, 235, 0.28);
+    }
+
+    /* ================= PAGE TITLE ================= */
+
+    .title {
+        margin-bottom: 32px;
+    }
+
+    .title h1 {
+        margin: 0 0 8px;
+        color: #1e3a8a;
+        font-size: 38px;
+        font-weight: 850;
+        letter-spacing: -0.6px;
+        display: flex;
+        align-items: center;
+        gap: 13px;
+    }
+
+    .title h1::before {
+        content: "🩺";
+        width: 54px;
+        height: 54px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #dbeafe, #e0e7ff);
+        border-radius: 17px;
+        font-size: 29px;
+        box-shadow: 0 7px 18px rgba(59, 130, 246, 0.13);
+    }
+
+    .title p {
+        margin: 0 0 0 67px;
+        color: #68748a;
+        font-size: 16px;
+    }
+
+    /* ================= DOCTOR GRID ================= */
+
+    .doctor-grid {
+        display: grid;
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(300px, 1fr)
+        );
+        gap: 25px;
+        align-items: stretch;
+    }
+
+    /* ================= DOCTOR CARD ================= */
+
+    .doctor-card {
+        background: rgba(255, 255, 255, 0.97);
+        border-radius: 23px;
+        padding: 25px;
+        border: 1px solid #e1e7f2;
+        box-shadow: 0 14px 35px rgba(35, 50, 100, 0.10);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.28s ease,
+                    box-shadow 0.28s ease;
+    }
+
+    .doctor-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 42px rgba(35, 50, 100, 0.16);
+    }
+
+    /* Automatic Pink → Blue → Teal → Pink... */
+
+    .doctor-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 6px;
+    }
+
+    .doctor-card:nth-child(3n+1)::before {
+        background: linear-gradient(
+            90deg,
+            #ec4899,
+            #f472b6,
+            #a855f7
+        );
+    }
+
+    .doctor-card:nth-child(3n+2)::before {
+        background: linear-gradient(
+            90deg,
+            #3b82f6,
+            #6366f1,
+            #06b6d4
+        );
+    }
+
+    .doctor-card:nth-child(3n)::before {
+        background: linear-gradient(
+            90deg,
+            #14b8a6,
+            #06b6d4,
+            #22c55e
+        );
+    }
+
+    /* ================= DOCTOR ICON ================= */
+
+    .doctor-icon {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 34px;
+        margin-bottom: 17px;
+        border: 5px solid white;
+        box-shadow: 0 7px 18px rgba(80, 90, 150, 0.15);
+    }
+
+    .doctor-card:nth-child(3n+1) .doctor-icon {
+        background: linear-gradient(
+            135deg,
+            #fce7f3,
+            #e9d5ff
+        );
+    }
+
+    .doctor-card:nth-child(3n+2) .doctor-icon {
+        background: linear-gradient(
+            135deg,
+            #dbeafe,
+            #e0e7ff
+        );
+    }
+
+    .doctor-card:nth-child(3n) .doctor-icon {
+        background: linear-gradient(
+            135deg,
+            #ccfbf1,
+            #cffafe
+        );
+    }
+
+    /* ================= DOCTOR NAME ================= */
+
+    .doctor-card h2 {
+        margin: 0 0 18px;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    .doctor-card:nth-child(3n+1) h2 {
+        color: #be185d;
+    }
+
+    .doctor-card:nth-child(3n+2) h2 {
+        color: #1d4ed8;
+    }
+
+    .doctor-card:nth-child(3n) h2 {
+        color: #047857;
+    }
+
+    /* ================= DOCTOR INFORMATION ================= */
+
+    .doctor-info {
+        margin: 12px 0;
+        padding: 11px 13px;
+        border-radius: 10px;
+        color: #596579;
+        font-size: 14px;
+        background: #f8fafc;
+    }
+
+    .doctor-card:nth-child(3n+1) .doctor-info {
+        background: #fff7fb;
+    }
+
+    .doctor-card:nth-child(3n+2) .doctor-info {
+        background: #f5f8ff;
+    }
+
+    .doctor-card:nth-child(3n) .doctor-info {
+        background: #f2fcfa;
+    }
+
+    .doctor-info strong {
+        color: #26345f;
+        font-weight: 800;
+    }
+
+    /* ================= AVAILABILITY ================= */
+
+    .availability {
+        margin-top: 22px;
+        padding-top: 19px;
+        border-top: 1px solid #e4e9f2;
+    }
+
+    .availability h3 {
+        margin: 0 0 14px;
+        font-size: 17px;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .availability h3::before {
+        content: "📅";
+        font-size: 18px;
+    }
+
+    .doctor-card:nth-child(3n+1) .availability h3 {
+        color: #c02670;
+    }
+
+    .doctor-card:nth-child(3n+2) .availability h3 {
+        color: #2563eb;
+    }
+
+    .doctor-card:nth-child(3n) .availability h3 {
+        color: #0f8f78;
+    }
+
+    /* ================= AVAILABILITY ITEM ================= */
+
+    .availability-item {
+        padding: 13px 14px;
+        border-radius: 13px;
+        margin-bottom: 10px;
+        color: #4b5870;
+        line-height: 1.65;
+        font-size: 14px;
+        transition: 0.2s ease;
+    }
+
+    .availability-item:hover {
+        transform: translateX(3px);
+        box-shadow: 0 5px 14px rgba(80, 80, 130, 0.08);
+    }
+
+    .doctor-card:nth-child(3n+1) .availability-item {
+        background: linear-gradient(
+            135deg,
+            #fff5fb,
+            #faf7ff
+        );
+        border: 1px solid #f1d7e8;
+    }
+
+    .doctor-card:nth-child(3n+2) .availability-item {
+        background: linear-gradient(
+            135deg,
+            #f1f7ff,
+            #f7f5ff
+        );
+        border: 1px solid #d8e5fa;
+    }
+
+    .doctor-card:nth-child(3n) .availability-item {
+        background: linear-gradient(
+            135deg,
+            #effcf9,
+            #f0fbff
+        );
+        border: 1px solid #cceee7;
+    }
+
+    /* ================= NO AVAILABILITY ================= */
+
+    .no-availability {
+        color: #64748b;
+        background: #f8fafc;
+        padding: 13px;
+        border-radius: 11px;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* ================= NO DOCTORS ================= */
+
+    .no-doctors {
+        background: white;
+        padding: 40px 30px;
+        text-align: center;
+        border-radius: 20px;
+        color: #64748b;
+        border: 1px solid #e2e7f0;
+        box-shadow: 0 12px 30px rgba(35, 50, 100, 0.09);
+    }
+
+    /* ================= MOBILE ================= */
+
+    @media (max-width: 650px) {
+
+        .navbar {
+            padding: 18px 22px;
+        }
+
+        .logo {
+            font-size: 25px;
+        }
+
+        .container {
+            margin: 25px auto;
+            padding: 0 16px;
+        }
+
+        .title h1 {
+            font-size: 30px;
+        }
+
+        .title h1::before {
+            width: 46px;
+            height: 46px;
+            font-size: 25px;
+        }
+
+        .title p {
+            margin-left: 0;
+        }
+
+        .doctor-card {
+            padding: 22px;
+        }
+    }
+
+</style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">CareTrack</div>
+    </div>
+
+    <div class="container">
+
+        <a href="/patient_dashboard" class="back-button">
+            ← Back to Dashboard
+        </a>
+
+        <div class="title">
+            <h1>Doctor Details</h1>
+            <p>View doctor information and availability</p>
+        </div>
+
+        {% if doctors %}
+
+        <div class="doctor-grid">
+
+            {% for doctor in doctors %}
+
+            <div class="doctor-card">
+
+                <div class="doctor-icon">
+                    👨‍⚕️
+                </div>
+
+                <h2> {{ doctor.name }}</h2>
+
+                <div class="doctor-info">
+                    <strong>Department:</strong>
+                    {{ doctor.department }}
+                </div>
+
+                <div class="doctor-info">
+                    <strong>Specialization:</strong>
+                    {{ doctor.specialization }}
+                </div>
+
+                
+
+                <div class="availability">
+
+                    <h3>Availability</h3>
+
+                    {% if doctor.availability %}
+
+                        {% for schedule in doctor.availability %}
+
+                        <div class="availability-item">
+                            📅 {{ schedule.day }}
+                            — {{ schedule.date }}
+                            <br>
+                            ⏰ {{ schedule.time }}
+                        </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <div class="no-availability">
+                            Availability not updated
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-doctors">
+            No doctors available at the moment.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>
