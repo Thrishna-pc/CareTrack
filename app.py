@@ -11,6 +11,28 @@ def get_db_connection():
         password="thrishnapc2004",
         database="caretrack"
     )
+def auto_cancel_missed_appointments(cursor):
+
+    cursor.execute("""
+        UPDATE tokens t
+        JOIN appointments a
+            ON t.appointment_id = a.appointment_id
+        SET
+            t.status = 'cancelled',
+            a.status = 'cancelled'
+        WHERE a.status = 'booked'
+          AND t.status = 'waiting'
+          AND (
+                a.appointment_date < CURDATE()
+                OR (
+                    a.appointment_date = CURDATE()
+                    AND ADDTIME(
+                        a.appointment_time,
+                        '00:10:00'
+                    ) <= CURTIME()
+                )
+          )
+    """)
 
 @app.route("/", methods=["GET", "POST"])
 def home():
@@ -511,6 +533,7 @@ def consultation_detail(appointment_id):
 
         if not appointment:
             return redirect("/doctor_appointments")
+        
 
         # ------------------------------------------------
         # CONSULTATION ONLY ON APPOINTMENT DATE
@@ -1830,6 +1853,8 @@ def doctor_appointments():
 
     db = get_db_connection()
     cursor = db.cursor(dictionary=True, buffered=True)
+    auto_cancel_missed_appointments(cursor)
+    db.commit()
 
     # Logged-in doctor
     cursor.execute("""
@@ -2030,6 +2055,9 @@ def tracking():
 
         patient_id = patient["patient_id"]
 
+        auto_cancel_missed_appointments(cursor)
+        db.commit()
+
 
         # =========================================================
         # PATIENT APPOINTMENTS
@@ -2082,13 +2110,10 @@ def tracking():
 
         appointments = cursor.fetchall()
 
-
         today = date.today()
-
 
         # =========================================================
         # CACHE QUEUE DATA
-        # Same doctor + same date = same queue
         # =========================================================
 
         queue_cache = {}
@@ -2129,7 +2154,7 @@ def tracking():
 
 
             # -----------------------------------------------------
-            # No token
+            # NO TOKEN
             # -----------------------------------------------------
 
             if token_number is None:
@@ -2150,17 +2175,17 @@ def tracking():
 
 
             # -----------------------------------------------------
-            # Queue cache key
+            # QUEUE CACHE KEY
             # -----------------------------------------------------
 
             cache_key = (
                 doctor_id,
-                appointment_date
+                appointment_date, token_number
             )
 
 
             # -----------------------------------------------------
-            # Get queue only once for same doctor/date
+            # GET QUEUE
             # -----------------------------------------------------
 
             if cache_key not in queue_cache:
@@ -2191,7 +2216,6 @@ def tracking():
 
             queue_data = queue_cache[cache_key]
 
-
             appointment["queue_data"] = queue_data
 
 
@@ -2208,7 +2232,6 @@ def tracking():
                     now_serving = item["token_number"]
 
                     break
-
 
             appointment["now_serving"] = now_serving
 
@@ -2230,7 +2253,6 @@ def tracking():
 
                         patients_ahead += 1
 
-
             appointment["patients_ahead"] = patients_ahead
 
 
@@ -2246,13 +2268,19 @@ def tracking():
                         "Consultation Completed"
                     )
 
-
                 elif appointment["token_status"] == "serving":
 
                     appointment["status_text"] = (
                         "In Consultation"
                     )
 
+                elif (
+                    appointment["token_status"] == "cancelled"
+                    or
+                    appointment["appointment_status"] == "cancelled"
+                ):
+
+                    appointment["status_text"] = "Cancelled"
 
                 elif appointment["token_status"] == "waiting":
 
@@ -2274,7 +2302,6 @@ def tracking():
                             "Waiting for Consultation"
                         )
 
-
                 else:
 
                     appointment["status_text"] = (
@@ -2294,6 +2321,14 @@ def tracking():
                         "Consultation Completed"
                     )
 
+                elif (
+                    appointment["token_status"] == "cancelled"
+                    or
+                    appointment["appointment_status"] == "cancelled"
+                ):
+
+                    appointment["status_text"] = "Cancelled"
+
                 else:
 
                     appointment["status_text"] = (
@@ -2312,6 +2347,10 @@ def tracking():
                 )
 
 
+        # =========================================================
+        # SHOW TRACKING PAGE
+        # =========================================================
+
         return render_template(
             "tracking.html",
             appointments=appointments
@@ -2328,7 +2367,9 @@ def tracking():
     finally:
 
         cursor.close()
+
         db.close()
+
 @app.route("/tracking_details/<int:appointment_id>")
 def tracking_details(appointment_id):
 
@@ -2345,7 +2386,82 @@ def tracking_details(appointment_id):
             a.doctor_id,
             a.appointment_date AS actual_date,
             du.name AS doctor_name,
-            
+
+            d.department,
+            d.specialization,
+
+            DATE_FORMAT(
+                a.appointment_date,
+                '%d-%m-%Y'
+            ) AS appointment_date,
+
+            TIME_FORMAT(
+                a.appointment_time,
+                '%h:%i %p'
+            ) AS appointment_time,
+
+            t.token_number,
+            t.status AS token_status,
+
+            a.status AS appointment_status,
+
+            mr.diagnosis,
+            mr.prescription,
+            mr.treatment,
+
+            CASE
+                WHEN mr.record_id IS NOT NULL THEN 1
+                ELSE 0
+            END AS record_exists
+
+        FROM appointments a
+
+        JOIN patients p
+            ON a.patient_id = p.patient_id
+
+        JOIN doctors d
+            ON a.doctor_id = d.doctor_id
+
+        JOIN users du
+            ON d.user_id = du.user_id
+
+        LEFT JOIN tokens t
+            ON a.appointment_id = t.appointment_id
+
+        LEFT JOIN medical_records mr
+            ON mr.patient_id = p.patient_id
+            AND mr.doctor_id = d.doctor_id
+
+        WHERE a.appointment_id = %s
+          AND p.user_id = %s
+
+        ORDER BY mr.record_id DESC
+
+        LIMIT 1
+    """, (
+        appointment_id,
+        session["user_id"]
+    ))
+
+    appointment = cursor.fetchone()
+
+    if not appointment:
+
+        cursor.close()
+        db.close()
+
+        return redirect("/tracking")
+
+    auto_cancel_missed_appointments(cursor)
+    db.commit()
+
+    cursor.execute("""
+        SELECT
+            a.appointment_id,
+            a.doctor_id,
+            a.appointment_date AS actual_date,
+            du.name AS doctor_name,
+
             d.department,
             d.specialization,
 
@@ -2502,6 +2618,10 @@ def tracking_details(appointment_id):
     elif patient_status == "completed":
 
         status_text = "Consultation Completed"
+
+    elif patient_status == "cancelled":
+
+        status_text = "Cancelled"
 
     else:
 

@@ -234,7 +234,15 @@ body {
 
     color: #15803d;
 }
+.status-cancelled {
 
+    background: #ffe9e9;
+
+    color: #c53030;
+
+    border: 1px solid #fecaca;
+
+}
 .queue {
 
     margin-top: 28px;
@@ -306,6 +314,14 @@ body {
     border-color: #94a3b8;
 
     color: #64748b;
+}
+.queue-cancelled {
+
+    background: #fee2e2;
+
+    border-color: #dc2626;
+
+    color: #dc2626;
 }
 
 .queue-label {
@@ -542,14 +558,23 @@ body {
 
         {% elif status_text == "Consultation Completed" %}
 
-            <div class="status status-completed">
+    <div class="status status-completed">
 
-                ✓ Consultation Completed
+        ✓ Consultation Completed
 
-            </div>
+    </div>
 
 
-        {% else %}
+    {% elif status_text == "Cancelled" %}
+
+        <div class="status status-cancelled">
+
+            🔴 Appointment Cancelled — Your scheduled time has expired.
+
+        </div>
+
+
+    {% else %}
 
             <div class="status status-waiting">
 
@@ -560,48 +585,53 @@ body {
         {% endif %}
 
 
-        <div class="queue">
+                <div class="queue">
 
             <h3>
                 Queue Progress
             </h3>
 
-
             <div class="queue-list">
+
+                {% set shown_tokens = [] %}
 
                 {% for item in queue_data %}
 
-                    {% if item.token_number == appointment.token_number %}
+                    {% if item.token_number not in shown_tokens %}
 
-                        <div class="queue-item queue-you">
+                        {% set _ = shown_tokens.append(item.token_number) %}
 
-                            {{ item.token_number }}
+                        {% if item.status == "cancelled" %}
 
-                        </div>
+                            <div class="queue-item queue-cancelled">
+                                {{ item.token_number }}
+                            </div>
 
-                    {% elif item.status == "completed" %}
+                        {% elif item.token_number == appointment.token_number %}
 
-                        <div class="queue-item queue-completed">
+                            <div class="queue-item queue-you">
+                                {{ item.token_number }}
+                            </div>
 
-                            ✓
+                        {% elif item.status == "completed" %}
 
-                        </div>
+                            <div class="queue-item queue-completed">
+                                ✓
+                            </div>
 
-                    {% elif item.status == "in_consultation" %}
+                        {% elif item.status == "in_consultation" %}
 
-                        <div class="queue-item queue-serving">
+                            <div class="queue-item queue-serving">
+                                {{ item.token_number }}
+                            </div>
 
-                            {{ item.token_number }}
+                        {% else %}
 
-                        </div>
+                            <div class="queue-item">
+                                {{ item.token_number }}
+                            </div>
 
-                    {% else %}
-
-                        <div class="queue-item">
-
-                            {{ item.token_number }}
-
-                        </div>
+                        {% endif %}
 
                     {% endif %}
 
@@ -609,16 +639,18 @@ body {
 
             </div>
 
-
             <div class="queue-label">
 
-                Blue = Now Serving &nbsp; | &nbsp;
-                Green = Your Token &nbsp; | &nbsp;
-                Grey = Completed
+                🔴 Cancelled &nbsp; | &nbsp;
+                🔵 Now Serving &nbsp; | &nbsp;
+                🟢 Your Token &nbsp; | &nbsp;
+                ✓ Completed &nbsp; | &nbsp;
+                Waiting
 
             </div>
 
-        </div>
+
+                </div>
 
 
         <div class="details">

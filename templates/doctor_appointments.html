@@ -304,6 +304,16 @@ td {
     background: #ffe9e9;
     color: #c53030;
 }
+.action-cancelled {
+    display: inline-block;
+    padding: 7px 12px;
+    border-radius: 9px;
+    background: #fff7ed;
+    color: #c2410c;
+    font-size: 12px;
+    font-weight: bold;
+    border: 1px solid #fed7aa;
+}
 
 /* CONSULTATION BUTTON */
 
@@ -615,17 +625,23 @@ td {
 
 {% if appointment.token_status in ["waiting", "in_consultation"] %}
 
-<a
-    href="/consultation/{{ appointment.appointment_id }}"
-    class="consult-btn"
->
-    🩺 Consultation
-</a>
+<a 
+    href="/consultation/{{ appointment.appointment_id }}" 
+    class="consult-btn" 
+> 
+    🩺 Consultation 
+</a> 
 
 {% elif appointment.token_status == "completed" %}
 
-<span style="color:#16824b;font-weight:bold;">
-    ✓ Completed
+<span style="color:#16824b;font-weight:bold;"> 
+    ✓ Completed 
+</span>
+
+{% elif appointment.token_status == "cancelled" %}
+
+<span class="action-cancelled">
+    ⏰ Time Expired
 </span>
 
 {% else %}

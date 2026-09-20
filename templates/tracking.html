@@ -500,6 +500,14 @@ body {
     color: white;
 
 }
+.token-cancelled {
+
+    background: #dc2626;
+
+    color: white;
+
+}
+
 
 
 /* =========================================================
@@ -568,6 +576,11 @@ body {
     color: #7c3aed;
 
 }
+.token-status-cancelled {
+
+    color: #dc2626;
+
+}
 
 
 /* =========================================================
@@ -600,6 +613,17 @@ body {
 
 }
 
+.line-cancelled {
+
+    background: #dc2626;
+
+}
+
+.line-waiting {
+
+    background: #f59e0b;
+
+}
 
 /* =========================================================
    LEGEND
@@ -668,6 +692,11 @@ body {
 .dot-waiting {
 
     background: #f59e0b;
+
+}
+.dot-cancelled {
+
+    background: #dc2626;
 
 }
 
@@ -845,6 +874,15 @@ body {
     color: #64748b;
 
     border: 1px solid #e2e8f0;
+
+}
+.status-cancelled {
+
+    background: #ffe9e9;
+
+    color: #c53030;
+
+    border: 1px solid #fecaca;
 
 }
 
@@ -1206,206 +1244,145 @@ body {
 
 {% for item in appointment.queue_data %}
 
-{% set is_you =
-    item.token_number ==
-    appointment.token_number
-%}
-
+{% set is_you = item.token_number == appointment.token_number %}
 
 <div class="token-node-wrapper">
 
+    <div class="token-node-area">
 
-<div class="token-node-area">
+        {% if item.status == "cancelled" %}
 
+            <div class="token-circle token-cancelled">
+                {{ item.token_number }}
+            </div>
 
-{% if is_you and item.status == "serving" %}
+            <div class="token-label">
+                Token {{ item.token_number }}
+            </div>
 
-<div class="
-    token-circle
-    token-you-serving
-">
-
-    {{ item.token_number }}
-
-</div>
-
-
-{% elif is_you
-      and item.status == "completed" %}
-
-<div class="
-    token-circle
-    token-you-completed
-">
-
-    {{ item.token_number }}
-
-</div>
+            <div class="token-status token-status-cancelled">
+                CANCELLED
+            </div>
 
 
-{% elif is_you %}
+        {% elif is_you and item.status == "serving" %}
 
-<div class="
-    token-circle
-    token-you
-">
+            <div class="token-circle token-you-serving">
+                {{ item.token_number }}
+            </div>
 
-    {{ item.token_number }}
+            <div class="token-label">
+                Token {{ item.token_number }}
+            </div>
 
-</div>
-
-
-{% elif item.status == "serving" %}
-
-<div class="
-    token-circle
-    token-serving
-">
-
-    {{ item.token_number }}
-
-</div>
+            <div class="token-status token-status-serving">
+                YOUR TOKEN • IN CONSULTATION
+            </div>
 
 
-{% elif item.status == "completed" %}
+        {% elif is_you and item.status == "completed" %}
 
-<div class="
-    token-circle
-    token-completed
-">
+            <div class="token-circle token-you-completed">
+                ✓
+            </div>
 
-    ✓
+            <div class="token-label">
+                Token {{ item.token_number }}
+            </div>
 
-</div>
+            <div class="token-status token-status-completed">
+                YOUR TOKEN • COMPLETED
+            </div>
 
 
-{% else %}
+        {% elif is_you %}
 
-<div class="
-    token-circle
-    token-waiting
-">
+            <div class="token-circle token-you">
+                {{ item.token_number }}
+            </div>
 
-    {{ item.token_number }}
+            <div class="token-label">
+                Token {{ item.token_number }}
+            </div>
 
-</div>
+            <div class="token-status token-status-you">
+                YOUR TOKEN
+            </div>
+
+
+        {% elif item.status == "serving" %}
+
+            <div class="token-circle token-serving">
+                {{ item.token_number }}
+            </div>
+
+            <div class="token-label">
+                Token {{ item.token_number }}
+            </div>
+
+            <div class="token-status token-status-serving">
+                IN CONSULTATION
+            </div>
+
+
+        {% elif item.status == "completed" %}
+
+            <div class="token-circle token-completed">
+                ✓
+            </div>
+
+            <div class="token-label">
+                Token {{ item.token_number }}
+            </div>
+
+            <div class="token-status token-status-completed">
+                COMPLETED
+            </div>
+    {% else %}
+
+        <div class="token-circle token-waiting">
+            {{ item.token_number }}
+        </div>
+
+        <div class="token-label">
+            Token {{ item.token_number }}
+        </div>
+
+        <div class="token-status">
+            WAITING
+        </div>
+
+
+        {% endif %}
+
+    </div>
+
+
+    {% if not loop.last %}
+
+    {% if item.status == "completed" %}
+
+        <div class="track-line line-completed"></div>
+
+    {% elif item.status == "serving" %}
+
+        <div class="track-line line-active"></div>
+
+    {% elif item.status == "cancelled" %}
+
+        <div class="track-line line-cancelled"></div>
+
+    {% elif item.status == "waiting" %}
+
+        <div class="track-line line-waiting"></div>
+
+    {% else %}
+
+        <div class="track-line"></div>
+
+    {% endif %}
 
 {% endif %}
-
-
-
-<div class="token-label">
-
-    Token
-    {{ item.token_number }}
-
-</div>
-
-
-
-{% if is_you and item.status == "completed" %}
-
-<div class="
-    token-status
-    token-status-completed
-">
-
-    YOUR TOKEN • COMPLETED
-
-</div>
-
-
-{% elif is_you and item.status == "serving" %}
-
-<div class="
-    token-status
-    token-status-serving
-">
-
-    YOUR TOKEN • IN CONSULTATION
-
-</div>
-
-
-{% elif is_you %}
-
-<div class="
-    token-status
-    token-status-you
-">
-
-    YOUR TOKEN
-
-</div>
-
-
-{% elif item.status == "serving" %}
-
-<div class="
-    token-status
-    token-status-serving
-">
-
-    IN CONSULTATION
-
-</div>
-
-
-{% elif item.status == "completed" %}
-
-<div class="
-    token-status
-    token-status-completed
-">
-
-    COMPLETED
-
-</div>
-
-
-{% else %}
-
-<div class="token-status">
-
-    WAITING
-
-</div>
-
-{% endif %}
-
-
-</div>
-
-
-
-{% if not loop.last %}
-
-{% if item.status == "completed" %}
-
-<div class="
-    track-line
-    line-completed
-">
-</div>
-
-{% elif item.status == "serving" %}
-
-<div class="
-    track-line
-    line-active
-">
-</div>
-
-{% else %}
-
-<div class="track-line">
-</div>
-
-{% endif %}
-
-{% endif %}
-
-
 </div>
 
 {% endfor %}
@@ -1470,6 +1447,17 @@ body {
     Waiting
 
 </div>
+<div class="legend-item">
+
+    <span class="
+        legend-dot
+        dot-cancelled
+    "></span>
+
+    Cancelled
+
+</div>
+
 
 
 </div>
@@ -1497,11 +1485,14 @@ body {
 
 
 <div class="summary-message">
+{% if appointment.token_status == "cancelled" %}
 
+    Appointment Cancelled
 
-{% if appointment.token_status == "completed" %}
+{% elif appointment.token_status == "completed" %}
 
     Consultation Completed
+
 
 {% elif appointment.token_status == "serving" %}
 
@@ -1542,12 +1533,16 @@ body {
 </div>
 
 
-<div class="summary-token">
+<div class="
+    summary-token
+    {% if appointment.token_status == 'cancelled' %}
+        token-cancelled
+    {% endif %}
+">
 
     {{ appointment.token_number or '—' }}
 
 </div>
-
 
 </div>
 
@@ -1559,8 +1554,21 @@ body {
 
 {% if appointment.is_today %}
 
+{% if appointment.token_status == "cancelled" %}
 
-{% if appointment.token_status == "completed" %}
+<div class="
+    status-box
+    status-cancelled
+">
+
+    🔴 Appointment Cancelled.
+
+    <br><br>
+
+    Your scheduled time has expired.
+</div>
+
+{% elif appointment.token_status == "completed" %}
 
 <div class="
     status-box
@@ -1570,7 +1578,6 @@ body {
     ✓ Your consultation has been completed.
 
 </div>
-
 
 {% elif appointment.token_status == "serving" %}
 
@@ -1585,7 +1592,6 @@ body {
 
 </div>
 
-
 {% elif appointment.patients_ahead == 0
       and appointment.now_serving %}
 
@@ -1598,7 +1604,6 @@ body {
 
 </div>
 
-
 {% elif appointment.now_serving %}
 
 <div class="
@@ -1607,7 +1612,6 @@ body {
 ">
 
     ⏳
-
     {{ appointment.patients_ahead }}
     patient{% if appointment.patients_ahead != 1 %}s{% endif %}
     ahead of you.
@@ -1618,7 +1622,6 @@ body {
     Token {{ appointment.now_serving }}
 
 </div>
-
 
 {% else %}
 
@@ -1633,10 +1636,7 @@ body {
 
 {% endif %}
 
-
-
 {% elif appointment.is_upcoming %}
-
 
 <div class="
     status-box
