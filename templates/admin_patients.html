@@ -3,167 +3,870 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CareTrack - Patients</title>
 
     <style>
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f8fc;
+        * {
+            box-sizing: border-box;
         }
 
-        .header {
-            background: #0d6efd;
-            color: white;
-            padding: 20px;
-            text-align: center;
+        /* ================= BODY ================= */
+
+        body {
+            margin: 0;
+            background: #ffffff;
         }
+
+
+        /* ================= HEADER ================= */
+
+        .header {
+            height: 112px;
+
+            padding: 0 35px;
+
+            background: linear-gradient(90deg, #123c9c, #1769e0);
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 6px 20px rgba(18, 60, 156, 0.20);
+        }
+
+
+        /* ================= LEFT BRAND ================= */
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .logo-circle {
+            width: 50px;
+
+            height: 50px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            box-shadow:
+                0 4px 12px rgba(0, 50, 120, 0.15);
+
+            overflow: hidden;
+        }
+
+
+        .logo-circle svg {
+            width: 32px;
+
+            height: 32px;
+        }
+
+
+        .brand span {
+            font-size: 29px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.3px;
+
+            color: white;
+        }
+
+
+        /* ================= RIGHT HEADER ================= */
+
+        .header-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: white;
+
+            font-size: 14px;
+
+            opacity: 0.95;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .user-icon {
+            width: 34px;
+
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+
+        /* ================= MAIN CONTAINER ================= */
 
         .container {
             width: 90%;
-            max-width: 1100px;
-            margin: 30px auto;
+
+            max-width: 1120px;
+
+            margin: 0 auto;
+
+            padding: 28px 0 45px;
+
+            position: relative;
+
+            z-index: 2;
         }
 
-        .filter-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 30px;
+
+        /* ================= PAGE TITLE ================= */
+
+        .page-title {
+            text-align: center;
+
+            margin-top: 8px;
+
+            margin-bottom: 20px;
+
+            position: relative;
+
+            z-index: 3;
         }
+
+
+        .page-icon {
+            width: 58px;
+
+            height: 58px;
+
+            margin: 0 auto 8px;
+
+            border-radius: 50%;
+
+            background: #ffffff;
+
+            border: 1px solid #d5eaf7;
+
+            box-shadow:
+                0 4px 14px rgba(43, 126, 180, 0.16);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 29px;
+        }
+
+
+        .page-title h1 {
+            margin: 0;
+
+            color: #15548a;
+
+            font-size: 36px;
+
+            font-weight: 700;
+        }
+
+
+        .page-title p {
+            margin: 7px 0 18px;
+
+            color: #54758b;
+
+            font-size: 16px;
+        }
+
+
+        /* ================= SEARCH ================= */
+
+        .filter-box {
+            background: #ffffff;
+
+            padding: 19px 24px;
+
+            border-radius: 13px;
+
+            box-shadow:
+                0 5px 18px rgba(50, 110, 145, 0.12);
+
+            margin-bottom: 19px;
+
+            border: 1px solid #d4e8f3;
+        }
+
 
         .filter-box label {
             font-weight: bold;
+
             display: block;
+
             margin-bottom: 8px;
+
+            color: #275b82;
         }
+
 
         select {
             width: 70%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+
+            padding: 11px 14px;
+
+            border: 1px solid #c7dfea;
+
+            border-radius: 8px;
+
             font-size: 15px;
+
+            color: #49687d;
+
+            background: #ffffff;
         }
+
 
         .search-button {
-            padding: 12px 22px;
-            background: #0d6efd;
+            padding: 11px 23px;
+
+            background: #168bd0;
+
             color: white;
+
             border: none;
-            border-radius: 6px;
+
+            border-radius: 8px;
+
             cursor: pointer;
+
             margin-left: 8px;
+
             font-size: 15px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 4px 9px rgba(22,139,208,0.18);
         }
 
-        .search-button:hover {
-            background: #0b5ed7;
-        }
+
+        /* ================= PATIENT HEADING ================= */
 
         h2 {
-            color: #333;
+            color: #205b88;
+
+            font-size: 25px;
+
+            margin: 15px 0 13px;
         }
+
+
+        /* ================= PATIENT GRID ================= */
 
         .patient-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px 20px;
         }
+
+
+        /* ================= PATIENT CARD ================= */
 
         .patient-card {
-            background: white;
-            padding: 22px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: relative;
+
+            height: 198px;
+
+            padding: 15px 18px;
+
+            border-radius: 13px;
+
+            overflow: hidden;
+
+            display: grid;
+
+            grid-template-columns: 72px 1fr;
+
+            grid-template-rows:
+                auto auto auto auto auto;
+
+            column-gap: 14px;
+
+            box-shadow:
+                0 5px 15px rgba(50, 100, 130, 0.12);
+
+            border: 1px solid rgba(255,255,255,0.9);
         }
+
+
+        /* ================= SOFT CARD CURVE ================= */
+
+        .patient-card::after {
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+
+            height: 150px;
+
+            right: -62px;
+
+            bottom: -70px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.38);
+        }
+
+
+        /* ================= CARD COLOURS ================= */
+
+        .patient-card:nth-child(6n+1) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #eaf7ff,
+                    #dff2fb
+                );
+
+            border-left: 5px solid #2798d4;
+        }
+
+
+        .patient-card:nth-child(6n+2) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #edfbf6,
+                    #ddf5eb
+                );
+
+            border-left: 5px solid #27bd91;
+        }
+
+
+        .patient-card:nth-child(6n+3) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f6f0ff,
+                    #ebe2fb
+                );
+
+            border-left: 5px solid #8557db;
+        }
+
+
+        .patient-card:nth-child(6n+4) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff7ed,
+                    #ffead7
+                );
+
+            border-left: 5px solid #f3a14f;
+        }
+
+
+        .patient-card:nth-child(6n+5) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #fff0f7,
+                    #fbdfea
+                );
+
+            border-left: 5px solid #e65a9a;
+        }
+
+
+        .patient-card:nth-child(6n+6) {
+            background:
+                linear-gradient(
+                    135deg,
+                    #edfbff,
+                    #d9f2f7
+                );
+
+            border-left: 5px solid #20a4bb;
+        }
+
+
+        /* ================= PATIENT ICON ================= */
 
         .patient-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
+            grid-column: 1;
+
+            grid-row: 1 / span 5;
+
+            width: 58px;
+
+            height: 58px;
+
+            margin-top: 3px;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 30px;
+
+            position: relative;
+
+            z-index: 2;
         }
+
+
+        .patient-card:nth-child(6n+1) .patient-icon {
+            background: #d2edfc;
+
+            color: #1483c8;
+        }
+
+
+        .patient-card:nth-child(6n+2) .patient-icon {
+            background: #cdf2e2;
+
+            color: #11996d;
+        }
+
+
+        .patient-card:nth-child(6n+3) .patient-icon {
+            background: #e1d5f8;
+
+            color: #6738b8;
+        }
+
+
+        .patient-card:nth-child(6n+4) .patient-icon {
+            background: #ffe0bd;
+
+            color: #ed8b2d;
+        }
+
+
+        .patient-card:nth-child(6n+5) .patient-icon {
+            background: #f7d0e2;
+
+            color: #d6387c;
+        }
+
+
+        .patient-card:nth-child(6n+6) .patient-icon {
+            background: #cdebf2;
+
+            color: #168ca4;
+        }
+
+
+        /* ================= PATIENT NAME ================= */
 
         .patient-card h3 {
-            color: #0d6efd;
-            margin: 8px 0 15px;
+            grid-column: 2;
+
+            grid-row: 1;
+
+            margin: 7px 0 8px;
+
+            color: #2373aa;
+
+            font-size: 18px;
+
+            position: relative;
+
+            z-index: 2;
         }
+
+
+        .patient-card:nth-child(6n+2) h3 {
+            color: #19805f;
+        }
+
+
+        .patient-card:nth-child(6n+3) h3 {
+            color: #683ab5;
+        }
+
+
+        .patient-card:nth-child(6n+4) h3 {
+            color: #b66a27;
+        }
+
+
+        .patient-card:nth-child(6n+5) h3 {
+            color: #b53b70;
+        }
+
+
+        .patient-card:nth-child(6n+6) h3 {
+            color: #197e95;
+        }
+
+
+        /* ================= PATIENT DETAILS ================= */
 
         .patient-card p {
-            margin: 8px 0;
-            color: #555;
+            grid-column: 2;
+
+            margin: 3px 0;
+
+            color: #4d7087;
+
+            font-size: 13px;
+
+            position: relative;
+
+            z-index: 2;
         }
+
+
+        .patient-card p strong {
+            color: #315c74;
+        }
+
+
+        /* ================= VIEW DETAILS ================= */
 
         .details-button {
+            grid-column: 2;
+
             display: inline-block;
-            margin-top: 15px;
-            padding: 10px 16px;
-            background: #0d6efd;
+
+            width: fit-content;
+
+            margin-top: 5px;
+
+            padding: 9px 18px;
+
+            background: #168bd0;
+
             color: white;
+
             text-decoration: none;
-            border-radius: 6px;
+
+            border-radius: 7px;
+
+            font-size: 13px;
+
+            font-weight: 600;
+
+            position: relative;
+
+            z-index: 3;
+
+            box-shadow:
+                0 3px 8px rgba(22,139,208,0.20);
         }
+
 
         .details-button:hover {
-            background: #0b5ed7;
+            background: #117ab7;
         }
+
+
+        /* ================= BACK BUTTON ================= */
 
         .back-button {
-            display: inline-block;
-            margin-top: 30px;
-            padding: 12px 20px;
-            background: #0d6efd;
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            margin-top: 25px;
+
+            padding: 10px 18px;
+
+            background: #2587d8;
+
             color: white;
+
             text-decoration: none;
-            border-radius: 6px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 3px 8px rgba(37, 135, 216, 0.20);
+
+            transition: 0.2s ease;
         }
 
+
+        .back-button::before {
+            content: "←";
+
+            font-size: 18px;
+
+            font-weight: 500;
+        }
+
+
+        .back-button:hover {
+            background: #176fb8;
+
+            transform: translateX(-2px);
+        }
+
+
+        /* ================= NO PATIENTS ================= */
+
         .no-patients {
-            background: white;
+            background: #ffffff;
+
             padding: 20px;
-            border-radius: 10px;
+
+            border-radius: 12px;
+
             text-align: center;
-            color: #666;
+
+            color: #667d8b;
+
+            border: 1px solid #e1edf4;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            .patient-grid {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+                height: 90px;
+
+                padding: 0 20px;
+            }
+
+
+            .brand span {
+                font-size: 24px;
+            }
+
+
+            .logo-circle {
+                width: 44px;
+
+                height: 44px;
+            }
+
+
+            .header-right {
+                display: none;
+            }
+
+
+            .patient-grid {
+                grid-template-columns: 1fr;
+            }
+
+
+            select {
+                width: 100%;
+
+                margin-bottom: 10px;
+            }
+
+
+            .search-button {
+                margin-left: 0;
+            }
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
+
+    <!-- ================= HEADER ================= -->
+
     <div class="header">
-        <h1>CareTrack</h1>
-        <p>Patient Information</p>
+
+        <div class="brand">
+
+            <div class="logo-circle">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <path
+                        d="M32 52
+                           C29 49 14 39 10 29
+                           C6 19 12 12 21 12
+                           C27 12 31 16 32 20
+                           C33 16 37 12 43 12
+                           C52 12 58 19 54 29
+                           C50 39 35 49 32 52Z"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linejoin="round"/>
+
+                    <polyline
+                        points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+                </svg>
+
+            </div>
+
+
+            <span>
+                CareTrack
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            Healthcare Management System
+
+            <span class="user-icon">
+                ♙
+            </span>
+
+        </div>
+
     </div>
 
+
+    <!-- ================= PAGE TITLE ================= -->
+
+    <div class="page-title">
+
+        <div class="page-icon">
+            👥
+        </div>
+
+        <h1>
+            CareTrack
+        </h1>
+
+        <p>
+            Patient Information
+        </p>
+
+    </div>
+
+
+    <!-- ================= MAIN ================= -->
+
     <div class="container">
+
+
+        <!-- ================= SEARCH ================= -->
 
         <div class="filter-box">
 
             <form method="GET" action="/admin_patients">
 
-                <label>Select Patient</label>
+                <label>
+                    Select Patient
+                </label>
 
                 <select name="patient_id">
 
-                    <option value="">Select Patient</option>
+                    <option value="">
+                        Select Patient
+                    </option>
 
                     {% for patient in patient_list %}
 
-                    <option value="{{ patient.patient_id }}"
+                    <option
+                        value="{{ patient.patient_id }}"
                         {% if selected_patient_id|string == patient.patient_id|string %}
                         selected
                         {% endif %}>
+
                         {{ patient.name }}
+
                     </option>
 
                     {% endfor %}
 
                 </select>
 
-                <button type="submit" class="search-button">
+
+                <button
+                    type="submit"
+                    class="search-button">
+
                     Search
+
                 </button>
 
             </form>
@@ -171,7 +874,12 @@
         </div>
 
 
-        <h2>Patient Cards</h2>
+        <!-- ================= PATIENT CARDS ================= -->
+
+        <h2>
+            Patient Cards
+        </h2>
+
 
         {% if patients %}
 
@@ -185,32 +893,42 @@
                     👤
                 </div>
 
-                <h3>{{ patient.name }}</h3>
+
+                <h3>
+                    {{ patient.name }}
+                </h3>
+
 
                 <p>
                     <strong>Email:</strong>
                     {{ patient.email }}
                 </p>
 
+
                 <p>
                     <strong>Phone:</strong>
                     {{ patient.phone }}
                 </p>
+
 
                 <p>
                     <strong>Age:</strong>
                     {{ patient.age }}
                 </p>
 
+
                 <p>
                     <strong>Gender:</strong>
                     {{ patient.gender }}
                 </p>
 
+
                 <a
                     href="/admin_patient_details/{{ patient.patient_id }}"
                     class="details-button">
+
                     View Details
+
                 </a>
 
             </div>
@@ -222,17 +940,26 @@
         {% else %}
 
         <div class="no-patients">
+
             No patients found.
+
         </div>
 
         {% endif %}
 
 
-        <a href="/admin_dashboard" class="back-button">
+        <!-- ================= BACK BUTTON ================= -->
+
+        <a
+            href="/admin_dashboard"
+            class="back-button">
+
             Back to Dashboard
+
         </a>
 
     </div>
+
 
 </body>
 

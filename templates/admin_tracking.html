@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>CareTrack - Token Tracking</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -17,138 +13,286 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: #f3f8fd;
-    color: #1e293b;
+    background: #ffffff;
+    color: #496579;
 }
 
-/* =========================
+/* =========================================
    HEADER
-========================= */
+========================================= */
 
 .header {
-    background: linear-gradient(135deg, #0b5ed7, #164e9c);
-    padding: 28px 55px;
+    height: 112px;
+    padding: 0 35px;
+    background: linear-gradient(90deg, #123c9c, #1769e0);
     color: white;
-    box-shadow: 0 4px 15px rgba(0, 65, 130, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(18, 60, 156, 0.20);
 }
 
-.header h1 {
-    margin: 0;
-    font-size: 29px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+}
+
+.logo-circle {
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 4px 12px rgba(0,50,120,0.15);
+}
+
+.logo-circle svg {
+    width: 44px;
+    height: 44px;
+    display: block;
+}
+
+.brand span {
+    font-size: 30px;
     font-weight: 700;
-    letter-spacing: 0.2px;
+    color: white;
 }
 
-.header p {
-    margin: 7px 0 0;
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: white;
     font-size: 14px;
-    opacity: 0.92;
+    font-weight: 500;
 }
 
-/* =========================
-   MAIN
-========================= */
+.header-logo-circle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.28);
+    box-shadow: 0 4px 12px rgba(0,50,120,0.15);
+}
+
+.header-logo-circle svg {
+    width: 32px;
+    height: 32px;
+}
+.user-icon
+ { 
+    width: 34px;
+     height: 34px;
+      border-radius: 50%;
+       background: rgba(255, 255, 255, 0.10);
+        border: 1px solid rgba(255, 255, 255, 0.25); 
+        display: flex; align-items: center; 
+        justify-content: center;
+         font-size: 19px;
+ }
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
 
 .container {
-    max-width: 1150px;
-    margin: 35px auto;
-    padding: 0 22px;
+    width: 90%;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 30px 0 55px;
 }
 
-/* =========================
+/* =========================================
    BACK BUTTON
-========================= */
+========================================= */
 
 .back-button {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: #0d6efd;
+    background: linear-gradient(90deg, #123c9c, #1769e0);
     color: white;
     text-decoration: none;
-    padding: 11px 19px;
-    border-radius: 9px;
+    padding: 12px 21px;
+    border-radius: 11px;
     font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 22px;
-    box-shadow: 0 4px 10px rgba(13, 110, 253, 0.20);
+    font-weight: 700;
+    margin-bottom: 24px;
+    box-shadow: 0 7px 16px rgba(18, 60, 156, 0.20);
     transition: 0.2s;
 }
 
 .back-button:hover {
-    background: #0958c7;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(18, 60, 156, 0.25);
 }
 
-/* =========================
-   MAIN CARD
-========================= */
+/* =========================================
+   GENERAL CARD
+========================================= */
 
 .card {
-    background: white;
-    border-radius: 16px;
+    background: #ffffff;
+    border-radius: 20px;
     padding: 27px;
     margin-bottom: 24px;
-    border: 1px solid #dce8f5;
-    box-shadow: 0 7px 25px rgba(30, 90, 140, 0.08);
+    border: 1px solid #d5e7fa;
+    box-shadow: 0 10px 28px rgba(30, 91, 160, 0.09);
+    position: relative;
+    overflow: hidden;
 }
 
+.card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #123c9c, #1769e0, #36a4f5);
+}
+
+/* =========================================
+   SECTION TITLE
+========================================= */
+
 .section-title {
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 700;
-    color: #123e70;
+    color: #174b9c;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title::before {
+    content: "✦";
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #1769e0;
+    background: #e7f3ff;
+    border: 1px solid #cde6fa;
+    font-size: 17px;
 }
 
 .section-subtitle {
-    font-size: 17px;
+    font-size: 20px;
     font-weight: 700;
-    color: #1769aa;
-    margin: 26px 0 15px;
+    color: #174b9c;
+    margin: 28px 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* =========================
-   SELECT DOCTOR
-========================= */
+.section-subtitle::before {
+    content: "✦";
+    width: 31px;
+    height: 31px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #1769e0;
+    background: #eaf5ff;
+    border: 1px solid #cfe6fb;
+    font-size: 15px;
+}
+
+/* =========================================
+   LABEL
+========================================= */
 
 label {
     display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: #475569;
+    font-size: 12px;
+    font-weight: 700;
+    color: #3970b0;
     margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
+
+/* =========================================
+   SELECT / DATE
+========================================= */
 
 select,
 input[type="date"] {
     width: 100%;
-    height: 49px;
-    border: 1px solid #cbd9e8;
-    border-radius: 10px;
-    padding: 0 14px;
+    height: 52px;
+    border: 1px solid #c9e1f5;
+    border-radius: 12px;
+    padding: 0 15px;
     font-size: 15px;
-    color: #334155;
-    background: #fbfdff;
+    color: #315f91;
+    background: #f5faff;
     outline: none;
     transition: 0.2s;
+    cursor: pointer;
 }
 
 select:focus,
 input[type="date"]:focus {
-    border-color: #0d6efd;
-    box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.09);
+    border-color: #1769e0;
+    box-shadow: 0 0 0 4px rgba(23, 105, 224, 0.11);
 }
 
-/* =========================
-   BEAUTIFUL DOCTOR INFORMATION
-========================= */
+/* =========================================
+   SELECT DOCTOR CARD
+========================================= */
+
+.card:first-of-type {
+    background: linear-gradient(135deg, #ffffff, #f7fbff);
+    border: 1px solid #cfe5f8;
+}
+
+.card:first-of-type form {
+    background: #eef7ff;
+    border: 1px solid #d4eafb;
+    border-radius: 15px;
+    padding: 18px;
+}
+
+/* =========================================
+   DOCTOR PROFILE
+========================================= */
 
 .doctor-profile-card {
-    background: linear-gradient(135deg, #f7fbff, #eef6ff);
-    border: 1px solid #d4e5f7;
+    background: linear-gradient(135deg, #ffffff, #f5faff);
+    border: 1px solid #cfe3f7;
     border-radius: 18px;
     padding: 22px;
-    box-shadow: 0 8px 25px rgba(30, 90, 140, 0.08);
+    box-shadow: 0 8px 22px rgba(40, 100, 160, 0.08);
+    position: relative;
+    overflow: hidden;
+}
+
+.doctor-profile-card::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: rgba(38, 146, 235, 0.06);
+    right: -60px;
+    top: -60px;
 }
 
 .doctor-profile-header {
@@ -157,45 +301,54 @@ input[type="date"]:focus {
     gap: 15px;
     padding-bottom: 18px;
     margin-bottom: 18px;
-    border-bottom: 1px solid #dbe8f5;
+    border-bottom: 1px solid #dceaf7;
+    position: relative;
+    z-index: 2;
 }
 
 .doctor-icon {
-    width: 54px;
-    height: 54px;
-    border-radius: 15px;
-    background: linear-gradient(135deg, #0d6efd, #4b91f1);
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #e5f3ff, #d8ebff);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 28px;
-    box-shadow: 0 6px 15px rgba(13, 110, 253, 0.20);
+    border: 1px solid #c8e1f8;
+    box-shadow: 0 6px 14px rgba(40, 120, 190, 0.12);
     flex-shrink: 0;
 }
 
 .doctor-profile-name {
-    font-size: 21px;
+    font-size: 22px;
     font-weight: 700;
-    color: #123e70;
+    color: #174b9c;
     margin: 0;
 }
 
 .doctor-profile-subtitle {
     font-size: 13px;
-    color: #718096;
+    color: #6d8298;
     margin-top: 5px;
 }
+
+/* =========================================
+   DOCTOR DETAILS GRID
+========================================= */
 
 .doctor-info-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
+    position: relative;
+    z-index: 2;
 }
 
 .info-box {
-    background: white;
-    border: 1px solid #dce8f5;
-    border-radius: 13px;
+    background: #f7fbff;
+    border: 1px solid #d4e6f6;
+    border-radius: 14px;
     padding: 15px 17px;
     display: flex;
     align-items: center;
@@ -205,19 +358,45 @@ input[type="date"]:focus {
 
 .info-box:hover {
     transform: translateY(-2px);
-    box-shadow: 0 7px 17px rgba(30, 90, 140, 0.09);
+    box-shadow: 0 8px 18px rgba(30, 105, 170, 0.10);
+}
+
+.info-box:nth-child(1) {
+    background: linear-gradient(135deg, #eef8ff, #f8fcff);
+    border-color: #cfe6fa;
+}
+
+.info-box:nth-child(2) {
+    background: linear-gradient(135deg, #effbfa, #f8ffff);
+    border-color: #ccebe8;
+}
+
+.info-box:nth-child(3) {
+    background: linear-gradient(135deg, #f3f0ff, #fbf9ff);
+    border-color: #ddd5fa;
 }
 
 .info-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 11px;
-    background: #eaf3ff;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
     flex-shrink: 0;
+}
+
+.info-box:nth-child(1) .info-icon {
+    background: #dceeff;
+}
+
+.info-box:nth-child(2) .info-icon {
+    background: #dff7f3;
+}
+
+.info-box:nth-child(3) .info-icon {
+    background: #e8e1ff;
 }
 
 .info-content {
@@ -226,24 +405,24 @@ input[type="date"]:focus {
 
 .info-label {
     font-size: 11px;
-    color: #718096;
+    color: #6d88a2;
     margin-bottom: 4px;
 }
 
 .info-value {
     font-size: 15px;
     font-weight: 700;
-    color: #123e70;
+    color: #24588e;
 }
 
-/* =========================
+/* =========================================
    AVAILABILITY
-========================= */
+========================================= */
 
 .availability-container {
-    background: #f8fbff;
-    border: 1px solid #dceaf7;
-    border-radius: 14px;
+    background: linear-gradient(135deg, #eef8ff, #f8fcff);
+    border: 1px solid #d2e8fa;
+    border-radius: 16px;
     padding: 15px;
 }
 
@@ -251,14 +430,22 @@ input[type="date"]:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: white;
-    border: 1px solid #dce8f5;
-    border-left: 5px solid #0d6efd;
-    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #d9e9f7;
+    border-left: 5px solid #1769e0;
+    border-radius: 13px;
     padding: 17px 20px;
     margin-bottom: 11px;
-    box-shadow: 0 4px 12px rgba(30, 90, 140, 0.06);
+    box-shadow: 0 5px 14px rgba(40, 100, 150, 0.07);
     transition: 0.2s;
+}
+
+.availability-card:nth-child(2n) {
+    border-left-color: #26b99a;
+}
+
+.availability-card:nth-child(3n) {
+    border-left-color: #7856e8;
 }
 
 .availability-card:last-child {
@@ -266,8 +453,8 @@ input[type="date"]:focus {
 }
 
 .availability-card:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 16px rgba(30, 90, 140, 0.10);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(40, 100, 150, 0.11);
 }
 
 .availability-left {
@@ -277,10 +464,11 @@ input[type="date"]:focus {
 }
 
 .calendar-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: 9px;
-    background: #eaf3ff;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: #e3f2ff;
+    border: 1px solid #cfe7fa;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -290,39 +478,43 @@ input[type="date"]:focus {
 .availability-day {
     font-size: 16px;
     font-weight: 700;
-    color: #174d82;
+    color: #24578e;
 }
 
 .availability-date {
     font-size: 13px;
-    color: #718096;
+    color: #7890a6;
     margin-top: 3px;
 }
 
 .availability-time {
-    background: #eef7ff;
-    color: #0864c7;
+    background: linear-gradient(135deg, #edf6ff, #e5f1ff);
+    color: #2464a4;
     font-weight: 700;
     font-size: 14px;
-    padding: 9px 13px;
-    border-radius: 8px;
+    padding: 9px 14px;
+    border-radius: 9px;
     white-space: nowrap;
+    border: 1px solid #cfe4f8;
 }
 
-/* =========================
-   SELECT DATE
-========================= */
+/* =========================================
+   DATE BOX / TOKEN TRACKING
+========================================= */
 
 .date-box {
-    background: #f8fbff;
-    border: 1px solid #dceaf7;
-    border-radius: 13px;
-    padding: 18px;
+    background: linear-gradient(135deg, #f2f9ff, #ffffff);
+    border: 1px solid #cfe5f8;
+    border-radius: 15px;
+    padding: 19px;
+    box-shadow: 0 6px 16px rgba(40, 105, 160, 0.07);
 }
 
-/* =========================
-   TOKEN TRACKING
-========================= */
+.date-box form {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 3px;
+}
 
 .token-header {
     display: flex;
@@ -334,55 +526,139 @@ input[type="date"]:focus {
 .token-title {
     font-size: 21px;
     font-weight: 700;
-    color: #123e70;
+    color: #174b9c;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.token-title::before {
+    content: "🎟️";
+    width: 38px;
+    height: 38px;
+    border-radius: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e5f2ff;
+    border: 1px solid #cde5fa;
+    font-size: 19px;
 }
 
 .date-badge {
-    background: #eaf3ff;
-    color: #0757b8;
-    padding: 8px 13px;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #e5f3ff, #f0f8ff);
+    color: #1769c4;
+    padding: 8px 14px;
+    border-radius: 9px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
+    border: 1px solid #cde4f8;
 }
 
-/* =========================
+/* =========================================
    TABLE
-========================= */
+========================================= */
 
 .table-wrapper {
     overflow-x: auto;
-    border: 1px solid #dce8f5;
-    border-radius: 12px;
+    border: 1px solid #cfe4f6;
+    border-radius: 15px;
+    background: white;
+    box-shadow: 0 6px 18px rgba(30, 100, 160, 0.07);
 }
 
 table {
     width: 100%;
-    border-collapse: collapse;
-    background: white;
+    border-collapse: separate;
+    border-spacing: 0 7px;
+    background: #f8fcff;
+    padding: 8px;
 }
 
+/* TABLE HEADER */
+
 th {
-    background: #edf5fd;
-    color: #174d82;
-    padding: 14px 16px;
+    background: linear-gradient(90deg, #dceeff, #eaf6ff);
+    color: #14559c;
+    padding: 15px 16px;
     text-align: left;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 12px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    border-top: 1px solid #c9e4f8;
+    border-bottom: 1px solid #c9e4f8;
 }
+
+th:first-child {
+    border-radius: 11px 0 0 11px;
+}
+
+th:last-child {
+    border-radius: 0 11px 11px 0;
+}
+
+/* TABLE DATA */
 
 td {
     padding: 15px 16px;
-    border-top: 1px solid #e7eef6;
     font-size: 14px;
-    color: #334155;
+    color: #496b89;
+    background: #ffffff;
+    border-top: 1px solid #dcecf8;
+    border-bottom: 1px solid #dcecf8;
 }
 
-.token-number {
-    font-size: 16px;
-    font-weight: 800;
-    color: #0757b8;
+tbody tr td:first-child {
+    border-left: 4px solid #258ce8;
+    border-radius: 11px 0 0 11px;
+    font-weight: 700;
+    color: #23588e;
 }
+
+tbody tr:nth-child(2n) td:first-child {
+    border-left-color: #27bd94;
+}
+
+tbody tr:nth-child(3n) td:first-child {
+    border-left-color: #7956e8;
+}
+
+tbody tr:nth-child(4n) td:first-child {
+    border-left-color: #f0a23a;
+}
+
+tbody tr td:last-child {
+    border-right: 1px solid #dcecf8;
+    border-radius: 0 11px 11px 0;
+}
+
+tbody tr:hover td {
+    background: #f1f8ff;
+    transform: scale(1.002);
+}
+
+/* =========================================
+   TOKEN NUMBER
+========================================= */
+
+.token-number {
+    font-size: 17px;
+    font-weight: 800;
+    color: #1769c4;
+}
+
+tbody tr:nth-child(2n) .token-number {
+    color: #159a76;
+}
+
+tbody tr:nth-child(3n) .token-number {
+    color: #7451dc;
+}
+
+/* =========================================
+   STATUS
+========================================= */
 
 .status {
     display: inline-block;
@@ -390,63 +666,75 @@ td {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 700;
+    white-space: nowrap;
 }
 
 .waiting {
-    background: #fff4e8;
-    color: #c45a00;
+    background: #fff1d9;
+    color: #c47720;
+    border: 1px solid #f7d9a9;
 }
 
 .in_consultation {
-    background: #e8f8f1;
-    color: #08784e;
+    background: #dcf8ee;
+    color: #21866b;
+    border: 1px solid #bdebdc;
 }
 
 .completed {
-    background: #eaf3ff;
-    color: #1764b0;
+    background: #e2f1ff;
+    color: #3476aa;
+    border: 1px solid #c9e4f8;
 }
 
 .cancelled {
-    background: #fff0f0;
-    color: #c62828;
+    background: #ffe7ee;
+    color: #c65376;
+    border: 1px solid #facbd9;
 }
 
 .unknown {
-    background: #f1f5f9;
-    color: #64748b;
+    background: #f1f4f7;
+    color: #718096;
+    border: 1px solid #dce2e8;
 }
 
-/* =========================
+/* =========================================
    EMPTY
-========================= */
+========================================= */
 
 .empty {
     text-align: center;
-    padding: 30px 20px;
-    color: #718096;
-    background: #f8fbff;
-    border: 1px dashed #cbd9e8;
-    border-radius: 12px;
+    padding: 32px 20px;
+    color: #70869b;
+    background: linear-gradient(135deg, #f4faff, #fbfdff);
+    border: 1px dashed #bdd9ee;
+    border-radius: 13px;
 }
 
-/* =========================
+/* =========================================
    RESPONSIVE
-========================= */
+========================================= */
 
 @media (max-width: 700px) {
 
     .header {
-        padding: 23px 22px;
+        height: auto;
+        min-height: 90px;
+        padding: 16px 20px;
     }
 
-    .header h1 {
+    .brand span {
         font-size: 24px;
     }
 
+    .header-right {
+        display: none;
+    }
+
     .container {
-        margin-top: 25px;
-        padding: 0 14px;
+        width: 94%;
+        padding-top: 25px;
     }
 
     .card {
@@ -472,44 +760,79 @@ td {
         gap: 10px;
         flex-direction: column;
     }
+
+    th,
+    td {
+        white-space: nowrap;
+        padding: 12px;
+    }
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
-
+<!-- HEADER -->
 <div class="header">
 
-    <h1>CareTrack — Token Tracking</h1>
+    <div class="brand">
 
-    <p>
-        Monitor doctor availability and appointment tokens
-    </p>
+        <div class="logo-circle">
+            <svg
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linejoin="round"
+                />
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+            </svg>
+        </div>
+
+        <span>CareTrack</span>
+
+    </div>
+
+    <div class="header-right"> Healthcare Management System
+         <span class="user-icon">♙</span>
+     </div>
+
+    </div>
 
 </div>
 
 
 <div class="container">
 
-<!-- =========================
-     BACK BUTTON
-========================= -->
+<!-- BACK BUTTON -->
 
-<a href="/admin_dashboard" class="back-button">
+<a
+    href="/admin_dashboard"
+    class="back-button"
+>
     ← Back to Dashboard
 </a>
 
 
-<!-- =========================
-     SELECT DOCTOR
-========================= -->
+<!-- SELECT DOCTOR -->
 
 <div class="card">
 
@@ -517,7 +840,10 @@ td {
         Select Doctor
     </div>
 
-    <form method="GET" action="/admin_tracking">
+    <form
+        method="GET"
+        action="/admin_tracking"
+    >
 
         <label>
             Doctor
@@ -540,7 +866,6 @@ td {
                     selected
                 {% endif %}
             >
-
                 {{ doctor.doctor_name }}
 
                 {% if doctor.specialization %}
@@ -561,9 +886,7 @@ td {
 {% if selected_doctor %}
 
 
-<!-- =========================
-     DOCTOR INFORMATION
-========================= -->
+<!-- DOCTOR INFORMATION -->
 
 <div class="card">
 
@@ -573,7 +896,6 @@ td {
 
 
     <div class="doctor-profile-card">
-
 
         <!-- DOCTOR PROFILE HEADER -->
 
@@ -671,116 +993,110 @@ td {
     </div>
 
 
-<!-- =========================
-     AVAILABILITY
-========================= -->
+    <!-- AVAILABILITY -->
 
-<div class="section-subtitle">
-    Doctor Availability
-</div>
+    <div class="section-subtitle">
+        Doctor Availability
+    </div>
 
 
-{% if availability %}
+    {% if availability %}
 
-<div class="availability-container">
+    <div class="availability-container">
 
-    {% for item in availability %}
+        {% for item in availability %}
 
-    <div class="availability-card">
+        <div class="availability-card">
 
+            <div class="availability-left">
 
-        <div class="availability-left">
+                <div class="calendar-icon">
+                    📅
+                </div>
 
-            <div class="calendar-icon">
-                📅
+                <div>
+
+                    <div class="availability-day">
+                        {{ item.day }}
+                    </div>
+
+                    <div class="availability-date">
+                        {{ item.next_date }}
+                    </div>
+
+                </div>
+
             </div>
 
-            <div>
 
-                <div class="availability-day">
-                    {{ item.day }}
-                </div>
+            <div class="availability-time">
 
-                <div class="availability-date">
-                    {{ item.next_date }}
-                </div>
+                ⏰
+                {{ item.start_time }}
+                –
+                {{ item.end_time }}
 
             </div>
 
         </div>
 
-
-        <div class="availability-time">
-
-            ⏰
-            {{ item.start_time }}
-            –
-            {{ item.end_time }}
-
-        </div>
-
+        {% endfor %}
 
     </div>
 
-    {% endfor %}
 
-</div>
+    {% else %}
 
-{% else %}
+    <div class="empty">
+        No availability has been configured for this doctor.
+    </div>
 
-<div class="empty">
-    No availability has been configured for this doctor.
-</div>
-
-{% endif %}
+    {% endif %}
 
 
-<!-- =========================
-     TOKEN TRACKING
-========================= -->
+    <!-- TOKEN TRACKING -->
 
-<div class="section-subtitle">
-    Token Tracking
-</div>
+    <div class="section-subtitle">
+        Token Tracking
+    </div>
 
 
-<div class="date-box">
+    <div class="date-box">
 
-    <form method="GET" action="/admin_tracking">
-
-        <input
-            type="hidden"
-            name="doctor_id"
-            value="{{ doctor_id }}"
+        <form
+            method="GET"
+            action="/admin_tracking"
         >
 
-        <label>
-            Select Date
-        </label>
+            <input
+                type="hidden"
+                name="doctor_id"
+                value="{{ doctor_id }}"
+            >
 
-        <input
-            type="date"
-            name="selected_date"
-            value="{{ selected_date }}"
-            onchange="this.form.submit()"
-        >
+            <label>
+                Select Date
+            </label>
 
-    </form>
+            <input
+                type="date"
+                name="selected_date"
+                value="{{ selected_date }}"
+                onchange="this.form.submit()"
+            >
+
+        </form>
+
+    </div>
 
 </div>
 
 
-</div>
-
-
-<!-- =========================
-     TOKEN DETAILS
-========================= -->
+<!-- TOKEN DETAILS -->
 
 {% if selected_date %}
 
 <div class="card">
-
 
     <div class="token-header">
 
@@ -789,14 +1105,13 @@ td {
         </div>
 
         <div class="date-badge">
-    {{ selected_date[8:10] }}-{{ selected_date[5:7] }}-{{ selected_date[0:4] }}
-</div>
+            {{ selected_date[8:10] }}-{{ selected_date[5:7] }}-{{ selected_date[0:4] }}
+        </div>
 
     </div>
 
 
     {% if appointments %}
-
 
     <div class="table-wrapper">
 
@@ -837,9 +1152,11 @@ td {
                         {{ appointment.patient_name }}
                     </td>
 
+
                     <td>
                         {{ appointment.appointment_time }}
                     </td>
+
 
                     <td class="token-number">
 
@@ -851,6 +1168,7 @@ td {
 
                     </td>
 
+
                     <td>
 
                         {% set status =
@@ -860,9 +1178,7 @@ td {
                         %}
 
                         <span class="status {{ status }}">
-
                             {{ status|replace("_", " ")|title }}
-
                         </span>
 
                     </td>
@@ -881,25 +1197,20 @@ td {
     {% else %}
 
     <div class="empty">
-
         No appointments or tokens found
         for the selected doctor and date.
-
     </div>
 
     {% endif %}
 
-
 </div>
 
 {% endif %}
 
 
 {% endif %}
-
 
 </div>
 
 </body>
-
 </html>

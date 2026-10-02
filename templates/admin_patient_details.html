@@ -3,71 +3,500 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CareTrack - Patient Details</title>
 
     <style>
 
+        * {
+            box-sizing: border-box;
+        }
+
+        /* ================= BODY ================= */
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f8fc;
+            background: #ffffff;
+            color: #496579;
         }
 
+
+        /* ================= HEADER ================= */
+
         .header {
-            background: #0d6efd;
+            height: 112px;
+
+            padding: 0 35px;
+
+            background: linear-gradient(90deg, #123c9c, #1769e0);
+
             color: white;
-            padding: 20px;
-            text-align: center;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            position: relative;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 6px 20px rgba(18, 60, 156, 0.20);
         }
+
+
+        /* ================= CARETRACK BRAND ================= */
+
+        .brand {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+
+        .logo-circle {
+            width: 50px;
+
+            height: 50px;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            box-shadow:
+                0 4px 12px rgba(0, 50, 120, 0.15);
+
+            overflow: hidden;
+        }
+
+
+        .logo-circle svg {
+            width: 32px;
+
+            height: 32px;
+
+            display: block;
+        }
+
+
+        .brand span {
+            font-size: 29px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.3px;
+
+            color: white;
+        }
+
+
+        /* ================= HEADER RIGHT ================= */
+
+        .header-right {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            color: white;
+
+            font-size: 14px;
+
+            opacity: 0.95;
+
+            position: relative;
+
+            z-index: 2;
+        }
+.user-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+        /* ================= MAIN CONTAINER ================= */
 
         .container {
             width: 90%;
-            max-width: 800px;
-            margin: 35px auto;
+
+            max-width: 900px;
+
+            margin: 40px auto 50px;
+
+            position: relative;
+
+            z-index: 2;
         }
+
+
+        /* ================= PATIENT DETAILS CARD ================= */
 
         .details-card {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            border: 1px solid #d7e5f5;
+
+            box-shadow:
+                0 8px 25px rgba(18, 60, 156, 0.10);
+
+            overflow: hidden;
         }
+
+
+        /* ================= CARD TITLE ================= */
 
         .details-card h2 {
-            color: #0d6efd;
-            margin-bottom: 25px;
+            margin: 0;
+
+            padding: 23px 28px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eef4ff,
+                    #f8fbff
+                );
+
+            color: #123c9c;
+
+            font-size: 22px;
+
+            font-weight: 700;
+
+            border-bottom: 1px solid #dce7f5;
         }
+
+
+        /* ================= DETAILS AREA ================= */
+
+        .details-content {
+            padding: 22px;
+        }
+
+
+        /* ================= DETAIL ROWS ================= */
 
         .detail-row {
-            padding: 14px 0;
-            border-bottom: 1px solid #eee;
+            display: flex;
+
+            align-items: center;
+
+            padding: 16px 18px;
+
+            margin-bottom: 10px;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            border: 1px solid transparent;
+
+            transition: 0.2s ease;
         }
+
+
+        .detail-row:hover {
+            transform: translateX(2px);
+
+            box-shadow:
+                0 3px 10px rgba(18, 60, 156, 0.06);
+        }
+
+
+        /* ================= ALTERNATE LIGHT COLOURS ================= */
+
+        .detail-row:nth-child(1) {
+            background: #f1f6ff;
+
+            border-color: #dce8fa;
+        }
+
+
+        .detail-row:nth-child(2) {
+            background: #f5f2fc;
+
+            border-color: #e7e0f5;
+        }
+
+
+        .detail-row:nth-child(3) {
+            background: #f0faf6;
+
+            border-color: #dcefe7;
+        }
+
+
+        .detail-row:nth-child(4) {
+            background: #fff8ef;
+
+            border-color: #f5e8d7;
+        }
+
+
+        .detail-row:nth-child(5) {
+            background: #f3f7ff;
+
+            border-color: #e1e8f7;
+        }
+
+
+        .detail-row:nth-child(6) {
+            background: #f0fafc;
+
+            border-color: #dceef2;
+        }
+
+
+        .detail-row:nth-child(7) {
+            background: #fff5f9;
+
+            border-color: #f2e0e9;
+        }
+
+
+        /* ================= LABEL ================= */
 
         .detail-row strong {
-            display: inline-block;
             width: 180px;
-            color: #333;
+
+            flex-shrink: 0;
+
+            color: #123c9c;
+
+            font-weight: 600;
         }
 
+
+        /* ================= VALUE ================= */
+
+        .detail-value {
+            color: #566f7e;
+
+            line-height: 1.5;
+        }
+
+
+        /* ================= BACK BUTTON ================= */
+
+        .back-container {
+            margin-top: 22px;
+        }
+
+
         .back-button {
-            display: inline-block;
-            margin-top: 25px;
-            padding: 12px 20px;
-            background: #0d6efd;
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 11px 20px;
+
+            background: #1769e0;
+
             color: white;
+
             text-decoration: none;
-            border-radius: 6px;
+
+            border-radius: 8px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            box-shadow:
+                0 4px 10px rgba(23, 105, 224, 0.20);
+
+            transition: 0.2s ease;
+        }
+
+
+        .back-button:hover {
+            background: #123c9c;
+
+            transform: translateX(-2px);
+        }
+
+
+        /* ================= NOT FOUND ================= */
+
+        .not-found {
+            padding: 35px;
+
+            text-align: center;
+
+            color: #123c9c;
+        }
+
+
+        .not-found h2 {
+            background: none;
+
+            border: none;
+
+            padding: 0;
+
+            margin: 0;
+
+            color: #123c9c;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 650px) {
+
+            .header {
+                height: 90px;
+
+                padding: 0 20px;
+            }
+
+
+            .logo-circle {
+                width: 44px;
+
+                height: 44px;
+            }
+
+
+            .logo-circle svg {
+                width: 32px;
+
+                height: 32px;
+            }
+
+
+            .brand span {
+                font-size: 24px;
+            }
+
+
+            .header-right {
+                display: none;
+            }
+
+
+            .container {
+                width: 94%;
+
+                margin-top: 25px;
+            }
+
+
+            .detail-row {
+                display: block;
+            }
+
+
+            .detail-row strong {
+                display: block;
+
+                width: auto;
+
+                margin-bottom: 5px;
+            }
+
         }
 
     </style>
+
 </head>
+
 
 <body>
 
+
+    <!-- ================= HEADER ================= -->
+
     <div class="header">
-        <h1>CareTrack</h1>
-        <p>Patient Details</p>
+
+        <div class="brand">
+
+            <div class="logo-circle">
+
+                <svg
+                    viewBox="0 0 64 64"
+                    xmlns="http://www.w3.org/2000/svg">
+
+                    <path
+                        d="M32 52
+                           C29 49 14 39 10 29
+                           C6 19 12 12 21 12
+                           C27 12 31 16 32 20
+                           C33 16 37 12 43 12
+                           C52 12 58 19 54 29
+                           C50 39 35 49 32 52Z"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linejoin="round"/>
+
+                    <polyline
+                        points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+                </svg>
+
+            </div>
+
+
+            <span>
+                CareTrack
+            </span>
+
+        </div>
+
+
+        <div class="header-right">
+
+    Healthcare Management System
+
+    <span class="user-icon">
+        ♙
+    </span>
+
+</div>
+
     </div>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
 
     <div class="container">
 
@@ -75,58 +504,158 @@
 
         <div class="details-card">
 
-            <h2>Full Patient Details</h2>
+            <h2>
+                Full Patient Details
+            </h2>
 
-            <div class="detail-row">
-                <strong>Full Name:</strong>
-                {{ patient.name }}
-            </div>
 
-            <div class="detail-row">
-                <strong>Email:</strong>
-                {{ patient.email }}
-            </div>
+            <div class="details-content">
 
-            <div class="detail-row">
-                <strong>Phone:</strong>
-                {{ patient.phone }}
-            </div>
 
-            <div class="detail-row">
-                <strong>Date of Birth:</strong>
-                {{ patient.date_of_birth }}
-            </div>
+                <div class="detail-row">
 
-            <div class="detail-row">
-                <strong>Age:</strong>
-                {{ patient.age }}
-            </div>
+                    <strong>
+                        Full Name:
+                    </strong>
 
-            <div class="detail-row">
-                <strong>Gender:</strong>
-                {{ patient.gender }}
-            </div>
+                    <span class="detail-value">
+                        {{ patient.name }}
+                    </span>
 
-            <div class="detail-row">
-                <strong>Address:</strong>
-                {{ patient.address }}
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Email:
+                    </strong>
+
+                    <span class="detail-value">
+                        {{ patient.email }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Phone:
+                    </strong>
+
+                    <span class="detail-value">
+                        {{ patient.phone }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Date of Birth:
+                    </strong>
+
+                    <span class="detail-value">
+                        {{ patient.date_of_birth.strftime('%d-%m-%Y') }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Age:
+                    </strong>
+
+                    <span class="detail-value">
+                        {{ patient.age }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Gender:
+                    </strong>
+
+                    <span class="detail-value">
+                        {{ patient.gender }}
+                    </span>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <strong>
+                        Address:
+                    </strong>
+
+                    <span class="detail-value">
+                        {{ patient.address }}
+                    </span>
+
+                </div>
+
+
             </div>
 
         </div>
+
+
+        <!-- BACK BUTTON -->
+
+        <div class="back-container">
+
+            <a
+                href="/admin_patients"
+                class="back-button">
+
+                ← Back to Patients
+
+            </a>
+
+        </div>
+
 
         {% else %}
 
+
         <div class="details-card">
-            <h2>Patient not found.</h2>
+
+            <div class="not-found">
+
+                <h2>
+                    Patient not found.
+                </h2>
+
+            </div>
+
         </div>
+
+
+        <div class="back-container">
+
+            <a
+                href="/admin_patients"
+                class="back-button">
+
+                ← Back to Patients
+
+            </a>
+
+        </div>
+
 
         {% endif %}
 
-        <a href="/admin_patients" class="back-button">
-            Back to Patients
-        </a>
-
     </div>
+
 
 </body>
 

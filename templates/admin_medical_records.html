@@ -1,15 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>CareTrack - Medical Records</title>
 
     <style>
-
         * {
             box-sizing: border-box;
         }
@@ -17,53 +13,138 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f8fc;
-            color: #1e293b;
+            background: #ffffff;
+            color: #496579;
         }
 
-        .navbar {
-            background: #0d6efd;
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            height: 112px;
+            padding: 0 35px;
+            background: linear-gradient(90deg, #123c9c, #1769e0);
             color: white;
-            padding: 22px 45px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(18, 60, 156, 0.20);
         }
 
-        .navbar h1 {
-            margin: 0;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+        }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 4px 12px rgba(0,50,120,0.15);
+        }
+
+        .logo-circle svg {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+
+        .brand span {
             font-size: 30px;
+            font-weight: 700;
+            color: white;
         }
 
-        .navbar p {
-            margin: 8px 0 0;
-            font-size: 15px;
+        .header-right {
+            color: white;
+            font-size: 14px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
+
+        .user-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
 
         .container {
+            width: 90%;
             max-width: 1150px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 0 auto;
+            padding: 30px 0 45px;
         }
+
+        /* =========================
+           PAGE TITLE
+        ========================= */
 
         .title {
             text-align: center;
+            margin-top: 5px;
             margin-bottom: 25px;
+        }
+
+        .page-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #fff1f7, #eee8ff);
+            border: 1px solid #d8e5f3;
+            box-shadow: 0 5px 15px rgba(80, 120, 160, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
         }
 
         .title h2 {
-            color: #0d6efd;
-            margin-bottom: 8px;
+            margin: 0;
+            color: #15548a;
+            font-size: 34px;
+            font-weight: 700;
         }
 
         .title p {
-            color: #64748b;
+            margin: 8px 0 0;
+            color: #54758b;
+            font-size: 15px;
         }
 
+        /* =========================
+           FILTER CARD
+        ========================= */
+
         .filter-box {
-            background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-            margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 22px;
+            border-radius: 16px;
+            border: 1px solid #d5e7f3;
+            box-shadow: 0 7px 22px rgba(50, 110, 145, 0.10);
+            margin-bottom: 28px;
         }
 
         .filter-row {
@@ -75,90 +156,289 @@
 
         .field label {
             display: block;
-            font-weight: bold;
+            font-weight: 700;
+            font-size: 13px;
             margin-bottom: 8px;
+            color: #315f80;
         }
 
         select {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 7px;
+            height: 48px;
+            padding: 0 14px;
+            border: 1px solid #c7dfea;
+            border-radius: 10px;
             font-size: 15px;
-            background: white;
+            color: #49687d;
+            background: #fbfdff;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: #4aa9d6;
+            box-shadow: 0 0 0 3px rgba(74, 169, 214, 0.10);
         }
 
         .search-btn {
-            padding: 12px 25px;
-            background: #0d6efd;
+            height: 48px;
+            padding: 0 24px;
+            background: linear-gradient(135deg, #2479b8, #4aa9d6);
             color: white;
             border: none;
-            border-radius: 7px;
-            font-size: 15px;
-            font-weight: bold;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
             cursor: pointer;
+            box-shadow: 0 5px 12px rgba(36, 121, 184, 0.20);
+            transition: 0.2s;
         }
 
         .search-btn:hover {
-            background: #0b5ed7;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(36, 121, 184, 0.24);
         }
+
+        /* =========================
+           MEDICAL RECORD SECTION
+        ========================= */
 
         .records-box {
-            background: white;
-            padding: 25px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
-            overflow-x: auto;
+            background: rgba(255, 255, 255, 0.94);
+            padding: 26px;
+            border-radius: 18px;
+            border: 1px solid #d6e7f3;
+            box-shadow: 0 7px 24px rgba(50, 110, 145, 0.10);
         }
 
-        .records-box h2 {
-            margin-top: 0;
-            color: #0d6efd;
+        .records-heading {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .records-heading-icon {
+            width: 43px;
+            height: 43px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #e8f7ff, #f0e9ff);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
         }
 
-        th {
-            background: #0d6efd;
-            color: white;
-            padding: 13px;
-            text-align: left;
+        .records-heading h2 {
+            margin: 0;
+            color: #205b88;
+            font-size: 23px;
         }
 
-        td {
-            padding: 13px;
-            border-bottom: 1px solid #e2e8f0;
+        /* =========================
+           MEDICAL RECORD CARDS
+        ========================= */
+
+        .records-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
         }
 
-        tr:hover {
-            background: #f8fbff;
+        .record-card {
+            position: relative;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.95);
+            box-shadow: 0 6px 17px rgba(50, 100, 130, 0.10);
+            overflow: hidden;
+            transition: 0.2s;
         }
+
+        .record-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(50, 100, 130, 0.14);
+        }
+
+        .record-card:nth-child(6n+1) {
+            background: linear-gradient(135deg, #eaf7ff, #dff2fb);
+            border-left: 5px solid #2798d4;
+        }
+
+        .record-card:nth-child(6n+2) {
+            background: linear-gradient(135deg, #f3edff, #ebe4fb);
+            border-left: 5px solid #8557db;
+        }
+
+        .record-card:nth-child(6n+3) {
+            background: linear-gradient(135deg, #fff3e8, #ffead8);
+            border-left: 5px solid #f2a15a;
+        }
+
+        .record-card:nth-child(6n+4) {
+            background: linear-gradient(135deg, #eafaf5, #dcf4eb);
+            border-left: 5px solid #31b78b;
+        }
+
+        .record-card:nth-child(6n+5) {
+            background: linear-gradient(135deg, #fff0f7, #fbe0eb);
+            border-left: 5px solid #dc659b;
+        }
+
+        .record-card:nth-child(6n+6) {
+            background: linear-gradient(135deg, #eefaff, #ddf3f6);
+            border-left: 5px solid #20a4bb;
+        }
+
+        /* =========================
+           CARD HEADER
+        ========================= */
+
+        .record-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(150, 180, 200, 0.35);
+        }
+
+        .patient-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .patient-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 13px;
+            background: rgba(255,255,255,0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 3px 8px rgba(60,100,130,0.08);
+        }
+
+        .patient-name {
+            color: #205b88;
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .doctor-name {
+            margin-top: 4px;
+            color: #6d8496;
+            font-size: 12px;
+        }
+
+        .record-date {
+            background: rgba(255,255,255,0.78);
+            padding: 7px 10px;
+            border-radius: 9px;
+            color: #50718a;
+            font-size: 11px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        /* =========================
+           MEDICAL INFORMATION
+        ========================= */
+
+        .medical-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 11px;
+        }
+
+        .detail-box {
+            background: rgba(255,255,255,0.72);
+            border-radius: 11px;
+            padding: 12px 13px;
+            border: 1px solid rgba(255,255,255,0.9);
+        }
+
+        .detail-box.full {
+            grid-column: 1 / -1;
+        }
+
+        .detail-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #6b8191;
+            margin-bottom: 6px;
+        }
+
+        .detail-value {
+            font-size: 13px;
+            line-height: 1.45;
+            color: #385a72;
+            font-weight: 600;
+            word-break: break-word;
+        }
+
+        .diagnosis-icon {
+            color: #c56a32;
+        }
+
+        .prescription-icon {
+            color: #7c58bd;
+        }
+
+        .treatment-icon {
+            color: #299879;
+        }
+
+        .doctor-small-icon {
+            color: #3182b8;
+        }
+
+        /* =========================
+           NO DATA
+        ========================= */
 
         .no-data {
             text-align: center;
-            padding: 25px;
-            color: #64748b;
+            padding: 35px 20px;
+            color: #6c8294;
+            background: linear-gradient(135deg, #f4faff, #f7f3ff);
+            border: 1px dashed #cbdfea;
+            border-radius: 13px;
         }
 
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
         .back-btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
             margin-top: 25px;
-            padding: 12px 22px;
-            background: #0d6efd;
+            padding: 12px 21px;
+            background: linear-gradient(135deg, #2479b8, #4aa9d6);
             color: white;
             text-decoration: none;
-            border-radius: 7px;
-            font-weight: bold;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 5px 12px rgba(36, 121, 184, 0.18);
+            transition: 0.2s;
         }
 
         .back-btn:hover {
-            background: #0b5ed7;
+            transform: translateY(-2px);
         }
 
-        @media (max-width: 700px) {
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
 
             .filter-row {
                 grid-template-columns: 1fr;
@@ -168,34 +448,97 @@
                 width: 100%;
             }
 
-            th,
-            td {
-                font-size: 13px;
+            .records-grid {
+                grid-template-columns: 1fr;
             }
 
+            .medical-details {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-box.full {
+                grid-column: auto;
+            }
+
+            .header {
+                padding: 0 20px;
+            }
+
+            .header-right {
+                display: none;
+            }
+
+            .brand span {
+                font-size: 25px;
+            }
+
+            .container {
+                width: 94%;
+            }
         }
-
     </style>
-
 </head>
-
 
 <body>
 
+    <!-- HEADER -->
 
-    <div class="navbar">
+    <div class="header">
 
-        <h1>CareTrack - Medical Records</h1>
+        <div class="brand">
 
-        <p>Admin Panel</p>
+            <div class="logo-circle">
+
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+                    <path
+                        d="M32 52
+                           C29 49 14 39 10 29
+                           C6 19 12 12 21 12
+                           C27 12 31 16 32 20
+                           C33 16 37 12 43 12
+                           C52 12 58 19 54 29
+                           C50 39 35 49 32 52Z"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linejoin="round"/>
+
+                    <polyline
+                        points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+                </svg>
+
+            </div>
+
+            <span>CareTrack</span>
+
+        </div>
+
+        <div class="header-right">
+
+            Healthcare Management System
+
+            <span class="user-icon">♙</span>
+
+        </div>
 
     </div>
 
-
     <div class="container">
 
+        <!-- PAGE TITLE -->
 
         <div class="title">
+
+            <div class="page-icon">
+                📋
+            </div>
 
             <h2>Medical Records</h2>
 
@@ -205,7 +548,6 @@
 
         </div>
 
-
         <!-- FILTERS -->
 
         <div class="filter-box">
@@ -214,9 +556,6 @@
 
                 <div class="filter-row">
 
-
-                    <!-- DOCTOR -->
-
                     <div class="field">
 
                         <label>
@@ -224,29 +563,28 @@
                         </label>
 
                         <select
-                    name="doctor_id"
-                    onchange="this.form.submit()"
-                >
-                    <option value="">
-                        All Doctors
-                    </option>
+                            name="doctor_id"
+                            onchange="this.form.submit()"
+                        >
 
-                    {% for doctor in doctors %}
+                            <option value="">
+                                All Doctors
+                            </option>
 
-                    <option
-                        value="{{ doctor.doctor_id }}"
-                        {% if selected_doctor_id == doctor.doctor_id|string %}selected{% endif %}
-                    >
-                        {{ doctor.name }}
-                    </option>
+                            {% for doctor in doctors %}
 
-                    {% endfor %}
-                </select>
+                            <option
+                                value="{{ doctor.doctor_id }}"
+                                {% if selected_doctor_id == doctor.doctor_id|string %}selected{% endif %}
+                            >
+                                {{ doctor.name }}
+                            </option>
+
+                            {% endfor %}
+
+                        </select>
 
                     </div>
-
-
-                    <!-- PATIENT -->
 
                     <div class="field">
 
@@ -275,10 +613,10 @@
 
                     </div>
 
-
-                    <!-- SEARCH -->
-
-                    <button type="submit" class="search-btn">
+                    <button
+                        type="submit"
+                        class="search-btn"
+                    >
                         🔍 Search Records
                     </button>
 
@@ -288,75 +626,139 @@
 
         </div>
 
-
-        <!-- RECORDS -->
-
         {% if searched %}
 
         <div class="records-box">
 
-            <h2>
-                Medical Record Information
-            </h2>
+            <div class="records-heading">
 
+                <div class="records-heading-icon">
+                    🩺
+                </div>
+
+                <h2>
+                    Medical Record Information
+                </h2>
+
+            </div>
 
             {% if records %}
 
-            <table>
+            <div class="records-grid">
 
-                <thead>
+                {% for record in records %}
 
-                    <tr>
+                <div class="record-card">
 
-                        <th>Patient Name</th>
-                        <th>Doctor Name</th>
-                        <th>Diagnosis</th>
-                        <th>Prescription</th>
-                        <th>Treatment</th>
-                        <th>Record Date</th>
+                    <div class="record-header">
 
-                    </tr>
+                        <div class="patient-info">
 
-                </thead>
+                            <div class="patient-icon">
+                                👤
+                            </div>
 
+                            <div>
 
-                <tbody>
+                                <div class="patient-name">
+                                    {{ record.patient_name }}
+                                </div>
 
-                    {% for record in records %}
+                                <div class="doctor-name">
+                                    🩺 {{ record.doctor_name }}
+                                </div>
 
-                    <tr>
+                            </div>
 
-                        <td>
-                            {{ record.patient_name }}
-                        </td>
+                        </div>
 
-                        <td>
-                            {{ record.doctor_name }}
-                        </td>
+                        <div class="record-date">
+                            📅 {{ record.record_date }}
+                        </div>
 
-                        <td>
-                            {{ record.diagnosis }}
-                        </td>
+                    </div>
 
-                        <td>
-                            {{ record.prescription }}
-                        </td>
+                    <div class="medical-details">
 
-                        <td>
-                            {{ record.treatment }}
-                        </td>
+                        <div class="detail-box">
 
-                        <td>
-                            {{ record.record_date }}
-                        </td>
+                            <div class="detail-label">
 
-                    </tr>
+                                <span class="diagnosis-icon">
+                                    🩻
+                                </span>
 
-                    {% endfor %}
+                                Diagnosis
 
-                </tbody>
+                            </div>
 
-            </table>
+                            <div class="detail-value">
+                                {{ record.diagnosis }}
+                            </div>
+
+                        </div>
+
+                        <div class="detail-box">
+
+                            <div class="detail-label">
+
+                                <span class="doctor-small-icon">
+                                    👨‍⚕️
+                                </span>
+
+                                Doctor
+
+                            </div>
+
+                            <div class="detail-value">
+                                {{ record.doctor_name }}
+                            </div>
+
+                        </div>
+
+                        <div class="detail-box full">
+
+                            <div class="detail-label">
+
+                                <span class="prescription-icon">
+                                    💊
+                                </span>
+
+                                Prescription
+
+                            </div>
+
+                            <div class="detail-value">
+                                {{ record.prescription }}
+                            </div>
+
+                        </div>
+
+                        <div class="detail-box full">
+
+                            <div class="detail-label">
+
+                                <span class="treatment-icon">
+                                    ❤️‍🩹
+                                </span>
+
+                                Treatment
+
+                            </div>
+
+                            <div class="detail-value">
+                                {{ record.treatment }}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
 
             {% else %}
 
@@ -370,15 +772,14 @@
 
         {% endif %}
 
-
-        <a href="/admin_dashboard" class="back-btn">
+        <a
+            href="/admin_dashboard"
+            class="back-btn"
+        >
             ← Back to Dashboard
         </a>
 
-
     </div>
 
-
 </body>
-
 </html>

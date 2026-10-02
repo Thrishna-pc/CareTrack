@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,85 +12,153 @@
     box-sizing: border-box;
 }
 
+/* ================= BODY ================= */
+
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background:
-        radial-gradient(circle at top left, #f2eaff 0%, transparent 35%),
-        radial-gradient(circle at bottom right, #e7f0ff 0%, transparent 35%),
-        linear-gradient(135deg, #f7f5ff, #f4f8ff);
-    color: #20264a;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #ffffff;
+    color: #385978;
+    min-height: 100vh;
 }
 
 
 /* ================= HEADER ================= */
 
 .header {
-    background: linear-gradient(135deg, #17105c, #35208f, #536dfe);
+    height: 112px;
+    padding: 0 35px;
+
+    background: linear-gradient(
+        90deg,
+        #123c9c,
+        #1769e0
+    );
+
     color: white;
-    padding: 28px 48px;
-    box-shadow: 0 8px 30px rgba(55, 35, 145, 0.28);
-    position: relative;
-    overflow: hidden;
-}
 
-.header::before {
-    content: "";
-    position: absolute;
-    width: 320px;
-    height: 320px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.08);
-    right: -90px;
-    top: -150px;
-}
-
-.header::after {
-    content: "";
-    position: absolute;
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    background: rgba(184, 148, 255, 0.14);
-    left: 35%;
-    top: -110px;
-}
-
-.logo-area {
     display: flex;
     align-items: center;
-    gap: 18px;
+    justify-content: space-between;
+
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+
+    box-shadow:
+        0 6px 20px rgba(18, 60, 156, 0.20);
+}
+        .user-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+
+/* ================= BRAND ================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: white;
+
     position: relative;
     z-index: 2;
 }
 
-.logo-mark {
-    width: 72px;
-    height: 72px;
-    border-radius: 22px;
-    background: linear-gradient(135deg, #ffffff, #eee7ff);
-    border: 3px solid rgba(255,255,255,0.55);
+
+/* ================= LEFT LOGO ================= */
+
+.logo-circle {
+    width: 50px;
+    height: 50px;
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    border-radius: 50%;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 38px;
+
     box-shadow:
-        0 10px 25px rgba(0,0,0,0.22),
-        0 0 0 6px rgba(255,255,255,0.08);
+        0 4px 12px rgba(0,50,120,0.15);
+
+    overflow: hidden;
 }
 
-.logo-text h1 {
-    margin: 0;
-    font-size: 32px;
-    letter-spacing: 0.5px;
-    font-weight: 800;
+.logo-circle svg {
+    width: 32px;
+    height: 32px;
+    display: block;
 }
 
-.logo-text p {
-    margin: 6px 0 0;
+.brand span {
+    font-size: 29px;
+    font-weight: 750;
+    letter-spacing: -0.3px;
+    color: white;
+}
+
+
+/* ================= RIGHT HEADER ================= */
+
+.header-right {
+    color: white;
+
     font-size: 14px;
-    opacity: 0.90;
-    letter-spacing: 0.3px;
+    font-weight: 400;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ================= RIGHT LOGO ================= */
+
+.header-logo-circle {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.10);
+
+    border: 1px solid rgba(255,255,255,0.25);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow:
+        0 4px 12px rgba(0,50,120,0.15);
+
+    overflow: hidden;
+}
+
+.header-logo-circle svg {
+    width: 23px;
+    height: 23px;
+    display: block;
 }
 
 
@@ -108,87 +177,142 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, #4c2bbf, #315bea);
+
+    background:
+        linear-gradient(
+            135deg,
+            #2479b8,
+            #4aa9d6
+        );
+
     color: white;
     text-decoration: none;
+
     padding: 12px 21px;
+
     border-radius: 13px;
-    font-weight: bold;
+
+    font-weight: 700;
+
     margin-bottom: 25px;
-    box-shadow: 0 7px 20px rgba(72, 43, 191, 0.25);
+
+    box-shadow:
+        0 7px 20px rgba(36,121,184,0.20);
+
     transition: 0.25s ease;
 }
 
 .back-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 11px 25px rgba(72, 43, 191, 0.34);
+
+    box-shadow:
+        0 11px 25px rgba(36,121,184,0.28);
 }
 
 
 /* ================= HERO ================= */
 
 .hero {
-    background: linear-gradient(135deg, #a98bef 0%, #e8edff 50%, #876be2 100%);
-    border-radius: 25px;
-    padding: 31px;
-    box-shadow: 0 12px 35px rgba(62, 45, 140, 0.15);
+    background:
+        linear-gradient(
+            135deg,
+            #eaf7ff,
+            #f4efff
+        );
+
+    border-radius: 20px;
+
+    padding: 25px 28px;
+
+    box-shadow:
+        0 8px 24px rgba(50,100,140,0.09);
+
     margin-bottom: 25px;
-    border: 1px solid #dcd2fa;
+
+    border: 1px solid #dceaf5;
+
     position: relative;
     overflow: hidden;
 }
 
 .hero::before {
     content: "";
+
     position: absolute;
-    width: 220px;
-    height: 220px;
+
+    width: 210px;
+    height: 210px;
+
     border-radius: 50%;
-    background: linear-gradient(
-        135deg,
-        rgba(126,87,255,0.10),
-        rgba(83,109,254,0.04)
-    );
-    right: -70px;
+
+    background: rgba(255,255,255,0.45);
+
+    right: -65px;
     top: -90px;
 }
 
 .hero::after {
     content: "";
+
     position: absolute;
+
     width: 90px;
     height: 90px;
+
     border-radius: 50%;
-    background: rgba(214, 195, 255, 0.18);
-    right: 110px;
+
+    background: rgba(210,235,250,0.35);
+
+    right: 150px;
     bottom: -55px;
 }
 
 .hero-icon {
-    width: 68px;
-    height: 68px;
-    border-radius: 20px;
-    background: linear-gradient(135deg, #6a35d4, #536dfe);
+    width: 62px;
+    height: 62px;
+
+    border-radius: 17px;
+
+    background: white;
+
+    color: #2479b8;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 33px;
-    box-shadow: 0 9px 22px rgba(84, 61, 190, 0.28);
+
+    font-size: 30px;
+
+    border: 1px solid #d7e9f5;
+
+    box-shadow:
+        0 5px 14px rgba(50,110,160,0.10);
+
     position: relative;
     z-index: 2;
 }
 
 .hero h2 {
-    margin: 14px 0 6px;
-    color: #28206c;
+    margin: 13px 0 5px;
+
+    color: #174a88;
+
     font-size: 27px;
-    font-weight: 800;
+    font-weight: 750;
+
+    position: relative;
+    z-index: 2;
 }
 
 .hero p {
     margin: 0;
-    color: #74708c;
-    font-size: 15px;
+
+    color: #6f849b;
+
+    font-size: 14px;
+
+    position: relative;
+    z-index: 2;
 }
 
 
@@ -196,61 +320,100 @@ body {
 
 .filter-card {
     background: rgba(255,255,255,0.96);
-    border-radius: 21px;
+
+    border-radius: 18px;
+
     padding: 24px;
+
     margin-bottom: 28px;
-    box-shadow: 0 9px 30px rgba(64, 45, 145, 0.10);
-    border: 1px solid #e8e2f7;
+
+    box-shadow:
+        0 8px 25px rgba(50,100,140,0.08);
+
+    border: 1px solid #dceaf5;
 }
 
 .filter-card label {
     display: block;
-    font-weight: bold;
-    color: #392b79;
+
+    font-weight: 700;
+
+    color: #416b91;
+
     margin-bottom: 9px;
 }
 
 .filter-row {
     display: flex;
+
     gap: 14px;
+
     align-items: end;
+
     flex-wrap: wrap;
 }
 
 select {
     min-width: 280px;
     height: 47px;
-    border: 1px solid #d7cff0;
+
+    border: 1px solid #cfe1ee;
+
     border-radius: 12px;
+
     padding: 0 14px;
+
     font-size: 15px;
-    color: #302a50;
-    background: #fcfbff;
+
+    color: #385978;
+
+    background: #fbfdff;
+
     outline: none;
+
     transition: 0.2s ease;
 }
 
 select:focus {
-    border-color: #7254db;
-    box-shadow: 0 0 0 4px rgba(114,84,219,0.12);
+    border-color: #4aa9d6;
+
+    box-shadow:
+        0 0 0 4px rgba(74,169,214,0.12);
 }
 
 .search-btn {
     height: 47px;
+
     border: none;
+
     border-radius: 12px;
+
     padding: 0 24px;
-    background: linear-gradient(135deg, #5429b8, #4668ee);
-    color: rgb(255, 255, 255);
-    font-weight: bold;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2479b8,
+            #4aa9d6
+        );
+
+    color: white;
+
+    font-weight: 700;
+
     cursor: pointer;
-    box-shadow: 0 7px 18px rgba(75, 45, 180, 0.23);
+
+    box-shadow:
+        0 7px 18px rgba(36,121,184,0.20);
+
     transition: 0.25s ease;
 }
 
 .search-btn:hover {
     transform: translateY(-3px);
-    box-shadow: 0 11px 24px rgba(75, 45, 180, 0.31);
+
+    box-shadow:
+        0 11px 24px rgba(36,121,184,0.28);
 }
 
 
@@ -258,7 +421,13 @@ select:focus {
 
 .records-card {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(330px, 1fr)
+        );
+
     gap: 23px;
 }
 
@@ -266,47 +435,192 @@ select:focus {
 /* ================= MEDICAL RECORD CARD ================= */
 
 .record-card {
-    background: rgba(255,255,255,0.98);
     border-radius: 23px;
+
     padding: 23px;
-    box-shadow: 0 10px 30px rgba(55, 40, 130, 0.11);
-    border: 1px solid #e8e1f7;
+
+    box-shadow:
+        0 10px 30px rgba(50,90,120,0.10);
+
     transition: 0.3s ease;
+
+    border: 1px solid;
+
     position: relative;
+
     overflow: hidden;
 }
 
+
+/* ================= 8 DISTINCT PASTEL COLORS ================= */
+
+.record-card:nth-child(8n+1) {
+    background:
+        linear-gradient(
+            135deg,
+            #e3f4ff,
+            #cfeafa
+        );
+
+    border-color: #b9dced;
+}
+
+.record-card:nth-child(8n+2) {
+    background:
+        linear-gradient(
+            135deg,
+            #e5f7ef,
+            #ccecdf
+        );
+
+    border-color: #b9dfd0;
+}
+
+.record-card:nth-child(8n+3) {
+    background:
+        linear-gradient(
+            135deg,
+            #eee7ff,
+            #ddd1f7
+        );
+
+    border-color: #cfc0eb;
+}
+
+.record-card:nth-child(8n+4) {
+    background:
+        linear-gradient(
+            135deg,
+            #fff1df,
+            #ffe1c2
+        );
+
+    border-color: #f1cfaa;
+}
+
+.record-card:nth-child(8n+5) {
+    background:
+        linear-gradient(
+            135deg,
+            #ffe8f1,
+            #f8cedf
+        );
+
+    border-color: #edbdd1;
+}
+
+.record-card:nth-child(8n+6) {
+    background:
+        linear-gradient(
+            135deg,
+            #e1f7f7,
+            #c9eaea
+        );
+
+    border-color: #b3dcdc;
+}
+
+.record-card:nth-child(8n+7) {
+    background:
+        linear-gradient(
+            135deg,
+            #fff4d9,
+            #f9e5ae
+        );
+
+    border-color: #ecd89c;
+}
+
+.record-card:nth-child(8n+8) {
+    background:
+        linear-gradient(
+            135deg,
+            #e9edff,
+            #d2d9f7
+        );
+
+    border-color: #c1cbed;
+}
+
+
+/* ================= COLORED LEFT ACCENT ================= */
+
 .record-card::before {
     content: "";
+
     position: absolute;
+
     left: 0;
     top: 0;
+
     width: 6px;
     height: 100%;
-    background: linear-gradient(
-        180deg,
-        #712bd4,
-        #536dfe,
-        #a34de8
-    );
+
+    border-radius: 23px 0 0 23px;
 }
+
+.record-card:nth-child(8n+1)::before {
+    background: #3b9ed0;
+}
+
+.record-card:nth-child(8n+2)::before {
+    background: #48a982;
+}
+
+.record-card:nth-child(8n+3)::before {
+    background: #8064c6;
+}
+
+.record-card:nth-child(8n+4)::before {
+    background: #e19a55;
+}
+
+.record-card:nth-child(8n+5)::before {
+    background: #d66f9b;
+}
+
+.record-card:nth-child(8n+6)::before {
+    background: #3fa4aa;
+}
+
+.record-card:nth-child(8n+7)::before {
+    background: #d3aa3e;
+}
+
+.record-card:nth-child(8n+8)::before {
+    background: #657bc1;
+}
+
+
+/* ================= DECORATIVE CIRCLE ================= */
 
 .record-card::after {
     content: "";
+
     position: absolute;
-    width: 100px;
-    height: 100px;
+
+    width: 105px;
+    height: 105px;
+
     border-radius: 50%;
-    background: rgba(112, 76, 210, 0.045);
-    right: -35px;
-    top: -35px;
+
+    background:
+        rgba(255,255,255,0.24);
+
+    right: -38px;
+    top: -38px;
+
     pointer-events: none;
 }
 
+
+/* ================= HOVER ================= */
+
 .record-card:hover {
-    transform: translateY(-7px);
-    box-shadow: 0 18px 42px rgba(55, 40, 130, 0.18);
-    border-color: #d8c9f5;
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 18px 40px rgba(50,90,120,0.15);
 }
 
 
@@ -314,66 +628,87 @@ select:focus {
 
 .patient-header {
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
+
     gap: 12px;
+
     padding-bottom: 18px;
-    border-bottom: 1px solid #eeeaf7;
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.75);
+
     margin-bottom: 18px;
+
+    position: relative;
+    z-index: 2;
 }
 
 .patient-info {
     display: flex;
+
     align-items: center;
+
     gap: 13px;
 }
 
 .patient-icon {
     width: 52px;
     height: 52px;
+
     border-radius: 17px;
 
-    /* Different color for patient icon */
-    background: linear-gradient(
-        135deg,
-        #7b2fd0,
-        #d04bcf
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #dce8ff,
+            #eee6ff
+        );
+
+    color: #51308f;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 25px;
 
     box-shadow:
-        0 7px 18px rgba(173, 62, 196, 0.25),
-        inset 0 1px 0 rgba(255,255,255,0.35);
+        0 7px 18px rgba(80,90,160,0.13);
 }
 
 .patient-name {
     font-size: 19px;
+
     font-weight: 800;
 
-    /* Different color for patient name */
-    color: #54249c;
+    color: #285b89;
 }
 
 .date-badge {
-    background: linear-gradient(
-        135deg,
-        #eef0ff,
-        #f2eaff
-    );
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,0.75),
+            rgba(235,243,255,0.85)
+        );
 
-    color: #4c3bb0;
+    color: #3275a8;
 
     padding: 8px 11px;
+
     border-radius: 10px;
+
     font-size: 12px;
-    font-weight: bold;
+
+    font-weight: 700;
+
     white-space: nowrap;
 
-    border: 1px solid #ddd5fa;
+    border:
+        1px solid rgba(180,210,230,0.65);
 }
 
 
@@ -381,68 +716,87 @@ select:focus {
 
 .record-detail {
     display: flex;
+
     gap: 13px;
+
     margin-bottom: 15px;
+
     padding: 14px;
+
     border-radius: 15px;
-    background: linear-gradient(
-        135deg,
-        #fbfaff,
-        #f8f9ff
-    );
-    border: 1px solid #eeeaf8;
+
+    background:
+        rgba(255,255,255,0.72);
+
+    border:
+        1px solid rgba(220,235,245,0.85);
+
     transition: 0.22s ease;
+
+    position: relative;
+    z-index: 2;
 }
 
 .record-detail:hover {
     transform: translateX(3px);
-    background: #f8f5ff;
+
+    background:
+        rgba(255,255,255,0.90);
 }
 
 .detail-icon {
     min-width: 42px;
+
     width: 42px;
     height: 42px;
+
     border-radius: 13px;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 20px;
 }
 
 
-/* ================= DIFFERENT ICON COLORS ================= */
+/* ================= ICON COLORS ================= */
 
 .diagnosis-icon {
-    background: linear-gradient(
-        135deg,
-        #eee5ff,
-        #e1e8ff
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #e8e4ff,
+            #d9e6ff
+        );
 
-    box-shadow: 0 5px 13px rgba(105, 65, 205, 0.13);
+    box-shadow:
+        0 5px 13px rgba(105,65,205,0.13);
 }
 
 .prescription-icon {
-    background: linear-gradient(
-        135deg,
-        #fff0f8,
-        #ffe8f1
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #ffe9f2,
+            #ffdce9
+        );
 
-    box-shadow: 0 5px 13px rgba(218, 74, 137, 0.12);
+    box-shadow:
+        0 5px 13px rgba(218,74,137,0.12);
 }
 
 .treatment-icon {
-    background: linear-gradient(
-        135deg,
-        #eaf0ff,
-        #e5eaff
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #e1f5f3,
+            #d9efff
+        );
 
-    box-shadow: 0 5px 13px rgba(73, 94, 218, 0.13);
+    box-shadow:
+        0 5px 13px rgba(73,140,160,0.13);
 }
-
 
 .detail-content {
     flex: 1;
@@ -450,16 +804,23 @@ select:focus {
 
 .detail-title {
     font-size: 12px;
-    font-weight: bold;
+
+    font-weight: 700;
+
     text-transform: uppercase;
+
     letter-spacing: 0.6px;
-    color: #746d8f;
+
+    color: #5d7890;
+
     margin-bottom: 5px;
 }
 
 .detail-text {
-    color: #333052;
+    color: #294f70;
+
     line-height: 1.55;
+
     font-size: 14px;
 }
 
@@ -467,37 +828,51 @@ select:focus {
 /* ================= EMPTY ================= */
 
 .empty {
-    background: rgba(255,255,255,0.97);
+    background:
+        rgba(255,255,255,0.97);
+
     border-radius: 23px;
+
     padding: 58px 30px;
+
     text-align: center;
-    color: #77718d;
-    box-shadow: 0 10px 30px rgba(55, 40, 130, 0.10);
-    border: 1px solid #e7e1f5;
+
+    color: #71869a;
+
+    box-shadow:
+        0 10px 30px rgba(50,90,120,0.10);
+
+    border:
+        1px solid #dceaf5;
 }
 
 .empty-icon {
     width: 78px;
     height: 78px;
+
     margin: 0 auto 16px;
+
     border-radius: 23px;
 
-    background: linear-gradient(
-        135deg,
-        #eee5ff,
-        #e7edff
-    );
+    background:
+        linear-gradient(
+            135deg,
+            #e3f4ff,
+            #e7edff
+        );
 
     display: flex;
     align-items: center;
     justify-content: center;
+
     font-size: 39px;
 
-    box-shadow: 0 8px 20px rgba(91, 67, 185, 0.12);
+    box-shadow:
+        0 8px 20px rgba(70,120,170,0.12);
 }
 
 .empty h3 {
-    color: #392b79;
+    color: #315f88;
     margin: 8px 0;
 }
 
@@ -511,18 +886,27 @@ select:focus {
 @media (max-width: 700px) {
 
     .header {
-        padding: 21px 22px;
+        height: auto;
+        min-height: 90px;
+        padding: 18px 22px;
     }
 
-    .logo-text h1 {
+    .brand span {
         font-size: 24px;
     }
 
-    .logo-mark {
-        width: 58px;
-        height: 58px;
-        font-size: 30px;
-        border-radius: 18px;
+    .logo-circle {
+        width: 52px;
+        height: 52px;
+    }
+
+    .logo-circle svg {
+        width: 39px;
+        height: 39px;
+    }
+
+    .header-right {
+        display: none;
     }
 
     .container {
@@ -531,7 +915,7 @@ select:focus {
     }
 
     .hero {
-        padding: 24px;
+        padding: 22px;
     }
 
     .filter-card {
@@ -559,39 +943,88 @@ select:focus {
     .date-badge {
         margin-left: 65px;
     }
-
 }
 
 </style>
 </head>
 
+
 <body>
+
+
+<!-- ================= HEADER ================= -->
 
 <div class="header">
 
-    <div class="logo-area">
+    <div class="brand">
 
-        <div class="logo-mark">
-            🏥
+        <div class="logo-circle">
+
+            <svg
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linejoin="round"
+                />
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
         </div>
 
-        <div class="logo-text">
-            <h1>CareTrack</h1>
-            <p>Doctor Medical Records</p>
-        </div>
+        <span>CareTrack</span>
+
+    </div>
+
+
+    <div class="header-right">
+        Healthcare Management System
+        <span class="user-icon">
+            ♙
+        </span>
+    </div>
 
     </div>
 
 </div>
 
 
+
+<!-- ================= MAIN ================= -->
+
 <div class="container">
 
 
-<a href="/doctor_dashboard" class="back-btn">
+<a
+    href="/doctor_dashboard"
+    class="back-btn"
+>
     ← Back to Dashboard
 </a>
 
+
+
+<!-- ================= HERO ================= -->
 
 <div class="hero">
 
@@ -610,6 +1043,9 @@ select:focus {
 </div>
 
 
+
+<!-- ================= FILTER ================= -->
+
 <div class="filter-card">
 
 <form
@@ -619,17 +1055,20 @@ select:focus {
 
 <div class="filter-row">
 
+
 <div>
 
 <label>
     👤 Select Patient
 </label>
 
+
 <select name="patient_id">
 
 <option value="">
     All Patients
 </option>
+
 
 {% for patient in patients %}
 
@@ -639,9 +1078,7 @@ select:focus {
         selected
     {% endif %}
 >
-
     {{ patient.patient_name }}
-
 </option>
 
 {% endfor %}
@@ -651,14 +1088,14 @@ select:focus {
 </div>
 
 
+
 <button
     type="submit"
     class="search-btn"
 >
-
     🔎 Search Records
-
 </button>
+
 
 </div>
 
@@ -667,135 +1104,177 @@ select:focus {
 </div>
 
 
+
+<!-- ================= RECORDS ================= -->
+
 {% if records %}
+
 
 <div class="records-card">
 
+
 {% for record in records %}
+
 
 <div class="record-card">
 
-    <!-- PATIENT -->
 
-    <div class="patient-header">
+<!-- ================= PATIENT ================= -->
 
-        <div class="patient-info">
-
-            <div class="patient-icon">
-                👤
-            </div>
-
-            <div class="patient-name">
-                {{ record.patient_name }}
-            </div>
-
-        </div>
+<div class="patient-header">
 
 
-        <div class="date-badge">
-            📅 {{ record.record_date.strftime("%d-%m-%Y") }}
-        </div>
-
-    </div>
+<div class="patient-info">
 
 
-    <!-- DIAGNOSIS -->
-
-    <div class="record-detail">
-
-        <div class="detail-icon diagnosis-icon">
-            🩺
-        </div>
-
-        <div class="detail-content">
-
-            <div class="detail-title">
-                Diagnosis
-            </div>
-
-            <div class="detail-text">
-                {{ record.diagnosis }}
-            </div>
-
-        </div>
-
-    </div>
+<div class="patient-icon">
+    👤
+</div>
 
 
-    <!-- PRESCRIPTION -->
+<div class="patient-name">
+    {{ record.patient_name }}
+</div>
 
-    <div class="record-detail">
-
-        <div class="detail-icon prescription-icon">
-            💊
-        </div>
-
-        <div class="detail-content">
-
-            <div class="detail-title">
-                Prescription
-            </div>
-
-            <div class="detail-text">
-                {{ record.prescription }}
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- TREATMENT -->
-
-    <div class="record-detail">
-
-        <div class="detail-icon treatment-icon">
-            🏥
-        </div>
-
-        <div class="detail-content">
-
-            <div class="detail-title">
-                Treatment
-            </div>
-
-            <div class="detail-text">
-                {{ record.treatment }}
-            </div>
-
-        </div>
-
-    </div>
 
 </div>
 
+
+<div class="date-badge">
+    📅 {{ record.record_date.strftime("%d-%m-%Y") }}
+</div>
+
+
+</div>
+
+
+
+<!-- ================= DIAGNOSIS ================= -->
+
+<div class="record-detail">
+
+
+<div class="detail-icon diagnosis-icon">
+    🩺
+</div>
+
+
+<div class="detail-content">
+
+
+<div class="detail-title">
+    Diagnosis
+</div>
+
+
+<div class="detail-text">
+    {{ record.diagnosis }}
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ================= PRESCRIPTION ================= -->
+
+<div class="record-detail">
+
+
+<div class="detail-icon prescription-icon">
+    💊
+</div>
+
+
+<div class="detail-content">
+
+
+<div class="detail-title">
+    Prescription
+</div>
+
+
+<div class="detail-text">
+    {{ record.prescription }}
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ================= TREATMENT ================= -->
+
+<div class="record-detail">
+
+
+<div class="detail-icon treatment-icon">
+    🏥
+</div>
+
+
+<div class="detail-content">
+
+
+<div class="detail-title">
+    Treatment
+</div>
+
+
+<div class="detail-text">
+    {{ record.treatment }}
+</div>
+
+
+</div>
+
+</div>
+
+
+</div>
+
+
 {% endfor %}
+
 
 </div>
 
 
 {% else %}
 
+
+<!-- ================= EMPTY ================= -->
+
 <div class="empty">
 
-    <div class="empty-icon">
-        📂
-    </div>
 
-    <h3>
-        No Medical Records Found
-    </h3>
+<div class="empty-icon">
+    📂
+</div>
 
-    <p>
-        Saved consultation records will appear here.
-    </p>
+
+<h3>
+    No Medical Records Found
+</h3>
+
+
+<p>
+    Saved consultation records will appear here.
+</p>
+
 
 </div>
+
 
 {% endif %}
 
 
 </div>
+
 
 </body>
 </html>

@@ -10,10 +10,6 @@
 
 <style>
 
-/* =========================================================
-   GLOBAL
-========================================================= */
-
 * {
     box-sizing: border-box;
 }
@@ -21,17 +17,8 @@
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
-
     color: #244B5A;
-
-    background:
-        linear-gradient(
-            135deg,
-            #F4FBFD,
-            #EAF7FA,
-            #F7FCFD
-        );
-
+    background: linear-gradient(135deg, #F3F7FF, #EEF5FD);
     min-height: 100vh;
 }
 
@@ -41,27 +28,23 @@ body {
 ========================================================= */
 
 .header {
-    background:
-        linear-gradient(
-            120deg,
-            #087E9B,
-            #159BB8,
-            #55BDD0
-        );
+    height: 105px;
+    padding: 0 35px;
+
+    background: linear-gradient(135deg, #2479b8, #4aa9d6);
 
     color: white;
-
-    padding: 20px 45px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    box-shadow:
-        0 8px 25px rgba(8,126,155,0.18);
+    box-sizing: border-box;
 
     position: relative;
     overflow: hidden;
+
+    box-shadow: 0 4px 14px rgba(30, 100, 150, 0.18);
 }
 
 .header::after {
@@ -72,10 +55,10 @@ body {
     width: 500px;
     height: 180px;
 
-    right: 18%;
-    top: -90px;
+    right: 10%;
+    top: -100px;
 
-    background: rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.08);
 
     border-radius: 50%;
 }
@@ -84,50 +67,47 @@ body {
     display: flex;
     align-items: center;
 
-    gap: 14px;
+    gap: 12px;
 
     position: relative;
     z-index: 2;
 }
 
-.logo {
-    width: 62px;
-    height: 62px;
-
-    border-radius: 20px;
-
-    background: rgba(255,255,255,0.18);
+.logo-circle {
+    width: 58px;
+    height: 58px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-size: 34px;
+    border-radius: 50%;
 
-    box-shadow:
-        0 5px 15px rgba(0,0,0,0.10),
-        inset 0 0 0 1px rgba(255,255,255,0.25);
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 2px solid rgba(255, 255, 255, 0.85);
 }
-.heart-logo {
-    color: #087E9B;
-    font-size: 38px;
-    line-height: 1;
+
+.logo-circle svg {
+    width: 44px;
+    height: 44px;
+
+    display: block;
 }
 
 .brand-text h1 {
     margin: 0;
 
-    font-size: 27px;
+    font-size: 30px;
+    font-weight: 700;
 
-    letter-spacing: 0.3px;
+    letter-spacing: 0.2px;
+
+    color: white;
 }
 
 .brand-text p {
-    margin: 3px 0 0;
-
-    font-size: 14px;
-
-    opacity: 0.92;
+    display: none;
 }
 
 .nav {
@@ -162,6 +142,8 @@ body {
     gap: 10px;
 
     font-weight: 600;
+
+    color: white;
 }
 
 .profile-icon {
@@ -207,7 +189,7 @@ body {
 
     background: white;
 
-    color: #087E9B;
+    color: #2479b8;
 
     text-decoration: none;
 
@@ -217,10 +199,10 @@ body {
 
     font-weight: 700;
 
-    border: 1px solid #B9E3EE;
+    border: 1px solid #c9e5f2;
 
     box-shadow:
-        0 5px 15px rgba(8,126,155,0.10);
+        0 5px 15px rgba(30,100,150,0.10);
 
     margin-bottom: 14px;
 
@@ -231,7 +213,7 @@ body {
     transform: translateX(-3px);
 
     box-shadow:
-        0 8px 20px rgba(8,126,155,0.16);
+        0 8px 20px rgba(30,100,150,0.16);
 }
 
 
@@ -249,8 +231,8 @@ body {
     border: 1px solid #CBE8EF;
 
     box-shadow:
-        0 18px 45px rgba(8,126,155,0.09),
-        0 3px 10px rgba(8,126,155,0.05);
+        0 18px 45px rgba(30,100,150,0.09),
+        0 3px 10px rgba(30,100,150,0.05);
 
     position: relative;
 
@@ -270,7 +252,7 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(85,189,208,0.08);
+    background: rgba(74,169,214,0.08);
 }
 
 .main-card::after {
@@ -286,7 +268,7 @@ body {
 
     border-radius: 50%;
 
-    background: rgba(21,155,184,0.06);
+    background: rgba(36,121,184,0.06);
 }
 
 
@@ -325,10 +307,10 @@ body {
 
     font-size: 36px;
 
-    color: #087E9B;
+    color: #2479b8;
 
     box-shadow:
-        0 8px 20px rgba(8,126,155,0.12);
+        0 8px 20px rgba(30,100,150,0.12);
 }
 
 .title h2 {
@@ -336,7 +318,7 @@ body {
 
     font-size: 31px;
 
-    color: #075E75;
+    color: #437fe8;
 
     font-weight: 800;
 }
@@ -364,7 +346,7 @@ body {
     background: #FFFFFF;
 
     box-shadow:
-        0 8px 22px rgba(8,126,155,0.07);
+        0 8px 22px rgba(30,100,150,0.07);
 
     position: relative;
     z-index: 2;
@@ -380,7 +362,7 @@ body {
             #EAF8FB
         );
 
-    color: #075E75;
+    color: #174a88;
 
     font-size: 18px;
 
@@ -447,7 +429,7 @@ body {
 }
 
 .token-value {
-    color: #087E9B;
+    color: #2479b8;
 
     font-size: 19px;
 }
@@ -466,7 +448,7 @@ body {
 
     margin: 28px 0 14px;
 
-    color: #075E75;
+    color: #174a88;
 
     font-size: 21px;
 
@@ -486,7 +468,7 @@ body {
             #BFE8F1
         );
 
-    color: #087E9B;
+    color: #2479b8;
 
     display: flex;
 
@@ -563,7 +545,7 @@ body {
 
     margin-bottom: 9px;
 
-    color: #075E75;
+    color: #174a88;
 }
 
 .form-heading-icon {
@@ -574,7 +556,7 @@ body {
 
     background: #D5F0F7;
 
-    color: #087E9B;
+    color: #2479b8;
 
     display: flex;
 
@@ -587,7 +569,7 @@ body {
 .diagnosis-card .form-heading,
 .prescription-card .form-heading,
 .treatment-card .form-heading {
-    color: #075E75;
+    color: #174a88;
 }
 
 .diagnosis-card .form-heading-icon,
@@ -595,7 +577,7 @@ body {
 .treatment-card .form-heading-icon {
     background: #D5F0F7;
 
-    color: #087E9B;
+    color: #2479b8;
 }
 
 
@@ -636,10 +618,10 @@ textarea::placeholder {
 .diagnosis-card textarea:focus,
 .prescription-card textarea:focus,
 .treatment-card textarea:focus {
-    border-color: #159BB8;
+    border-color: #4aa9d6;
 
     box-shadow:
-        0 0 0 3px rgba(21,155,184,0.12);
+        0 0 0 3px rgba(74,169,214,0.12);
 }
 
 
@@ -661,9 +643,8 @@ textarea::placeholder {
     background:
         linear-gradient(
             100deg,
-            #087E9B,
-            #159BB8,
-            #55BDD0
+            #2479b8,
+            #4aa9d6
         );
 
     color: white;
@@ -677,7 +658,7 @@ textarea::placeholder {
     letter-spacing: 0.2px;
 
     box-shadow:
-        0 9px 22px rgba(8,126,155,0.20);
+        0 9px 22px rgba(30,100,150,0.20);
 
     transition: 0.2s;
 
@@ -690,7 +671,7 @@ textarea::placeholder {
     transform: translateY(-2px);
 
     box-shadow:
-        0 13px 28px rgba(8,126,155,0.26);
+        0 13px 28px rgba(30,100,150,0.26);
 }
 
 .save-btn:active {
@@ -748,7 +729,7 @@ textarea::placeholder {
 .next-card h3 {
     margin: 0 0 7px;
 
-    color: #087E9B;
+    color: #2479b8;
 }
 
 .next-card p {
@@ -775,7 +756,7 @@ textarea::placeholder {
 .footer span {
     margin: 0 7px;
 
-    color: #159BB8;
+    color: #4aa9d6;
 }
 
 
@@ -832,14 +813,12 @@ textarea::placeholder {
     }
 
     .brand-text p {
-        font-size: 12px;
+        display: none;
     }
 
-    .logo {
+    .logo-circle {
         width: 50px;
         height: 50px;
-
-        font-size: 27px;
     }
 
     .nav-item {
@@ -896,8 +875,33 @@ textarea::placeholder {
 
     <div class="brand">
 
-        <div class="logo">
-            <span class="heart-logo">♥</span>
+        <div class="logo-circle">
+
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linejoin="round"/>
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+
+            </svg>
+
         </div>
 
         <div class="brand-text">
@@ -913,31 +917,10 @@ textarea::placeholder {
     </div>
 
 
-    <div class="nav">
-
-        <a href="/doctor_dashboard" class="nav-item">
-            🏠 Home
-        </a>
-
-        <a href="/doctor_appointments" class="nav-item">
-            📅 Appointments
-        </a>
-
-        <div class="profile">
-
-            <div class="profile-icon">
-                👤
-            </div>
-
-            <span>
-                {{ session.get("name", "Doctor") }}
-            </span>
-
-            <span>⌄</span>
-
-        </div>
-
-    </div>
+    <div class="header-right">
+    Healthcare Management System
+    <span class="user-icon">♙</span>
+</div>
 
 </div>
 
@@ -1235,7 +1218,7 @@ textarea::placeholder {
 
         <!-- =================================================
              NEXT PATIENT
-        ================================================== -->
+        ================================================= -->
 
         {% if next_patient %}
 
@@ -1268,7 +1251,7 @@ textarea::placeholder {
 
     <!-- =================================================
          FOOTER
-    ================================================== -->
+    ================================================= -->
 
     <div class="footer">
 

@@ -8,6 +8,9 @@
 
 <title>CareTrack - Doctor Appointments</title>
 
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 
 * {
@@ -16,29 +19,76 @@
 
 body {
     margin: 0;
-    font-family: Arial, sans-serif;
-    background: #eef7ff;
-    color: #183b56;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #ffffff;
+    color: #385978;
+    min-height: 100vh;
 }
+
 
 /* HEADER */
 
-.top-header {
-    background: linear-gradient(135deg, #0757b8, #159bd7);
+.header {
+    height: 112px;
+    padding: 0 35px;
+    background: linear-gradient(90deg, #123c9c, #1769e0);
     color: white;
-    padding: 24px 45px;
-    box-shadow: 0 5px 18px rgba(0, 80, 150, 0.18);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(18, 60, 156, 0.20);
 }
 
-.top-header h1 {
-    margin: 0;
-    font-size: 27px;
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
 }
 
-.top-header p {
-    margin: 7px 0 0;
-    opacity: 0.92;
+.logo-circle {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.10);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 4px 12px rgba(0,50,120,0.15);
 }
+
+.logo-circle svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.brand span {
+    font-size: 30px;
+    font-weight: 700;
+    color: white;
+}
+
+.header-right {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+.user-icon { width: 34px; height: 34px;
+     border-radius: 50%; 
+     background: rgba(255, 255, 255, 0.10); 
+     border: 1px solid rgba(255, 255, 255, 0.25);
+      display: flex; align-items: center; 
+      justify-content: center; 
+      font-size: 19px;
+ }
 
 /* MAIN */
 
@@ -48,63 +98,117 @@ body {
     padding: 0 22px;
 }
 
+
 /* BACK BUTTON */
 
 .back-btn {
     display: inline-block;
     text-decoration: none;
-    background: #0757b8;
+    background: linear-gradient(135deg, #2479b8, #4aa9d6);
     color: white;
     padding: 11px 19px;
     border-radius: 10px;
     font-weight: bold;
     margin-bottom: 22px;
+    box-shadow: 0 4px 10px rgba(36, 121, 184, 0.15);
 }
 
 .back-btn:hover {
-    background: #064796;
+    background: linear-gradient(135deg, #1f6da8, #419bc8);
 }
 
+
 /* HERO */
+
+/* MY APPOINTMENTS */
 
 .hero-card {
     position: relative;
     overflow: hidden;
 
-    background: white;
-    border-radius: 22px;
-    padding: 28px;
+    background: linear-gradient(
+        135deg,
+        #eaf7ff,
+        #f4efff
+    );
 
-    box-shadow: 0 9px 28px rgba(0, 80, 150, 0.09);
+    border-radius: 18px;
+
+    padding: 22px 26px;
 
     margin-bottom: 22px;
+
+    border: 1px solid #dceaf5;
+
+    box-shadow: 0 6px 18px rgba(50, 100, 140, 0.08);
+
+    display: flex;
+    align-items: center;
+    gap: 18px;
 }
 
 .hero-card::after {
-    content: "🩺";
-
+    content: "";
     position: absolute;
-    right: 30px;
-    top: 18px;
 
-    font-size: 65px;
-    opacity: 0.10;
+    width: 120px;
+    height: 120px;
+
+    right: -35px;
+    top: -45px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.45);
 }
 
 .hero-icon {
-    font-size: 38px;
-    margin-bottom: 8px;
+    width: 62px;
+    height: 62px;
+
+    flex-shrink: 0;
+
+    border-radius: 17px;
+
+    background: white;
+
+    color: #2479b8;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    border: 1px solid #d7e9f5;
+
+    box-shadow: 0 5px 14px rgba(50, 110, 160, 0.10);
+
+    position: relative;
+    z-index: 2;
 }
 
 .hero-card h2 {
-    margin: 0;
-    color: #123f73;
-    font-size: 27px;
+    margin: 0 0 5px;
+
+    color: #1879f0;
+
+    font-size: 25px;
+    font-weight: 700;
+
+    position: relative;
+    z-index: 2;
 }
 
 .hero-card p {
-    margin: 8px 0 0;
-    color: #718096;
+    margin: 0;
+
+    color: #0fbccb;
+
+    font-size: 14px;
+
+    position: relative;
+    z-index: 2;
 }
 
 /* SEARCH */
@@ -114,7 +218,7 @@ body {
     border-radius: 18px;
     padding: 23px;
 
-    box-shadow: 0 8px 25px rgba(0, 80, 150, 0.08);
+    box-shadow: 0 8px 25px rgba(50, 100, 130, 0.08);
 
     margin-bottom: 25px;
 }
@@ -155,6 +259,14 @@ body {
 
     padding: 0 13px;
     font-size: 15px;
+
+    background: #fbfdff;
+}
+
+.search-field input:focus {
+    outline: none;
+    border-color: #4aa9d6;
+    box-shadow: 0 0 0 3px rgba(74, 169, 214, 0.12);
 }
 
 .search-btn {
@@ -163,7 +275,7 @@ body {
     border: none;
     border-radius: 9px;
 
-    background: #0757b8;
+    background: linear-gradient(135deg, #2479b8, #4aa9d6);
     color: white;
 
     padding: 0 22px;
@@ -173,8 +285,9 @@ body {
 }
 
 .search-btn:hover {
-    background: #064796;
+    background: linear-gradient(135deg, #1f6da8, #419bc8);
 }
+
 
 /* SECTION */
 
@@ -187,21 +300,43 @@ body {
 }
 
 .section-heading .icon {
-    font-size: 27px;
+    width: 42px;
+    height: 42px;
+
+    border-radius: 12px;
+
+    background: linear-gradient(
+        135deg,
+        #e5f5ff,
+        #eee8ff
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+
+    border: 1px solid #d9e8f5;
 }
 
 .section-heading h3 {
     margin: 0;
-    color: #164b80;
+    color: #1879f0;
     font-size: 21px;
 }
+
 
 /* DATE INFO */
 
 .date-card {
-    background: linear-gradient(135deg, #ffffff, #f0f8ff);
+    background: linear-gradient(
+        135deg,
+        #eaf7ff,
+        #f3edff
+    );
 
-    border-left: 5px solid #159bd7;
+    border-left: 5px solid #2798d4;
 
     border-radius: 15px;
 
@@ -209,22 +344,24 @@ body {
 
     margin-bottom: 16px;
 
-    box-shadow: 0 5px 17px rgba(0, 80, 150, 0.06);
+    box-shadow: 0 5px 17px rgba(50, 100, 130, 0.06);
 }
 
 .date-card strong {
-    color: #0757b8;
+    color: #2479b8;
 }
+
 
 /* TABLE */
 
 .table-card {
-    background: white;
+    background: #ffffff;
     border-radius: 18px;
+    overflow: hidden;
 
-    overflow-x: auto;
+    border: 1px solid #dceaf5;
 
-    box-shadow: 0 8px 25px rgba(0, 80, 150, 0.08);
+    box-shadow: 0 7px 22px rgba(50, 100, 140, 0.08);
 }
 
 table {
@@ -234,41 +371,69 @@ table {
 }
 
 th {
-    background: #edf7ff;
-    color: #214d78;
+    background: linear-gradient(
+        135deg,
+        #e8f6ff,
+        #eee8ff
+    );
 
-    padding: 16px;
+    color: #325f9a;
+
+    padding: 24px 16px;
 
     text-align: left;
-    font-size: 14px;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    border-bottom: 1px solid #dceaf5;
 }
 
 td {
-    padding: 16px;
+    padding: 15px 16px;
 
     border-top: 1px solid #edf2f7;
 
     font-size: 14px;
+
+    color: #526d87;
+}
+
+tbody tr:nth-child(even) td {
+    background: #fbfdff;
+}
+
+tbody tr:hover td {
+    background: #f2f8ff;
 }
 
 .patient {
-    font-weight: bold;
-    color: #183b61;
+    font-weight: 700;
+    color: #31527c;
 }
 
-/* TOKEN */
-
 .token {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-    background: #e5f3ff;
-    color: #0757b8;
+    min-width: 55px;
+
+    background: linear-gradient(
+        135deg,
+        #e1f3ff,
+        #e8e2ff
+    );
+
+    color: #28669c;
 
     padding: 7px 13px;
 
     border-radius: 20px;
 
-    font-weight: bold;
+    font-weight: 700;
+
+    border: 1px solid #d5e8f7;
 }
 
 /* STATUS */
@@ -304,6 +469,7 @@ td {
     background: #ffe9e9;
     color: #c53030;
 }
+
 .action-cancelled {
     display: inline-block;
     padding: 7px 12px;
@@ -315,6 +481,7 @@ td {
     border: 1px solid #fed7aa;
 }
 
+
 /* CONSULTATION BUTTON */
 
 .consult-btn {
@@ -322,8 +489,8 @@ td {
 
     background: linear-gradient(
         135deg,
-        #149bd7,
-        #0757b8
+        #4aa9d6,
+        #2479b8
     );
 
     color: white;
@@ -337,37 +504,76 @@ td {
     font-weight: bold;
 
     font-size: 13px;
+
+    box-shadow: 0 3px 8px rgba(36, 121, 184, 0.15);
 }
 
 .consult-btn:hover {
     transform: translateY(-1px);
 }
 
+
 /* EMPTY */
 
 .empty-card {
-    background: white;
-
+    background: linear-gradient(135deg, #eef8ff, #f4efff);
+    border: 1px solid #dceaf7;
     border-radius: 18px;
-
-    padding: 45px 25px;
-
+    padding: 30px 25px;
     text-align: center;
-
-    box-shadow: 0 8px 25px rgba(0, 80, 150, 0.08);
-
+    box-shadow: 0 6px 18px rgba(60, 100, 150, 0.08);
     color: #718096;
 }
 
 .empty-icon {
-    font-size: 45px;
-    margin-bottom: 10px;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 16px;
+
+    background: linear-gradient(135deg, #dff3ff, #e9e0ff);
+
+    font-size: 30px;
+
+    box-shadow: 0 4px 10px rgba(80, 110, 160, 0.08);
 }
 
-/* HISTORY */
+.empty-card h3 {
+    margin: 5px 0 7px;
+    color: #315f91;
+    font-size: 19px;
+}
+
+.empty-card p {
+    margin: 0;
+    color: #7890a8;
+    font-size: 14px;
+}
 
 .history-box {
     margin-top: 35px;
+    margin-bottom: 12px;
+}
+
+.history-box .icon {
+    background: linear-gradient(
+        135deg,
+        #f0eaff,
+        #e3f5ff
+    );
+
+    color: #5f68ad;
+
+    border: 1px solid #ddd9f4;
+}
+
+.history-box h3 {
+    color: #315f91;
 }
 
 .small-note {
@@ -376,12 +582,36 @@ td {
     margin-bottom: 15px;
 }
 
+
 /* MOBILE */
 
 @media (max-width: 700px) {
 
-    .top-header {
-        padding: 20px;
+    .header {
+        height: auto;
+        min-height: 90px;
+        padding: 16px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .brand span {
+        font-size: 25px;
+    }
+
+    .logo-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-circle svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    .header-right {
+        font-size: 12px;
     }
 
     .container {
@@ -403,15 +633,53 @@ td {
 
 <!-- HEADER -->
 
-<div class="top-header">
+<div class="header">
 
-    <h1>CareTrack — Doctor Portal</h1>
+    <div class="brand">
 
-    <p>
-        Welcome, {{ doctor.doctor_name }}
-    </p>
+        <div class="logo-circle">
+
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linejoin="round"/>
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"/>
+
+            </svg>
+
+        </div>
+
+        <span>CareTrack</span>
+
+    </div>
+
+    <div class="header-right">
+    Healthcare Management System
+    <span class="user-icon">
+        ♙
+    </span>
+</div>
 
 </div>
+
+
 
 
 <div class="container">
@@ -427,7 +695,7 @@ td {
 <div class="hero-card">
 
     <div class="hero-icon">
-        👨‍⚕️
+        <i class="fa-solid fa-user-doctor"></i>
     </div>
 
     <h2>
@@ -641,7 +909,7 @@ td {
 {% elif appointment.token_status == "cancelled" %}
 
 <span class="action-cancelled">
-    ⏰ Time Expired
+    🔴 Cancelled
 </span>
 
 {% else %}

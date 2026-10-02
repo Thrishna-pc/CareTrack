@@ -3,419 +3,528 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Patient Dashboard - CareTrack</title>
+<title>Patient Dashboard - CareTrack</title>
 
-    <style>
+<style>
 
-        * {
-            box-sizing: border-box;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #eef6ff, #f8fbff);
-            color: #172554;
-        }
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
 
-        /* ================= NAVBAR ================= */
+    /* EXISTING BACKGROUND — UNCHANGED */
+  
+ 
+    background: white;
+}
 
-        .navbar {
-            background: linear-gradient(90deg, #123c9c, #1769e0);
-            color: white;
-            padding: 18px 55px;
 
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
 
-            box-shadow: 0 4px 18px rgba(20, 70, 150, 0.20);
-        }
+/* ================= NAVBAR ================= */
 
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+.navbar {
 
-        .brand-icon {
-            width: 42px;
-            height: 42px;
+    /* SAME BLUE THEME */
+    background: linear-gradient(90deg, #123c9c, #1769e0);
 
-            background: rgba(255,255,255,0.16);
-            border-radius: 12px;
+    color: white;
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
+    height: 105px;
+    padding: 0 35px;
 
-            font-size: 22px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-        .brand-text h2 {
-            margin: 0;
-            font-size: 23px;
-        }
+    box-shadow: 0 4px 18px rgba(20, 70, 150, 0.20);
 
-        .brand-text span {
-            font-size: 11px;
-            opacity: 0.82;
-        }
+    position: relative;
+    overflow: hidden;
+}
 
-        .navbar-right {
-            font-size: 13px;
-            opacity: 0.85;
-        }
 
+/* Decorative navbar circle */
 
-        /* ================= MAIN ================= */
+.navbar::before {
+    content: "";
+    position: absolute;
 
-        .container {
-            max-width: 1050px;
-            margin: 0 auto;
-            padding: 48px 25px 25px;
-        }
+    width: 300px;
+    height: 300px;
 
+    border-radius: 50%;
 
-        /* ================= WELCOME ================= */
+    background: rgba(255,255,255,0.08);
 
-        .welcome-section {
-            margin-bottom: 38px;
-        }
+    right: 60px;
+    top: -210px;
+}
 
-        .welcome-section h1 {
-            margin: 0;
-            font-size: 34px;
-            color: #0bd53e;
-        }
 
-        .welcome-section h1 span {
-            color: #1a89e5;
-        }
+/* ================= CARETRACK BRAND ================= */
 
-        .welcome-section p {
-            margin-top: 9px;
-            color: #64748b;
-            font-size: 15px;
-        }
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 
+    color: white;
 
-        /* ================= DASHBOARD ================= */
+    position: relative;
+    z-index: 2;
+}
 
-        .cards {
-            display: grid;
 
-            grid-template-columns: repeat(6, 1fr);
+/* CareTrack Logo */
 
-            gap: 22px;
-        }
+.logo-circle {
 
+    width: 58px;
+    height: 58px;
 
-        /* First three cards */
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-        .card:nth-child(1),
-        .card:nth-child(2),
-        .card:nth-child(3) {
-            grid-column: span 2;
-        }
+    border-radius: 50%;
 
+    background: rgba(255, 255, 255, 0.10);
 
-        /* Medical History - Center */
+    border: 2px solid rgba(255, 255, 255, 0.85);
+}
 
-        .card:nth-child(4) {
-            grid-column: 3 / span 2;
-        }
 
+/* SVG Logo */
 
-        /* ================= CARD ================= */
+.logo-circle svg {
+    width: 44px;
+    height: 44px;
+    display: block;
+}
 
-        .card {
-            position: relative;
 
-            min-height: 205px;
+/* CareTrack text */
 
-            background: rgba(255,255,255,0.94);
+.brand span {
 
-            border-radius: 18px;
+    font-size: 30px;
 
-            padding: 25px;
+    font-weight: 700;
 
-            text-decoration: none;
-            color: #172554;
+    color: white;
+}
 
-            border: 1px solid #e2e8f0;
 
-            box-shadow:
-                0 8px 25px rgba(30, 64, 175, 0.08);
+/* Right side */
 
-            overflow: hidden;
+.navbar-right {
 
-            transition:
-                transform 0.25s ease,
-                box-shadow 0.25s ease,
-                border-color 0.25s ease;
-        }
+    color: white;
 
+    font-size: 14px;
 
-        .card:hover {
-            transform: translateY(-6px);
+    font-weight: 400;
 
-            box-shadow:
-                0 16px 35px rgba(30, 64, 175, 0.15);
+    display: flex;
 
-            border-color: #93c5fd;
-        }
+    align-items: center;
 
+    gap: 5px;
 
-        /* Decorative circle */
+    position: relative;
 
-        .card::after {
-            content: "";
+    z-index: 2;
+}
 
-            position: absolute;
-
-            width: 115px;
-            height: 115px;
-
-            right: -40px;
-            bottom: -45px;
-
-            border-radius: 50%;
-
-            background: rgba(59, 130, 246, 0.07);
-        }
-
-
-        /* ================= ICON ================= */
-
-        .icon-box {
-            width: 55px;
-            height: 55px;
-
-            border-radius: 15px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            font-size: 27px;
-
-            margin-bottom: 25px;
-
-            position: relative;
-            z-index: 2;
-        }
-
-
-        /* Different colors */
-
-        .doctor-icon {
-            background: #e0edff;
-            color: #2563eb;
-        }
-
-        .appointment-icon {
-            background: #e4f1ff;
-            color: #0b70d1;
-        }
-
-        .token-icon {
-            background: #fff0df;
-            color: #d97706;
-        }
-
-        .report-icon {
-            background: #e6f8ee;
-            color: #159447;
-        }
-
-        .history-icon {
-            background: #eeeaff;
-            color: #6954d9;
-        }
-
-
-        /* ================= ARROW ================= */
-
-        .arrow {
-            position: absolute;
-
-            top: 25px;
-            right: 25px;
-
+.user-icon {
+    font-size: 18px;
+    margin-left: 3px;
+}
+.user-icon {
             width: 34px;
             height: 34px;
-
             border-radius: 50%;
 
-            background: #eef5ff;
+            background: rgba(255, 255, 255, 0.10);
 
-            color: #1769e0;
+            border: 1px solid rgba(255, 255, 255, 0.25);
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            font-size: 17px;
-
-            transition: 0.25s;
-
-            z-index: 3;
+            font-size: 19px;
         }
 
-        .card:hover .arrow {
-            background: #1769e0;
-            color: white;
-            transform: translateX(3px);
-        }
+/* ================= MAIN ================= */
+
+.container {
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 48px 25px 25px;
+}
 
 
-        /* ================= TEXT ================= */
+/* ================= WELCOME ================= */
 
-        .card h3 {
-            margin: 0 0 9px;
+.welcome-section {
+    margin-bottom: 38px;
+}
 
-            font-size: 20px;
+.welcome-section h1 {
+    margin: 0;
+    font-size: 34px;
+    color: #0bd53e;
+}
 
-            color: #163477;
+.welcome-section h1 span {
+    color: #1a89e5;
+}
 
-            position: relative;
-            z-index: 2;
-        }
-
-        .card p {
-            margin: 0;
-
-            color: #64748b;
-
-            font-size: 14px;
-
-            line-height: 1.55;
-
-            position: relative;
-            z-index: 2;
-        }
+.welcome-section p {
+    margin-top: 9px;
+    color: #64748b;
+    font-size: 15px;
+}
 
 
-        /* ================= LOGOUT ================= */
+/* ================= DASHBOARD ================= */
 
-        .logout-container {
-            text-align: center;
+.cards {
+    display: grid;
 
-            margin-top: 38px;
-            margin-bottom: 12px;
-        }
+    grid-template-columns: repeat(6, 1fr);
 
-        .logout-btn {
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            gap: 9px;
-
-            padding: 12px 27px;
-
-            background: linear-gradient(
-                135deg,
-                #1769e0,
-                #0d47a1
-            );
-
-            color: white;
-
-            text-decoration: none;
-
-            border-radius: 9px;
-
-            font-weight: bold;
-
-            font-size: 14px;
-
-            box-shadow:
-                0 6px 16px rgba(23, 105, 224, 0.22);
-
-            transition: 0.25s;
-        }
-
-        .logout-btn:hover {
-            transform: translateY(-2px);
-
-            box-shadow:
-                0 9px 22px rgba(23, 105, 224, 0.30);
-        }
+    gap: 22px;
+}
 
 
-        /* ================= FOOTER ================= */
+/* First three cards */
 
-        .footer {
-            text-align: center;
-
-            color: #94a3b8;
-
-            font-size: 12px;
-
-            margin-top: 18px;
-
-            padding-bottom: 20px;
-        }
+.card:nth-child(1),
+.card:nth-child(2),
+.card:nth-child(3) {
+    grid-column: span 2;
+}
 
 
-        /* ================= MOBILE ================= */
+/* Medical History - Center */
 
-        @media (max-width: 850px) {
-
-            .cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .card:nth-child(1),
-            .card:nth-child(2),
-            .card:nth-child(3),
-            .card:nth-child(4),
-            .card:nth-child(5) {
-                grid-column: span 1;
-            }
-
-        }
+.card:nth-child(4) {
+    grid-column: 3 / span 2;
+}
 
 
-        @media (max-width: 600px) {
+/* ================= CARD ================= */
 
-            .navbar {
-                padding: 16px 20px;
-            }
+.card {
+    position: relative;
 
-            .navbar-right {
-                display: none;
-            }
+    min-height: 205px;
 
-            .container {
-                padding: 32px 18px;
-            }
+    background: rgba(255,255,255,0.94);
 
-            .welcome-section h1 {
-                font-size: 28px;
-            }
+    border-radius: 18px;
 
-            .cards {
-                grid-template-columns: 1fr;
-            }
+    padding: 25px;
 
-            .card:nth-child(1),
-            .card:nth-child(2),
-            .card:nth-child(3),
-            .card:nth-child(4),
-            .card:nth-child(5) {
-                grid-column: span 1;
-            }
+    text-decoration: none;
 
-        }
+    color: #172554;
 
-    </style>
+    border: 1px solid #e2e8f0;
+
+    box-shadow:
+        0 8px 25px rgba(30, 64, 175, 0.08);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+
+.card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 16px 35px rgba(30, 64, 175, 0.15);
+
+    border-color: #93c5fd;
+}
+
+
+/* Decorative circle */
+
+.card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 115px;
+    height: 115px;
+
+    right: -40px;
+    bottom: -45px;
+
+    border-radius: 50%;
+
+    background: rgba(59, 130, 246, 0.07);
+}
+
+
+/* ================= ICON ================= */
+
+.icon-box {
+    width: 55px;
+    height: 55px;
+
+    border-radius: 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+
+    margin-bottom: 25px;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* Different colors */
+
+.doctor-icon {
+    background: #e0edff;
+    color: #2563eb;
+}
+
+.appointment-icon {
+    background: #e4f1ff;
+    color: #0b70d1;
+}
+
+.token-icon {
+    background: #fff0df;
+    color: #d97706;
+}
+
+.report-icon {
+    background: #e6f8ee;
+    color: #159447;
+}
+
+.history-icon {
+    background: #eeeaff;
+    color: #6954d9;
+}
+
+
+/* ================= ARROW ================= */
+
+.arrow {
+    position: absolute;
+
+    top: 25px;
+    right: 25px;
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #eef5ff;
+
+    color: #1769e0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 17px;
+
+    transition: 0.25s;
+
+    z-index: 3;
+}
+
+
+.card:hover .arrow {
+    background: #1769e0;
+    color: white;
+    transform: translateX(3px);
+}
+
+
+/* ================= TEXT ================= */
+
+.card h3 {
+    margin: 0 0 9px;
+
+    font-size: 20px;
+
+    color: #163477;
+
+    position: relative;
+    z-index: 2;
+}
+
+.card p {
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ================= LOGOUT ================= */
+
+.logout-container {
+    text-align: center;
+
+    margin-top: 38px;
+    margin-bottom: 12px;
+}
+
+.logout-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    padding: 12px 27px;
+
+    background: linear-gradient(
+        135deg,
+        #1769e0,
+        #0d47a1
+    );
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    font-weight: bold;
+
+    font-size: 14px;
+
+    box-shadow:
+        0 6px 16px rgba(23, 105, 224, 0.22);
+
+    transition: 0.25s;
+}
+
+
+.logout-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 9px 22px rgba(23, 105, 224, 0.30);
+}
+
+
+/* ================= FOOTER ================= */
+
+.footer {
+    text-align: center;
+
+    color: #94a3b8;
+
+    font-size: 12px;
+
+    margin-top: 18px;
+
+    padding-bottom: 20px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 850px) {
+
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .card:nth-child(1),
+    .card:nth-child(2),
+    .card:nth-child(3),
+    .card:nth-child(4),
+    .card:nth-child(5) {
+        grid-column: span 1;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 16px 20px;
+        height: auto;
+    }
+
+    .brand span {
+        font-size: 24px;
+    }
+
+    .logo-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-circle svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .navbar-right {
+        display: none;
+    }
+
+    .container {
+        padding: 32px 18px;
+    }
+
+    .welcome-section h1 {
+        font-size: 28px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .card:nth-child(1),
+    .card:nth-child(2),
+    .card:nth-child(3),
+    .card:nth-child(4),
+    .card:nth-child(5) {
+        grid-column: span 1;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -429,26 +538,67 @@
 
     <div class="brand">
 
-        <div class="brand-icon">
-            ❤️
+        <div class="logo-circle">
+
+            <!-- CARETRACK HEART + ECG LOGO -->
+
+            <svg
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+
+                    fill="none"
+
+                    stroke="white"
+
+                    stroke-width="3"
+
+                    stroke-linejoin="round"
+                />
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+
+                    fill="none"
+
+                    stroke="white"
+
+                    stroke-width="3"
+
+                    stroke-linecap="round"
+
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
         </div>
 
-        <div class="brand-text">
 
-            <h2>
-                Care<span style="color:#60a5fa;">Track</span>
-            </h2>
-
-            <span>
-                Healthcare Management System
-            </span>
-
-        </div>
+        <span>
+            CareTrack
+        </span>
 
     </div>
 
+
     <div class="navbar-right">
-        Patient Dashboard
+
+        Healthcare Management System
+
+        <span class="user-icon">
+            ♙
+        </span>
+
     </div>
 
 </div>
@@ -483,7 +633,10 @@
 
         <!-- DOCTOR DETAILS -->
 
-        <a href="/doctor_details" class="card">
+        <a
+            href="/doctor_details"
+            class="card"
+        >
 
             <div class="icon-box doctor-icon">
                 👨‍⚕️
@@ -507,7 +660,10 @@
 
         <!-- BOOK APPOINTMENT -->
 
-        <a href="/patient_book_appointment" class="card">
+        <a
+            href="/patient_book_appointment"
+            class="card"
+        >
 
             <div class="icon-box appointment-icon">
                 📅
@@ -531,7 +687,10 @@
 
         <!-- TOKEN TRACKING -->
 
-        <a href="/tracking" class="card">
+        <a
+            href="/tracking"
+            class="card"
+        >
 
             <div class="icon-box token-icon">
                 🎫
@@ -553,12 +712,12 @@
 
 
 
-        
-
-
         <!-- MEDICAL HISTORY -->
 
-        <a href="/patient_medical_history" class="card">
+        <a
+            href="/patient_medical_history"
+            class="card"
+        >
 
             <div class="icon-box history-icon">
                 📋
@@ -587,7 +746,10 @@
 
     <div class="logout-container">
 
-        <a href="/logout" class="logout-btn">
+        <a
+            href="/logout"
+            class="logout-btn"
+        >
 
             🚪 Logout
 

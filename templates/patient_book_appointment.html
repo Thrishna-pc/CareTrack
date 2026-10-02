@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
@@ -17,39 +18,104 @@
 body {
     margin: 0;
     font-family: "Segoe UI", Arial, sans-serif;
-    background: #f4f6fb;
+    background: #ffffff;
     color: #252a3a;
 }
 
 /* ================= NAVBAR ================= */
 
 .navbar {
-    background: linear-gradient(135deg, #172554, #312e81);
+    background: linear-gradient(90deg, #123c9c, #1769e0);
     color: white;
-    padding: 25px 48px;
-    box-shadow: 0 8px 25px rgba(23, 37, 84, 0.20);
+    height: 105px;
+    padding: 0 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    box-shadow: 0 4px 18px rgba(20, 70, 150, 0.20);
+
+    position: relative;
+    overflow: hidden;
 }
+
+.navbar::before {
+    content: "";
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    right: 60px;
+    top: -210px;
+}
+
+/* ================= CARETRACK BRAND ================= */
 
 .logo {
-    font-size: 31px;
-    font-weight: 800;
-    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: white;
+
+    position: relative;
+    z-index: 2;
+
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 0;
 }
 
-.logo::before {
-    content: "✚";
-    display: inline-flex;
+.logo-circle {
+    width: 58px;
+    height: 58px;
+
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 43px;
-    height: 43px;
-    margin-right: 12px;
-    border-radius: 12px;
-    background: #ffffff;
-    color: #4f46e5;
-    font-size: 25px;
-    vertical-align: middle;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+.logo-circle svg {
+    width: 44px;
+    height: 44px;
+    display: block;
+}
+
+/* ================= RIGHT NAVBAR ================= */
+
+.navbar-right {
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+    z-index: 2;
+}
+
+.user-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
 }
 
 /* ================= MAIN ================= */
@@ -69,20 +135,24 @@ body {
     padding: 12px 21px;
     margin-bottom: 30px;
     border-radius: 10px;
-    background: #ffffff;
-    color: #3730a3;
-    border: 1px solid #d9ddf2;
+
+    background: linear-gradient(90deg, #123c9c, #1769e0);
+    color: white;
+
+    border: none;
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
-    box-shadow: 0 5px 15px rgba(37, 45, 90, 0.08);
+
+    box-shadow: 0 6px 16px rgba(18, 60, 156, 0.22);
     transition: all 0.25s ease;
 }
 
 .back-button:hover {
-    background: #3730a3;
+    background: linear-gradient(90deg, #10358b, #125bc5);
     color: white;
     transform: translateX(-3px);
+    box-shadow: 0 9px 20px rgba(18, 60, 156, 0.30);
 }
 
 /* ================= TITLE ================= */
@@ -547,6 +617,25 @@ tbody tr:last-child td {
 
 @media (max-width: 700px) {
 
+    .navbar {
+        padding: 16px 20px;
+        height: auto;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .logo-circle {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-circle svg {
+        width: 38px;
+        height: 38px;
+    }
+
     .title:nth-of-type(2) h1 {
         font-size: 29px;
     }
@@ -562,6 +651,7 @@ tbody tr:last-child td {
     }
 
 }
+
 </style>
 </head>
 
@@ -572,7 +662,47 @@ tbody tr:last-child td {
 <div class="navbar">
 
     <div class="logo">
+
+        <div class="logo-circle">
+
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linejoin="round"
+                />
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+        </div>
+
         CareTrack
+
+    </div>
+
+    <div class="navbar-right">
+        Healthcare Management System
+        <span class="user-icon">
+            ♙
+        </span>
     </div>
 
 </div>
@@ -615,21 +745,22 @@ tbody tr:last-child td {
 
             <div class="form-group">
 
-    <label>Patient</label>
+                <label>Patient</label>
 
-    <div style="
-        width: 100%;
-        padding: 13px;
-        border: 1px solid #cbd5e1;
-        border-radius: 8px;
-        background: #f8fbff;
-        font-size: 15px;
-        font-weight: bold;
-    ">
-        {{ patient_name }}
-    </div>
+                <div style="
+                    width: 100%;
+                    padding: 13px;
+                    border: 1px solid #cbd5e1;
+                    border-radius: 8px;
+                    background: #f8fbff;
+                    font-size: 15px;
+                    font-weight: bold;
+                ">
+                    {{ patient_name }}
+                </div>
 
-</div>
+            </div>
+
             <!-- Department -->
 
             <div class="form-group">

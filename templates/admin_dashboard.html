@@ -16,8 +16,8 @@
 
         body {
             margin: 0;
-            font-family: "Segoe UI", Arial, sans-serif;
-            background: linear-gradient(135deg, #eef7ff, #f8fbff);
+            font-family: Arial, sans-serif;
+            background: #ffffff;
             color: #173b72;
             min-height: 100vh;
         }
@@ -25,43 +25,75 @@
         /* ================= NAVBAR ================= */
 
         .navbar {
-            background: linear-gradient(135deg, #123f91, #1976d2);
+            background: linear-gradient(90deg, #123c9c, #1769e0);
             color: white;
-            padding: 20px 35px;
-            font-size: 23px;
-            font-weight: 700;
-
+            height: 105px;
+            padding: 0 35px;
             display: flex;
             align-items: center;
-            gap: 14px;
-
-            box-shadow: 0 5px 20px rgba(23, 78, 166, 0.25);
+            justify-content: space-between;
+            box-shadow: 0 4px 18px rgba(20, 70, 150, 0.20);
+            position: relative;
+            overflow: hidden;
         }
 
-        .logo-icon {
-            width: 46px;
-            height: 46px;
-
-            background: rgba(255, 255, 255, 0.18);
+        .navbar::before {
+            content: "";
+            position: absolute;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            right: 60px;
+            top: -210px;
+        }
 
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo-circle {
+            width: 58px;
+            height: 58px;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            font-size: 24px;
-
-            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.25);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            border: 2px solid rgba(255, 255, 255, 0.85);
         }
 
-        .navbar-text {
+        .logo-circle svg {
+            width: 44px;
+            height: 44px;
+            display: block;
+        }
+
+        .brand span {
+            font-size: 30px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .navbar-right {
+            color: white;
+            font-size: 14px;
+            font-weight: 400;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px;
+            position: relative;
+            z-index: 2;
         }
 
-        .navbar-divider {
-            opacity: 0.5;
+        .user-icon {
+            font-size: 18px;
+            margin-left: 3px;
         }
 
         /* ================= MAIN CONTAINER ================= */
@@ -90,15 +122,11 @@
         .admin-icon {
             width: 105px;
             height: 105px;
-
             border-radius: 50%;
-
             background: linear-gradient(145deg, #dff1ff, #ffffff);
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             font-size: 55px;
 
             box-shadow:
@@ -108,9 +136,7 @@
 
         h1 {
             margin: 0;
-
             color: #123b7a;
-
             font-size: 38px;
             font-weight: 750;
             letter-spacing: -0.5px;
@@ -124,12 +150,9 @@
 
         .health-message {
             text-align: right;
-
             color: #1976d2;
-
             font-size: 20px;
             font-weight: 600;
-
             line-height: 1.5;
         }
 
@@ -148,74 +171,157 @@
 
         .card {
             position: relative;
-
             min-height: 225px;
-
             padding: 30px;
-
             border-radius: 22px;
-
-            background: rgba(255,255,255,0.94);
-
-            border: 1px solid #d9eaff;
+            overflow: hidden;
 
             box-shadow:
-                0 10px 30px rgba(32, 91, 150, 0.12);
-
-            overflow: hidden;
+                0 10px 28px rgba(23, 78, 166, 0.12);
 
             transition:
                 transform 0.3s ease,
                 box-shadow 0.3s ease;
         }
 
-        .card::after {
-            content: "";
-
-            position: absolute;
-
-            width: 155px;
-            height: 155px;
-
-            right: -60px;
-            bottom: -70px;
-
-            border-radius: 50%;
-
-            background: rgba(72,151,240,0.10);
-        }
-
         .card:hover {
             transform: translateY(-7px);
 
             box-shadow:
-                0 18px 40px rgba(32, 91, 150, 0.20);
+                0 18px 40px rgba(23, 78, 166, 0.22);
         }
 
-        /* ================= CARD BACKGROUNDS ================= */
+        /* ================= CARD COLORS ================= */
 
         .patients-card {
-            background: linear-gradient(145deg, #ffffff, #eef7ff);
+            background: linear-gradient(
+                135deg,
+                #dff1ff 0%,
+                #b9dcff 100%
+            );
+
+            border: 1px solid #a8d2f5;
         }
+
+        .patients-card::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            bottom: -90px;
+            border-radius: 50%;
+            background: rgba(25, 118, 210, 0.13);
+        }
+
 
         .doctors-card {
-            background: linear-gradient(145deg, #ffffff, #effcf9);
+            background: linear-gradient(
+                135deg,
+                #e2f8f3 0%,
+                #bde9df 100%
+            );
+
+            border: 1px solid #a8dcd0;
         }
+
+        .doctors-card::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            bottom: -90px;
+            border-radius: 50%;
+            background: rgba(23, 151, 128, 0.13);
+        }
+
 
         .appointments-card {
-            background: linear-gradient(145deg, #ffffff, #f5f1ff);
+            background: linear-gradient(
+                135deg,
+                #eeeaff 0%,
+                #d2c8f5 100%
+            );
+
+            border: 1px solid #c3b7ed;
         }
+
+        .appointments-card::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            bottom: -90px;
+            border-radius: 50%;
+            background: rgba(91, 76, 175, 0.12);
+        }
+
 
         .tracking-card {
-            background: linear-gradient(145deg, #ffffff, #fff7e8);
+            background: linear-gradient(
+                135deg,
+                #dff5ff 0%,
+                #b8e3f5 100%
+            );
+
+            border: 1px solid #a4d3e8;
         }
+
+        .tracking-card::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            bottom: -90px;
+            border-radius: 50%;
+            background: rgba(21, 126, 174, 0.14);
+        }
+
 
         .records-card {
-            background: linear-gradient(145deg, #ffffff, #eefaff);
+            background: linear-gradient(
+                135deg,
+                #e9efff 0%,
+                #cbd9f5 100%
+            );
+
+            border: 1px solid #b7c9e9;
         }
 
+        .records-card::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            bottom: -90px;
+            border-radius: 50%;
+            background: rgba(52, 91, 170, 0.13);
+        }
+
+
         .reports-card {
-            background: linear-gradient(145deg, #ffffff, #f5f2ff);
+            background: linear-gradient(
+                135deg,
+                #e5ecff 0%,
+                #bfd1f3 100%
+            );
+
+            border: 1px solid #aec3e8;
+        }
+
+        .reports-card::after {
+            content: "";
+            position: absolute;
+            width: 190px;
+            height: 190px;
+            right: -70px;
+            bottom: -90px;
+            border-radius: 50%;
+            background: rgba(37, 87, 168, 0.14);
         }
 
         /* ================= CARD ICON ================= */
@@ -223,7 +329,6 @@
         .card-icon {
             width: 65px;
             height: 65px;
-
             border-radius: 18px;
 
             display: flex;
@@ -231,61 +336,56 @@
             justify-content: center;
 
             font-size: 34px;
-
             margin-bottom: 20px;
 
             position: relative;
             z-index: 2;
+
+            box-shadow:
+                0 6px 15px rgba(23, 78, 166, 0.10);
         }
 
         .patients-icon {
-            background: #dceeff;
+            background: #b9ddff;
         }
 
         .doctors-icon {
-            background: #d9f8f0;
+            background: #b4e5d9;
         }
 
         .appointments-icon {
-            background: #ebe2ff;
+            background: #d0c4f4;
         }
 
         .tracking-icon {
-            background: #fff0cf;
+            background: #b5e0f2;
         }
 
         .records-icon {
-            background: #dff5ff;
+            background: #c3d3f2;
         }
 
         .reports-icon {
-            background: #eee5ff;
+            background: #b9caf0;
         }
 
         /* ================= CARD TEXT ================= */
 
         .card h2 {
             color: #123b7a;
-
             margin: 0 0 9px;
-
             font-size: 23px;
             font-weight: 750;
-
             position: relative;
             z-index: 2;
         }
 
         .card p {
-            color: #64748b;
-
+            color: #536b89;
             margin: 0;
-
             line-height: 1.6;
             font-size: 15.5px;
-
             max-width: 400px;
-
             position: relative;
             z-index: 2;
         }
@@ -294,22 +394,17 @@
 
         .btn {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
-
             gap: 7px;
 
             margin-top: 20px;
-
             padding: 10px 18px;
 
             background: #1976d2;
-
             color: white;
 
             text-decoration: none;
-
             border-radius: 8px;
 
             font-size: 14px;
@@ -323,35 +418,35 @@
 
         .btn:hover {
             background: #123f91;
-
             transform: translateY(-2px);
 
-            box-shadow: 0 7px 15px rgba(25,118,210,0.25);
+            box-shadow:
+                0 7px 15px rgba(25,118,210,0.25);
         }
 
         /* ================= LOGOUT ================= */
 
         .logout-container {
             text-align: center;
-
             margin-top: 42px;
             margin-bottom: 25px;
         }
 
         .logout-btn {
             display: inline-flex;
-
             align-items: center;
             justify-content: center;
-
             gap: 10px;
 
             padding: 14px 35px;
 
-            background: linear-gradient(135deg, #174ea6, #1976d2);
+            background: linear-gradient(
+                135deg,
+                #174ea6,
+                #1976d2
+            );
 
             color: white;
-
             text-decoration: none;
 
             border-radius: 10px;
@@ -368,7 +463,11 @@
         .logout-btn:hover {
             transform: translateY(-3px);
 
-            background: linear-gradient(135deg, #103b82, #125ca8);
+            background: linear-gradient(
+                135deg,
+                #103b82,
+                #125ca8
+            );
 
             box-shadow:
                 0 12px 25px rgba(25,118,210,0.35);
@@ -382,11 +481,8 @@
 
         .footer {
             text-align: center;
-
             color: #8996a8;
-
             font-size: 14px;
-
             padding-bottom: 25px;
         }
 
@@ -394,33 +490,23 @@
 
         .bottom-decoration {
             position: fixed;
-
             right: -45px;
             bottom: -65px;
-
             width: 240px;
             height: 240px;
-
             border-radius: 50%;
-
-            background: rgba(92,171,244,0.12);
-
+            background: rgba(92,171,244,0.08);
             z-index: -1;
         }
 
         .left-decoration {
             position: fixed;
-
             left: -75px;
             bottom: -85px;
-
             width: 250px;
             height: 250px;
-
             border-radius: 50%;
-
-            background: rgba(93,175,244,0.08);
-
+            background: rgba(93,175,244,0.06);
             z-index: -1;
         }
 
@@ -441,14 +527,31 @@
             .health-message {
                 text-align: left;
             }
-
         }
 
         @media (max-width: 600px) {
 
             .navbar {
                 padding: 16px 20px;
-                font-size: 18px;
+                height: auto;
+            }
+
+            .brand span {
+                font-size: 24px;
+            }
+
+            .logo-circle {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-circle svg {
+                width: 38px;
+                height: 38px;
+            }
+
+            .navbar-right {
+                display: none;
             }
 
             .container {
@@ -468,7 +571,6 @@
             .card {
                 padding: 25px;
             }
-
         }
 
     </style>
@@ -481,14 +583,44 @@
 
 <div class="navbar">
 
-    <div class="logo-icon">
-        ❤️‍⚕️
+    <div class="brand">
+
+        <div class="logo-circle">
+
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linejoin="round" />
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round" />
+
+            </svg>
+
+        </div>
+
+        <span>CareTrack</span>
+
     </div>
 
-    <div class="navbar-text">
-        <span>CareTrack</span>
-        <span class="navbar-divider">—</span>
-        <span>Admin Dashboard</span>
+    <div class="navbar-right">
+        Healthcare Management System
+        <span class="user-icon">♙</span>
     </div>
 
 </div>
@@ -497,9 +629,6 @@
 <!-- ================= MAIN CONTENT ================= -->
 
 <div class="container">
-
-
-    <!-- Welcome Section -->
 
     <div class="welcome-section">
 
@@ -540,7 +669,6 @@
     <!-- ================= DASHBOARD CARDS ================= -->
 
     <div class="cards">
-
 
         <!-- PATIENTS -->
 
@@ -679,7 +807,6 @@
 
         </div>
 
-
     </div>
 
 
@@ -708,8 +835,6 @@
     CareTrack © 2026 | Healthcare Management System
 </div>
 
-
-<!-- Decorative Background -->
 
 <div class="bottom-decoration"></div>
 <div class="left-decoration"></div>

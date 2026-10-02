@@ -1,3 +1,4 @@
+<html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,10 +13,6 @@
 
 
 <style>
-
-/* =========================================================
-   RESET
-========================================================= */
 
 * {
     box-sizing: border-box;
@@ -34,17 +31,170 @@ body {
         Arial,
         sans-serif;
 
-    background:
-        linear-gradient(
-            135deg,
-            #eef6ff,
-            #f8f4ff
-        );
+    background: white;
 
     color: #12345b;
 
 }
 
+
+/* =========================================================
+   NAVBAR — SAME AS PATIENT DASHBOARD
+========================================================= */
+
+.navbar {
+
+    background: linear-gradient(90deg, #123c9c, #1769e0);
+
+    color: white;
+
+    height: 105px;
+
+    padding: 0 35px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    box-shadow:
+        0 4px 18px
+        rgba(20, 70, 150, 0.20);
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+/* Decorative navbar circle */
+
+.navbar::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+
+    height: 300px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    right: 60px;
+
+    top: -210px;
+
+}
+
+
+/* =========================================================
+   CARETRACK BRAND
+========================================================= */
+
+.brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    color: white;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+
+/* CareTrack Logo */
+
+.logo-circle {
+
+    width: 58px;
+
+    height: 58px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 2px solid rgba(255, 255, 255, 0.85);
+
+}
+
+
+/* SVG Logo */
+
+.logo-circle svg {
+
+    width: 44px;
+
+    height: 44px;
+
+    display: block;
+
+}
+
+
+/* CareTrack text */
+
+.brand span {
+
+    font-size: 30px;
+
+    font-weight: 700;
+
+    color: white;
+
+}
+
+
+/* Right side */
+
+.navbar-right {
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: 400;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    position: relative;
+
+    z-index: 2;
+
+}
+
+.user-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+}
 
 /* =========================================================
    CONTAINER
@@ -500,6 +650,7 @@ body {
     color: white;
 
 }
+
 .token-cancelled {
 
     background: #dc2626;
@@ -507,7 +658,6 @@ body {
     color: white;
 
 }
-
 
 
 /* =========================================================
@@ -576,6 +726,7 @@ body {
     color: #7c3aed;
 
 }
+
 .token-status-cancelled {
 
     color: #dc2626;
@@ -624,6 +775,7 @@ body {
     background: #f59e0b;
 
 }
+
 
 /* =========================================================
    LEGEND
@@ -694,6 +846,7 @@ body {
     background: #f59e0b;
 
 }
+
 .dot-cancelled {
 
     background: #dc2626;
@@ -876,6 +1029,7 @@ body {
     border: 1px solid #e2e8f0;
 
 }
+
 .status-cancelled {
 
     background: #ffe9e9;
@@ -987,6 +1141,42 @@ body {
 
     }
 
+    .navbar {
+
+        padding: 16px 20px;
+
+        height: auto;
+
+    }
+
+    .brand span {
+
+        font-size: 24px;
+
+    }
+
+    .logo-circle {
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+    .logo-circle svg {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+    .navbar-right {
+
+        display: none;
+
+    }
+
 }
 
 </style>
@@ -995,6 +1185,80 @@ body {
 
 
 <body>
+
+
+<!-- =========================================================
+     CARETRACK NAVBAR
+========================================================= -->
+
+<div class="navbar">
+
+    <div class="brand">
+
+        <div class="logo-circle">
+
+            <!-- CARETRACK HEART + ECG LOGO -->
+
+            <svg
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+
+                    fill="none"
+
+                    stroke="white"
+
+                    stroke-width="3"
+
+                    stroke-linejoin="round"
+                />
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+
+                    fill="none"
+
+                    stroke="white"
+
+                    stroke-width="3"
+
+                    stroke-linecap="round"
+
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+        </div>
+
+
+        <span>
+            CareTrack
+        </span>
+
+    </div>
+
+
+    <div class="navbar-right">
+
+        Healthcare Management System
+
+        <span class="user-icon">
+            ♙
+        </span>
+
+    </div>
+
+</div>
 
 
 <div class="container">
@@ -1338,7 +1602,8 @@ body {
             <div class="token-status token-status-completed">
                 COMPLETED
             </div>
-    {% else %}
+
+        {% else %}
 
         <div class="token-circle token-waiting">
             {{ item.token_number }}
@@ -1447,6 +1712,7 @@ body {
     Waiting
 
 </div>
+
 <div class="legend-item">
 
     <span class="
@@ -1457,7 +1723,6 @@ body {
     Cancelled
 
 </div>
-
 
 
 </div>
@@ -1485,6 +1750,7 @@ body {
 
 
 <div class="summary-message">
+
 {% if appointment.token_status == "cancelled" %}
 
     Appointment Cancelled
@@ -1774,17 +2040,9 @@ body {
 
 <script>
 
-/* =========================================================
-   KEEP SELECTED APPOINTMENT AFTER AUTO REFRESH
-========================================================= */
-
 const selector =
     document.getElementById("appointmentSelector");
 
-
-/* =========================================================
-   SELECT APPOINTMENT
-========================================================= */
 
 function showAppointment(id) {
 
@@ -1812,13 +2070,6 @@ function showAppointment(id) {
     }
 
 
-    /*
-       IMPORTANT:
-       Save the actual appointment ID.
-       This prevents the selected appointment
-       from changing after refresh.
-    */
-
     if (selector) {
 
         localStorage.setItem(
@@ -1830,10 +2081,6 @@ function showAppointment(id) {
 
 }
 
-
-/* =========================================================
-   RESTORE SAME APPOINTMENT AFTER REFRESH
-========================================================= */
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -1850,11 +2097,6 @@ document.addEventListener(
             );
 
 
-        /*
-           Find the saved appointment in the
-           newly loaded appointment list.
-        */
-
         const savedOption =
             Array.from(
                 selector.options
@@ -1868,10 +2110,6 @@ document.addEventListener(
 
         if (savedOption) {
 
-            /*
-               RESTORE SAME APPOINTMENT
-            */
-
             selector.value =
                 savedAppointment;
 
@@ -1882,11 +2120,6 @@ document.addEventListener(
         }
 
         else if (selector.options.length > 0) {
-
-            /*
-               Only if the saved appointment
-               no longer exists.
-            */
 
             selector.value =
                 selector.options[0].value;
@@ -1900,10 +2133,6 @@ document.addEventListener(
     }
 );
 
-
-/* =========================================================
-   SAVE WHEN USER CHANGES APPOINTMENT
-========================================================= */
 
 if (selector) {
 
@@ -1926,17 +2155,8 @@ if (selector) {
 }
 
 
-/* =========================================================
-   AUTO REFRESH
-========================================================= */
-
 setTimeout(
     function() {
-
-        /*
-           Save current appointment
-           BEFORE page refresh.
-        */
 
         if (selector) {
 
@@ -1946,12 +2166,6 @@ setTimeout(
             );
 
         }
-
-
-        /*
-           Refresh page so live queue/status
-           can update.
-        */
 
         location.reload();
 
@@ -1965,3 +2179,4 @@ setTimeout(
 </body>
 
 </html>
+

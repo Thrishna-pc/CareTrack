@@ -1,138 +1,613 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>CareTrack - Patients</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f7fa;
-            margin: 0;
-            padding: 0;
-        }
+<title>CareTrack - Patients</title>
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 40px auto;
-        }
+<style>
 
-        h1 {
-            color: #1f3c88;
-            margin-bottom: 5px;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        h2 {
-            color: #333;
-            margin-top: 30px;
-        }
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: white;
+    color: #173b78;
+}
 
-        .form-box {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            margin-top: 20px;
-        }
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+/* ================= NAVBAR ================= */
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 6px;
-            color: #333;
-        }
+.navbar {
+    background: linear-gradient(90deg, #123c9c, #1769e0);
+    color: white;
+    height: 105px;
+    padding: 0 35px;
 
-        input,
-        select,
-        textarea {
-            width: 100%;
-            max-width: 500px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            font-size: 15px;
-        }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-        textarea {
-            height: 90px;
-            resize: vertical;
-        }
+    box-shadow:
+        0 4px 18px
+        rgba(20, 70, 150, 0.20);
 
-        button {
-            background-color: #1f3c88;
-            color: white;
-            border: none;
-            padding: 11px 22px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 15px;
-        }
+    position: relative;
+    overflow: hidden;
+}
 
-        button:hover {
-            background-color: #162d68;
-        }
+.navbar::before {
+    content: "";
+    position: absolute;
 
-        .table-box {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-            margin-top: 20px;
-            overflow-x: auto;
-        }
+    width: 300px;
+    height: 300px;
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
+    border-radius: 50%;
 
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
+    background: rgba(255,255,255,0.08);
 
-        th {
-            background-color: #1f3c88;
-            color: white;
-        }
+    right: 60px;
+    top: -210px;
+}
 
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
 
-        .empty {
-            text-align: center;
-            color: #777;
-            padding: 20px;
-        }
-    </style>
+/* ================= CARETRACK LOGO ================= */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: white;
+    font-size: 30px;
+    font-weight: 700;
+
+    position: relative;
+    z-index: 2;
+}
+
+.logo-icon {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 2px solid rgba(255, 255, 255, 0.85);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-icon svg {
+    width: 44px;
+    height: 44px;
+    display: block;
+}
+
+
+/* ================= RIGHT SIDE ================= */
+
+.user-area {
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    color: white;
+    font-size: 14px;
+    font-weight: 400;
+
+    position: relative;
+    z-index: 2;
+}
+
+.user-icon {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 19px;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 40px auto;
+}
+
+
+/* ================= TITLE ================= */
+
+h1 {
+    color: #123e82;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: #17458d;
+    margin-top: 30px;
+    margin-bottom: 22px;
+}
+
+
+/* ================= FORM ================= */
+
+.form-box {
+    background: #ffffff;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    border: 1px solid #dcecff;
+
+    box-shadow:
+        0 10px 30px
+        rgba(43, 105, 180, 0.11);
+
+    margin-top: 20px;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+/* TOP ACCENT */
+
+.form-box::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background: linear-gradient(
+        90deg,
+        #123c9c,
+        #1769e0,
+        #7b6eea,
+        #e58bb5
+    );
+}
+
+
+/* ================= FORM GRID ================= */
+
+.form-box form {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 20px 24px;
+
+    padding-top: 5px;
+}
+
+
+/* ================= FORM GROUP ================= */
+
+.form-group {
+
+    padding: 17px;
+
+    border-radius: 14px;
+
+    border: 1px solid transparent;
+
+    transition: all 0.25s ease;
+}
+
+
+/* Pastel colours */
+
+.form-group:nth-child(1) {
+    background: #eef7ff;
+    border-color: #d9ebfc;
+}
+
+.form-group:nth-child(2) {
+    background: #f5f0ff;
+    border-color: #e7ddf8;
+}
+
+.form-group:nth-child(3) {
+    background: #edfaf5;
+    border-color: #d5eee3;
+}
+
+.form-group:nth-child(4) {
+    background: #fff5e9;
+    border-color: #f5e1c8;
+}
+
+.form-group:nth-child(5) {
+    background: #fff0f5;
+    border-color: #f3dbe6;
+}
+
+.form-group:nth-child(6) {
+    grid-column: 1 / -1;
+
+    background: #eef4ff;
+    border-color: #d8e4f7;
+}
+
+
+.form-group:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 7px 18px
+        rgba(48, 89, 135, 0.08);
+}
+
+
+/* ================= LABEL ================= */
+
+label {
+    display: block;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+    color: #315887;
+
+    font-size: 13px;
+}
+
+
+/* ================= INPUTS ================= */
+
+input,
+select,
+textarea {
+
+    width: 100%;
+
+    padding: 12px 13px;
+
+    border: 1px solid #cbdced;
+
+    border-radius: 9px;
+
+    box-sizing: border-box;
+
+    font-size: 14px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    color: #173b78;
+
+    background: rgba(255,255,255,0.88);
+
+    outline: none;
+
+    transition: all 0.25s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #9aaabd;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+
+    background: white;
+
+    border-color: #abc6e3;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+
+    background: white;
+
+    border-color: #1769e0;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(23,105,224,0.10);
+}
+
+textarea {
+    height: 90px;
+
+    resize: vertical;
+}
+
+
+/* ================= BUTTON ================= */
+
+button {
+
+    grid-column: 1 / -1;
+
+    justify-self: flex-start;
+
+    margin-top: 4px;
+
+    background: linear-gradient(
+        90deg,
+        #123c9c,
+        #1769e0
+    );
+
+    color: white;
+
+    border: none;
+
+    padding: 13px 27px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 7px 18px
+        rgba(18, 60, 156, 0.22);
+
+    transition: all 0.25s ease;
+}
+
+button:hover {
+
+    background: linear-gradient(
+        90deg,
+        #10358b,
+        #125bc5
+    );
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px
+        rgba(18, 60, 156, 0.30);
+}
+
+
+/* ================= TABLE ================= */
+
+.table-box {
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 16px;
+
+    border: 1px solid #dcecff;
+
+    box-shadow:
+        0 8px 25px
+        rgba(43, 105, 180, 0.10);
+
+    margin-top: 20px;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 10px;
+}
+
+th,
+td {
+    border: 1px solid #dcecff;
+
+    padding: 12px;
+
+    text-align: left;
+}
+
+th {
+    background: linear-gradient(90deg, #123c9c, #1769e0);
+
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f8fbff;
+}
+
+tr:hover {
+    background-color: #eef6ff;
+}
+
+.empty {
+    text-align: center;
+
+    color: #7186a4;
+
+    padding: 20px;
+}
+
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: auto;
+        padding: 16px 20px;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .logo-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-icon svg {
+        width: 38px;
+        height: 38px;
+    }
+
+    .user-area {
+        display: none;
+    }
+
+    .container {
+        width: 92%;
+        margin-top: 25px;
+    }
+
+    .form-box {
+        padding: 22px;
+    }
+
+    .form-box form {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group:nth-child(6) {
+        grid-column: auto;
+    }
+
+    button {
+        grid-column: auto;
+        width: 100%;
+    }
+}
+
+</style>
+
 </head>
+
 
 <body>
 
+
+<!-- ================= NAVBAR ================= -->
+
+<div class="navbar">
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <!-- SAME CARETRACK HEART + ECG LOGO -->
+
+            <svg
+                viewBox="0 0 64 64"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+
+                <path
+                    d="M32 52
+                       C29 49 14 39 10 29
+                       C6 19 12 12 21 12
+                       C27 12 31 16 32 20
+                       C33 16 37 12 43 12
+                       C52 12 58 19 54 29
+                       C50 39 35 49 32 52Z"
+
+                    fill="none"
+
+                    stroke="white"
+
+                    stroke-width="3"
+
+                    stroke-linejoin="round"
+                />
+
+                <polyline
+                    points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+
+                    fill="none"
+
+                    stroke="white"
+
+                    stroke-width="3"
+
+                    stroke-linecap="round"
+
+                    stroke-linejoin="round"
+                />
+
+            </svg>
+
+        </div>
+
+        CareTrack
+
+    </div>
+
+
+    <div class="user-area">
+
+        Healthcare Management System
+
+        <span class="user-icon">
+            ♙
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ================= MAIN ================= -->
+
 <div class="container">
 
-    <h1>CareTrack</h1>
 
-    <h2>Patient Registration</h2>
+    <h2><b>Patient Registration</b></h2>
+
 
     <div class="form-box">
 
+
         <form method="POST" action="/patients">
 
+
             <div class="form-group">
-                <label for="name">Patient Name</label>
+
+                <label for="name">
+                    Patient Name
+                </label>
+
                 <input
                     type="text"
                     id="name"
@@ -140,10 +615,16 @@
                     placeholder="Enter patient name"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="email">Email</label>
+
+                <label for="email">
+                    Email
+                </label>
+
                 <input
                     type="email"
                     id="email"
@@ -151,10 +632,16 @@
                     placeholder="Enter email"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="phone">Phone</label>
+
+                <label for="phone">
+                    Phone
+                </label>
+
                 <input
                     type="text"
                     id="phone"
@@ -162,10 +649,16 @@
                     placeholder="Enter phone number"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="age">Age</label>
+
+                <label for="age">
+                    Age
+                </label>
+
                 <input
                     type="number"
                     id="age"
@@ -175,35 +668,72 @@
                     max="120"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="gender">Gender</label>
-                <select id="gender" name="gender" required>
-                    <option value="">Select Gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
+
+                <label for="gender">
+                    Gender
+                </label>
+
+                <select
+                    id="gender"
+                    name="gender"
+                    required
+                >
+
+                    <option value="">
+                        Select Gender
+                    </option>
+
+                    <option value="Male">
+                        Male
+                    </option>
+
+                    <option value="Female">
+                        Female
+                    </option>
+
+                    <option value="Other">
+                        Other
+                    </option>
+
                 </select>
+
             </div>
 
+
             <div class="form-group">
-                <label for="address">Address</label>
+
+                <label for="address">
+                    Address
+                </label>
+
                 <textarea
                     id="address"
                     name="address"
                     placeholder="Enter patient address"
                     required
                 ></textarea>
+
             </div>
 
-            <button type="submit">Add Patient</button>
+
+            <button type="submit">
+                Add Patient
+            </button>
+
 
         </form>
 
     </div>
 
 
+</div>
+
 
 </body>
+
 </html>

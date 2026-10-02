@@ -16,81 +16,236 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background: #f4f8fc;
-            color: #1e293b;
+            background: #ffffff;
+            color: #385978;
         }
+
+
+        /* =========================
+           HEADER
+        ========================= */
 
         .navbar {
-            background: #0d6efd;
+            height: 112px;
+            padding: 0 35px;
+            background: linear-gradient(90deg, #123c9c, #1769e0);
             color: white;
-            padding: 18px 45px;
-            box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(18, 60, 156, 0.20);
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            position: relative;
+            z-index: 2;
         }
+
+        .logo-circle {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.10);
+            border: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 4px 12px rgba(0,50,120,0.15);
+        }
+
+        .logo-circle svg {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+
+        .brand span {
+            font-size: 30px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .header-right {
+            color: white;
+            font-size: 14px;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .user-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+        }
+
+
+        /* =========================
+           MAIN CONTAINER
+        ========================= */
 
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
+            width: 90%;
+            max-width: 1050px;
+            margin: 0 auto;
+            padding: 35px 0 50px;
         }
+
+
+        /* =========================
+           PAGE TITLE
+        ========================= */
 
         .title {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 28px;
+        }
+
+        .title-icon {
+            width: 58px;
+            height: 58px;
+            margin: 0 auto 10px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e7f5ff, #eee7ff);
+            border: 1px solid #d5e8f7;
+            box-shadow: 0 5px 15px rgba(50,110,150,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
         }
 
         .title h1 {
-            color: #0d6efd;
-            margin-bottom: 8px;
+            color: #15548a;
+            margin: 0;
+            font-size: 34px;
+            font-weight: 700;
         }
 
         .title p {
-            color: #64748b;
+            color: #54758b;
+            margin: 7px 0 0;
+            font-size: 15px;
         }
 
-        .search-card,
+
+        /* =========================
+           SEARCH CARD
+        ========================= */
+
+        .search-card {
+            background: rgba(255,255,255,0.92);
+            border: 1px solid #d8e8f3;
+            border-radius: 16px;
+            padding: 25px 28px;
+            box-shadow: 0 7px 20px rgba(50,110,145,0.10);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .search-card::before {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            right: -45px;
+            top: -55px;
+            border-radius: 50%;
+            background: #e5f4fc;
+        }
+
+        .search-card::after {
+            content: "";
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            left: -35px;
+            bottom: -40px;
+            border-radius: 50%;
+            background: #f0e9ff;
+        }
+
+        .search-card form {
+            position: relative;
+            z-index: 2;
+        }
+
+        label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 9px;
+            color: #275b82;
+        }
+
+        select {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #c8dfea;
+            border-radius: 9px;
+            font-size: 15px;
+            margin-bottom: 15px;
+            background: #fbfdff;
+            color: #49687d;
+            outline: none;
+        }
+
+        select:focus {
+            border-color: #65acd2;
+            box-shadow: 0 0 0 3px rgba(74,169,214,0.12);
+        }
+
+
+        /* =========================
+           BUTTON
+        ========================= */
+
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #2479b8, #4aa9d6);
+            color: white;
+            border: none;
+            border-radius: 9px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 5px 12px rgba(36,121,184,0.18);
+            transition: 0.2s ease;
+        }
+
+        .button:hover {
+            background: linear-gradient(135deg, #1d6da8, #389bc9);
+            transform: translateY(-1px);
+        }
+
+
+        /* =================================================
+           GENERATED REPORT
+        ================================================= */
+
         .report-card {
             background: white;
             border-radius: 15px;
             padding: 30px;
             box-shadow: 0 5px 18px rgba(0,0,0,0.08);
             margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #cbd5e1;
-            border-radius: 8px;
-            font-size: 15px;
-            margin-bottom: 15px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #0d6efd;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .button:hover {
-            background: #0b5ed7;
         }
 
         .report-header {
@@ -167,6 +322,20 @@
             background: #157347;
         }
 
+
+        /* =========================
+           BACK BUTTON
+        ========================= */
+
+        .back-container {
+            margin-top: 20px;
+        }
+
+
+        /* =========================
+           ERROR
+        ========================= */
+
         .error {
             background: #fff1f2;
             color: #be123c;
@@ -176,23 +345,55 @@
             font-weight: bold;
         }
 
+
+        /* =========================
+           MOBILE
+        ========================= */
+
         @media (max-width: 650px) {
 
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .brand span {
+                font-size: 24px;
+            }
+
+            .header-right {
+                display: none;
+            }
+
             .container {
-                margin: 25px auto;
+                width: 94%;
+                padding-top: 25px;
+            }
+
+            .title h1 {
+                font-size: 28px;
             }
 
             .info {
                 grid-template-columns: 1fr;
             }
 
+            .search-card,
+            .report-card {
+                padding: 22px;
+            }
         }
+
+
+        /* =========================
+           PRINT
+        ========================= */
 
         @media print {
 
             .navbar,
             .search-card,
-            .actions {
+            .actions,
+            .back-container {
                 display: none;
             }
 
@@ -201,110 +402,221 @@
             }
 
             .container {
+                width: 100%;
+                max-width: none;
                 margin: 0 auto;
+                padding: 0;
+            }
+
+            .title {
+                display: none;
             }
 
             .report-card {
                 box-shadow: none;
             }
-
         }
 
     </style>
 
 </head>
 
+
 <body>
 
+
+    <!-- =========================
+         HEADER
+    ========================= -->
+
     <div class="navbar">
-        <div class="logo">CareTrack</div>
+
+        <div class="brand">
+
+            <div class="logo-circle">
+
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+
+                    <path
+                        d="M32 52
+                           C29 49 14 39 10 29
+                           C6 19 12 12 21 12
+                           C27 12 31 16 32 20
+                           C33 16 37 12 43 12
+                           C52 12 58 19 54 29
+                           C50 39 35 49 32 52Z"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linejoin="round"/>
+
+                    <polyline
+                        points="15,30 23,30 27,24 31,36 35,27 39,30 49,30"
+                        fill="none"
+                        stroke="white"
+                        stroke-width="3"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"/>
+
+                </svg>
+
+            </div>
+
+            <span>CareTrack</span>
+
+        </div>
+
+
+        <div class="header-right">
+
+            Healthcare Management System
+
+            <span class="user-icon">♙</span>
+
+        </div>
+
     </div>
+
+
 
     <div class="container">
 
+
+        <!-- =========================
+             PAGE TITLE
+        ========================= -->
+
         <div class="title">
+
+            <div class="title-icon">
+                📋
+            </div>
+
             <h1>Patient Medical Report</h1>
-            <p>Generate and view patient medical reports</p>
-        </div>
 
-
-        
-        <div class="search-card"> 
-
-            <form method="GET" action="/report"> 
-
-                <label>Select Patient</label>
-<select name="patient_id" required> 
-
-    <option value="">Select Patient</option> 
-
-    {% for patient in patients %} 
-
-    <option value="{{ patient.patient_id }}"> 
-        {{ patient.name }} 
-    </option> 
-
-    {% endfor %} 
-
-</select> 
-
-                <button type="submit" class="button"> 
-
-                    Generate Report 
-                </button> 
-
-            </form> 
+            <p>
+                Generate and view patient medical reports
+            </p>
 
         </div>
 
 
-    
+
+        <!-- =========================
+             SEARCH PATIENT
+        ========================= -->
+
+        <div class="search-card">
+
+            <form method="GET" action="/report">
+
+                <label>
+                    Select Patient
+                </label>
+
+                <select name="patient_id" required>
+
+                    <option value="">
+                        Select Patient
+                    </option>
+
+                    {% for patient in patients %}
+
+                    <option value="{{ patient.patient_id }}">
+                        {{ patient.name }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
 
 
-         
+                <button type="submit" class="button">
+
+                    Generate Report
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+
+        <!-- =========================
+             GENERATED REPORT
+        ========================= -->
 
         {% if report %}
 
         <div class="report-card">
 
+
             <div class="report-header">
 
-                <h2>CareTrack Medical Report</h2>
+                <h2>
+                    CareTrack Medical Report
+                </h2>
 
-                <p>Patient Consultation Report</p>
+                <p>
+                    Patient Consultation Report
+                </p>
 
             </div>
+
 
 
             <div class="info">
 
+
                 <div class="info-box">
-                    <span class="label">Patient Name</span>
+
+                    <span class="label">
+                        Patient Name
+                    </span>
+
                     <span class="value">
                         {{ report.patient_name }}
                     </span>
+
                 </div>
 
+
                 <div class="info-box">
-                    <span class="label">Doctor</span>
+
+                    <span class="label">
+                        Doctor
+                    </span>
+
                     <span class="value">
                         {{ report.doctor_name }}
                     </span>
+
                 </div>
 
+
                 <div class="info-box">
-                    <span class="label">Record Date</span>
+
+                    <span class="label">
+                        Record Date
+                    </span>
+
                     <span class="value">
                         {{ report.record_date }}
                     </span>
+
                 </div>
+
 
             </div>
 
 
+
             <div class="section">
 
-                <h3>Diagnosis</h3>
+                <h3>
+                    Diagnosis
+                </h3>
 
                 <p>
                     {{ report.diagnosis }}
@@ -313,9 +625,12 @@
             </div>
 
 
+
             <div class="section">
 
-                <h3>Prescription</h3>
+                <h3>
+                    Prescription
+                </h3>
 
                 <p>
                     {{ report.prescription }}
@@ -324,9 +639,12 @@
             </div>
 
 
+
             <div class="section">
 
-                <h3>Treatment</h3>
+                <h3>
+                    Treatment
+                </h3>
 
                 <p>
                     {{ report.treatment }}
@@ -335,31 +653,52 @@
             </div>
 
 
+
             <div class="actions">
 
                 <button
                     onclick="window.print()"
                     class="button print-button">
+
                     Print / Save Report
+
                 </button>
 
             </div>
 
+
         </div>
-        <div style="margin-top: 20px;">
+
+
+
+        <!-- BACK TO DASHBOARD -->
+
+        <div class="back-container">
+
             <a href="/admin_dashboard" class="button">
+
                 ← Back to Dashboard
+
             </a>
+
         </div>
+
+
         {% elif searched %}
 
+
         <div class="error">
+
             No medical record found for this patient.
+
         </div>
+
 
         {% endif %}
 
+
     </div>
+
 
 </body>
 
