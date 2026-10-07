@@ -203,10 +203,12 @@
 
             overflow: hidden;
 
-            border: 1px solid rgba(255,255,255,0.95);
+            background: #ffffff;
+
+            border: 1px solid #cbdaf2;
 
             box-shadow:
-                0 8px 25px rgba(50, 100, 130, 0.12);
+                0 8px 25px rgba(18, 60, 156, 0.10);
 
             transition:
                 transform 0.3s ease,
@@ -233,41 +235,33 @@
             transform: translateY(-6px);
 
             box-shadow:
-                0 15px 32px rgba(50, 100, 130, 0.18);
+                0 15px 32px rgba(18, 60, 156, 0.16);
         }
 
         /* ================= CARD BACKGROUNDS ================= */
 
-        /* SOFT MINT PASTEL */
+        /* APPOINTMENTS */
 
         .appointment-card {
-            background: linear-gradient(
-                135deg,
-                #eef9f8,
-                #f3d2e6
-            );
+            background: #ffffff;
 
-            border-left: 5px solid #f05289;
+            border-left: 5px solid #123c9c;
         }
 
         .appointment-card::after {
-            background: #e8c5d3;
+            background: rgba(23, 105, 224, 0.08);
         }
 
-        /* SOFT LAVENDER PASTEL */
+        /* MEDICAL RECORDS */
 
         .records-card {
-            background: linear-gradient(
-                135deg,
-                #f5f1ff,
-                #e7def8
-            );
+            background: #ffffff;
 
-            border-left: 5px solid #9274d1;
+            border-left: 5px solid #1769e0;
         }
 
         .records-card::after {
-            background: #dcd0f2;
+            background: rgba(18, 60, 156, 0.08);
         }
 
         /* ================= CARD ICONS ================= */
@@ -291,23 +285,31 @@
         }
 
         .appointment-icon {
-            background: #d8f0e7;
+            background: #eef5ff;
+
+            color: #1769e0;
+
+            border: 1px solid #d3e2f7;
 
             box-shadow:
-                0 7px 16px rgba(70, 160, 125, 0.12);
+                0 7px 16px rgba(18, 60, 156, 0.10);
         }
 
         .records-icon {
-            background: #e6ddf7;
+            background: #f1f6fd;
+
+            color: #123c9c;
+
+            border: 1px solid #d3e2f7;
 
             box-shadow:
-                0 7px 16px rgba(120, 90, 190, 0.12);
+                0 7px 16px rgba(18, 60, 156, 0.10);
         }
 
         .card h3 {
             margin: 0 0 10px;
 
-            color: #174a88;
+            color: #123c9c;
 
             font-size: 24px;
             font-weight: 750;
@@ -355,15 +357,23 @@
             z-index: 3;
 
             box-shadow:
-                0 6px 15px rgba(0,0,0,0.13);
+                0 6px 15px rgba(18, 60, 156, 0.20);
         }
 
         .appointment-card .card-arrow {
-            background: #98a955;
+            background: linear-gradient(
+                135deg,
+                #123c9c,
+                #1769e0
+            );
         }
 
         .records-card .card-arrow {
-            background: #8062c4;
+            background: linear-gradient(
+                135deg,
+                #123c9c,
+                #1769e0
+            );
         }
 
         /* ================= LOGOUT ================= */
