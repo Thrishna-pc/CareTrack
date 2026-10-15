@@ -4,6 +4,17 @@ import mysql.connector
 
 app = Flask(__name__)
 app.secret_key = "caretrack_secret_key"
+@app.after_request
+def add_no_cache(response):
+
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate, max-age=0"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    if "text/html" in response.content_type:
+        response.headers["Vary"] = "Cookie"
+
+    return response
 def get_db_connection():
     return mysql.connector.connect(
         host="127.0.0.1",
@@ -98,7 +109,7 @@ def patients():
         address = request.form.get("address")
         try:
             # Create user account
-            password = name + "123"
+            password = name.split()[0] + "@123"
 
             cursor.execute("""
                 INSERT INTO users (name, email, password, role)
@@ -863,7 +874,7 @@ def admin_doctor_manage():
 
         name = request.form.get("name", "").strip()
         email = request.form.get("email", "").strip()
-        password = request.form.get("password", "").strip()
+        password = name.replace("Dr. ", "").split()[0] + "@123"
         specialization = request.form.get("specialization", "").strip()
         department = request.form.get("department", "").strip()
         phone = request.form.get("phone", "").strip()
@@ -2798,10 +2809,18 @@ def admin_dashboard():
         return redirect("/")
 
     return render_template("index.html")
+
 @app.route("/logout")
 def logout():
     session.clear()
-    return redirect("/")
+
+    response = redirect("/")
+
+    response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+    response.headers["Pragma"] = "no-cache"
+    response.headers["Expires"] = "0"
+
+    return response
 
 @app.route("/doctor_dashboard")
 def doctor_dashboard():
